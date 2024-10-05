@@ -105,7 +105,7 @@ CnxPoints ↚ ˘↘+↧0⊙::⍜△×DiagLine⊸⊃⌵(±+0.1)⤚-
 # FIXME: Fix behavior when points are outside of the graph
 # bounding box. Currently, points outside are taken completely
 # out of consideration, and visible points that should connect
-# to it connect to each other instead.
+# to them connect to each other instead.
 Lines ← (
   /↥⬚0≡/CnxPoints◫2⊸PointsToPx
   ⇌⬚0↙⇌PC~Size,

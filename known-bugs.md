@@ -1,0 +1,2 @@
+- When drawing lines, out-of-bounds points are taken completely out of consideration, and visible points that should connect to them connect to each other instead.
+- Error if a data series is entirely out of bounds of the plot

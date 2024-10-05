@@ -73,7 +73,11 @@ AxisNums ← ⬚∘(
   PC!⊃GridlineInterval⊃Min⊃Max⊃Ppu Size°◌
   ⊓⌈⌊⤚∩÷’⊙⊓’⊙⇌
   ∩°⊟₆°⊟⍉⊟₆
-  ∩⊓(⍚layout PC~FontSize°◌ ⊃°⋕(×˜-)×▽⊸≠0⍜-(⇡+1))∘
+  ∩⊓(
+    ⤙×▽⊸≠0⍜-(⇡+1)
+    ⍜×⁅˜ⁿ10⬚0⊗@.⇌°⋕ # Round values to precision of original factor
+    ⍚layout PC~FontSize°◌⊃°⋕(×˜-)
+  )∘
   ⊓⍚⍉⊙⊙⍚⇌⍚⇌
   ∩/↥∩⬚0≡◇(⬚0↙⁅⊟⊙:¯+⌊÷2⤚⧻)
   ↥∩⇌∩⬚0↙’⇌PC~Size°◌⍉

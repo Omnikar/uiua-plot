@@ -30,7 +30,7 @@ C ↚ ⬚1↙₄
     GridlineInterval(⊟.0.2) 0
     FontSize(15) 0
     FontColor(↯3 0.3) 0
-    PlotColor(1_0_0) 0
+    PlotColor(⋯+1⇡6) 0
     DrawDots(1) 0
     DotSize(40) 0
     DrawLines(1) 0

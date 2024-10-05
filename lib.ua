@@ -96,7 +96,7 @@ Dots ← (
   ↧1↘¯⟜↘⌊÷2△⟜FFTConvolve
   ⍉⊞×C PC~PlotColor:)
 
-# Given an shape, creates an array of that shape with
+# Given a shape, creates an array of that shape with
 # 1 along the diagonal of the rectangle, and 0 elsewhere.
 DiagLine ↚ ⍥⍉:°⊚⁅≡⊟⊙×⤙÷⟜⇡/↥⟜/↧⟜/>
 # Draws a line connecting two pixel coordinates

@@ -2,7 +2,7 @@
 
 `uiua-plot` is a data plotting library for the [Uiua](https://uiua.org) programming language.
 
-The library requires `# Experimental!` due to reliance on the `layout` function for text rendering, reliance on [`uiua-math`](https://github.com/Omnikar/uiua-math), and internal usage of experimental modifiers.
+The library requires `# Experimental!` due to reliance on the `layout` function for text rendering, reliance on [`uiua-math`](https://github.com/Omnikar/uiua-math), and internal usage of experimental modifiers/functions.
 
 To create a plot, you first need to make a `PlotConfig`. This can be done in two main ways.
 

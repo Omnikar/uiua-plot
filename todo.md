@@ -1,5 +1,4 @@
 ## Features
-- Axis labels
 - Legend?
 - Config option for whether to display axis numbers
 - Support for minor gridlines by passing higher rank arrays to `GridlineInterval`, `GridlineWidth`, and `GridlineColor`

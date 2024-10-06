@@ -28,8 +28,12 @@ C ↚ ⬚1↙₄
     GridlineWidth(1) 0
     GridlineColor(↯3 0.7) 0
     GridlineInterval(⊟.∞) 0
-    FontSize(15) 0
-    FontColor(↯3 0.3) 0
+    NumberSize(15) 0
+    NumberColor(↯3 0.3) 0
+    XLabel("") 2
+    YLabel("") 2
+    LabelSize(20) 0
+    LabelColor(↯3 0.2) 0
     PlotColor(
       # Colors from Desmos graphing calculator
       # https://www.desmos.com/api/v1.7/docs/index.html#document-colors
@@ -87,12 +91,12 @@ AxisNums ← ⬚∘(
   ∩⊓(
     ⤙×▽⊸≠0⍜-(⇡+1)
     ⍜×⁅˜ⁿ10⬚0⊗@.⇌°⋕ # Round values to precision of original factor
-    ⍚(∧˘↘⊟⊸¯⊟.⁅÷8⟜layout) PC~FontSize°◌⊃°⋕(×˜-)
+    ⍚(∧˘↘⊟⊸¯⊟.⁅÷8⟜layout) PC~NumberSize°◌⊃°⋕(×˜-)
   )∘
   ⊓⍚⍉⊙⊙⍚⇌⍚⇌
   ∩(∧◇(⬚0↥⬚0↙⁅⊟⊙:¯+⌊÷2⤚⧻)⊙⊙⊙[])
   ↥∩⇌∩⬚0↙’⇌PC~Size°◌⍉
-  ⍉⊞×C PC~FontColor°◌
+  ⍉⊞×C PC~NumberColor°◌
 )
 
 # Convolution kernel for thickening dots and lines
@@ -155,11 +159,13 @@ Infer‼ ↚ ⟜(⍜^0(⍜∩▽◌’⊸=∞):^1)
 # list of boxed shape 2_n arrays.
 # Image ? Data PlotConfig
 Plot ← (
+  ⊙(>0⊸[∩⧻PC!⊃YLabel XLabel]⟜PC~Size⟜Background
+    ⍜⊙PC~Size-×+⟜+⌊⊸÷4 PC~LabelSize,)
   ⍥¤=2⧻⊸△
   PC!Infer‼GridlineInterval(⍜×⁅˜ⁿ10¯⌊⊸ₙ10÷5-⊃/↧/↥/◇⊂)
   PC!Infer‼Min(-÷5GridlineInterval,/↧/◇⊂)
   PC!Infer‼Max(+÷5GridlineInterval,/↥/◇⊂)
-  /Stack⬚∘[
+  /Stack⊸⬚∘[
     ⬚◌/Stack≡(
       ⬚◌/Stack◇[
         ⋅◌⍥◠Dots PC~DrawDots,
@@ -171,6 +177,12 @@ Plot ← (
     | DrawDots : 0
     | DrawLines : 0
     )⟜⧻ °◌
-    ⟜AxisNums⟜Axes
-    ⟜Gridlines⟜Background
-  ])
+    ⟜AxisNums
+    ⟜Axes⟜Gridlines
+  ]
+  PC!⊃LabelColor⊃LabelSize⊃XLabel YLabel:
+  ⊙∩(∧˘↘⊟⊸¯⌊÷4⟜layout)⊙’
+  ⊡1△:⊙(⟜⧻,)∩(⤸1⍉⊞×)’C
+  ⊙˜⊂:⤸1⊙⇌∩(↻⌊÷2-⊃⊙⧻⬚0↙)
+  Stack↙×1_¯1⇌:≡⊂⬚0↙⧻,
+)

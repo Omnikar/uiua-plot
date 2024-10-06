@@ -85,8 +85,12 @@ All available configuration values for `PlotConfig` are in the following table. 
 | `GridlineWidth` | `[]` | Thickness of the gridlines | `1` |
 | `GridlineColor` | `[3]` or `[4]` | Color of the gridlines | `[0.7 0.7 0.7]` |
 | `GridlineInterval` | `[2]` | Spacing between gridlines in the x and y directions | Inferred |
-| `FontSize` | `[]` | Font size to use for axis numbers | `15` |
-| `FontColor` | `[3]` or `[4]` | Font color to use for axis numbers | `[0.3 0.3 0.3]` |
+| `NumberSize` | `[]` | Font size to use for axis numbers | `15` |
+| `NumberColor` | `[3]` or `[4]` | Font color to use for axis numbers | `[0.3 0.3 0.3]` |
+| `XLabel` | string | x-axis label | `""` |
+| `YLabel` | string | y-axis label | `""` |
+| `LabelSize` | `[]` | Font size to use for axis labels | `20` |
+| `LabelColor` | `[3]` or `[4]` | Font color to use for axis labels | `[0.2 0.2 0.2]` |
 | `PlotColor` | `[3]`, `[4]`, `[x 3]`, or `[x 4]` | (Distributive) Colors with which to plot data series | [Desmos graph colors](https://www.desmos.com/api/v1.7/docs/index.html#document-colors) |
 | `DrawDots` | `[]` or `[x]` | (Distributive) Whether to draw dots when plotting a series; expects `0` or `1` | `1` |
 | `DotSize` | `[]` or `[x]` | (Distributive) Size with which to draw dots | `40` |

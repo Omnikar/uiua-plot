@@ -101,11 +101,13 @@ WidthKernel ↚ °√₄↧1×2√₁₆Gaussian⤙÷40⍜(÷2+1)⁅
 # Rounding dot size up to an odd number
 # gives the post-convolution array the correct shape
 
-PointsToPx ↚ ⁅≡⇌×⊙-∩¤PC!⊃Ppu Min:▽/××⊓<>’◡⊓⍉PC!⊃Min Max
+# Returns pixel coordinates of points and whether each
+# point is inside the x bounds and the y bounds
+PointsToPx ↚ ∩≡⇌⊃(⍉×⊓<>’⊓⍉PC!⊃Min Max|⁅×⊙-∩¤PC!⊃Ppu Min:)
 
 # Image ? Data PlotConfig
 Dots ← (
-  °⊚⊸PointsToPx
+  °⊚▽≡/×⊸PointsToPx
   ⇌⬚0↙⇌PC~Size,
   WidthKernel PC~DotSize,
   ↧1↘¯⟜↘⌊÷2△⟜FFTConvolve
@@ -116,12 +118,22 @@ Dots ← (
 # CoordList ? StartCoord EndCoord
 LineCoords ↚ +×¤: ⍥≡⇌:⁅≡⊟⊙×⤙÷⟜⇡/↥⟜/↧⟜/> ⊃⌵±⊃-¤
 
-# FIXME: Fix behavior when points are outside of the graph
-# bounding box. Currently, points outside are taken completely
-# out of consideration, and visible points that should connect
-# to them connect to each other instead.
 Lines ← (
-  °⊚/◇⊂⍚/LineCoords◫2⊸PointsToPx
+  ⊸PointsToPx
+
+  # Handle lines connecting to out-of-bounds points by
+  # projecting said points onto the bounding box
+  ∩◫₂⊙⊙⊸⍥₂¤
+  ▽’¬⊸≡(/×♭)
+  ⍜⊙▽(
+    ≡⨬(
+      -1⊓PC~Size °⊟:
+      ⊃(∩(˜÷∩-,)0_0◡⋅⊙∘)⋅⊙∘
+      ⁅⍜⊙-×↥0/↥↧
+    )⊢≡⊓≡/×(⊟⟜⇌))
+  ▽≡(/×♭)∩⍉×⊓≥<0_0,⇌PC~Size◡:°⍉
+
+  °⊚/◇⊂⍚/LineCoords
   ⇌⬚0↙⇌PC~Size,
   ↧1↘¯⟜↘⌊÷2△⟜FFTConvolve WidthKernel PC~LineWidth,
   ⍉⊞×C PC~PlotColor:

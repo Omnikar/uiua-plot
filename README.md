@@ -30,6 +30,8 @@ PlotConfig!(
   °⊸PlotColor [0.33_0.51_0.93 0.85_0.32_0.25]
   # Whether to draw dots or not
   °⊸DrawDots 0
+  # Label of the x-axis
+  °⊸XLabel "Year"
 )
 ```
 
@@ -51,13 +53,15 @@ PlotConfig!(
   °⊸PlotColor [0.33_0.51_0.93 0.85_0.32_0.25]
   # Whether to draw dots or not
   °⊸DrawDots 0
+  # Label of the x-axis
+  °⊸XLabel "Year"
 )
 
 &ims Plot {
   [2007_2 2008_1 2009_3]
   [2007_2 2008_2 2009_4]}
 ```
-This code produces the following output ([try it online](https://www.uiua.org/pad?src=0_13_0-dev_3__IyBFeHBlcmltZW50YWwhCn4gImdpdDogZ2l0aHViLmNvbS9PbW5pa2FyL3VpdWEtcGxvdCIgfiBQbG90IFBsb3RDb25maWcKUGxvdENvbmZpZyEoCiAgTmV3CiAgIyBNaW5pbXVtIHggYW5kIHkgYm91bmRzCiAgwrDiirhNaW4gMjAwNi44X8KvMC4zCiAgIyBNYXhpbXVtIHggYW5kIHkgYm91bmRzCiAgwrDiirhNYXggMjAwOS4yXzQuMwogICMgU3BhY2luZyBiZXR3ZWVuIGdyaWRsaW5lcyBpbiB0aGUgeCBhbmQgeSBkaXJlY3Rpb25zCiAgwrDiirhHcmlkbGluZUludGVydmFsIDAuNV8xCiAgIyBTaXplIG9mIHRoZSBpbWFnZSB0byBwcm9kdWNlCiAgwrDiirhTaXplIDgwMF80MDAKICAjIENvbG9yKHMpIHRvIHVzZSBmb3IgcGxvdHRpbmcgdGhlIGRhdGEKICDCsOKKuFBsb3RDb2xvciBbMC4zM18wLjUxXzAuOTMgMC44NV8wLjMyXzAuMjVdCiAgIyBXaGV0aGVyIHRvIGRyYXcgZG90cyBvciBub3QKICDCsOKKuERyYXdEb3RzIDAKKQoKJmltcyBQbG90IHsKICBbMjAwN18yIDIwMDhfMSAyMDA5XzNdCiAgWzIwMDdfMiAyMDA4XzIgMjAwOV80XX0K)):
+This code produces the following output ([try it online](https://www.uiua.org/pad?src=0_13_0-dev_3__IyBFeHBlcmltZW50YWwhCn4gImdpdDogZ2l0aHViLmNvbS9PbW5pa2FyL3VpdWEtcGxvdCIgfiBQbG90IFBsb3RDb25maWcKUGxvdENvbmZpZyEoCiAgTmV3CiAgIyBNaW5pbXVtIHggYW5kIHkgYm91bmRzCiAgwrDiirhNaW4gMjAwNi44X8KvMC4zCiAgIyBNYXhpbXVtIHggYW5kIHkgYm91bmRzCiAgwrDiirhNYXggMjAwOS4yXzQuMwogICMgU3BhY2luZyBiZXR3ZWVuIGdyaWRsaW5lcyBpbiB0aGUgeCBhbmQgeSBkaXJlY3Rpb25zCiAgwrDiirhHcmlkbGluZUludGVydmFsIDAuNV8xCiAgIyBTaXplIG9mIHRoZSBpbWFnZSB0byBwcm9kdWNlCiAgwrDiirhTaXplIDgwMF80MDAKICAjIENvbG9yKHMpIHRvIHVzZSBmb3IgcGxvdHRpbmcgdGhlIGRhdGEKICDCsOKKuFBsb3RDb2xvciBbMC4zM18wLjUxXzAuOTMgMC44NV8wLjMyXzAuMjVdCiAgIyBXaGV0aGVyIHRvIGRyYXcgZG90cyBvciBub3QKICDCsOKKuERyYXdEb3RzIDAKICAjIExhYmVsIG9mIHRoZSB4LWF4aXMKICDCsOKKuFhMYWJlbCAiWWVhciIKKQoKJmltcyBQbG90IHsKICBbMjAwN18yIDIwMDhfMSAyMDA5XzNdCiAgWzIwMDdfMiAyMDA4XzIgMjAwOV80XX0K)):
 ![Example plot](examples/example-plot-0.png)
 
 If unspecified, plot bounds and gridline spacing are inferred, and a default selection of colors is used.

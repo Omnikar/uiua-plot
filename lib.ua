@@ -90,7 +90,7 @@ AxisNums ← ⬚∘(
     ⍚(∧˘↘⊟⊸¯⊟.⁅÷8⟜layout) PC~FontSize°◌⊃°⋕(×˜-)
   )∘
   ⊓⍚⍉⊙⊙⍚⇌⍚⇌
-  ∩(∧◇(⬚0↥⬚0↙⁅⊟⊙:¯+⌊÷2⤚⧻)⊙⊙⊙[[0]])
+  ∩(∧◇(⬚0↥⬚0↙⁅⊟⊙:¯+⌊÷2⤚⧻)⊙⊙⊙[])
   ↥∩⇌∩⬚0↙’⇌PC~Size°◌⍉
   ⍉⊞×C PC~FontColor°◌
 )
@@ -121,7 +121,7 @@ LineCoords ↚ +×¤: ⍥≡⇌:⁅≡⊟⊙×⤙÷⟜⇡/↥⟜/↧⟜/> ⊃⌵
 # out of consideration, and visible points that should connect
 # to them connect to each other instead.
 Lines ← (
-  °⊚∧(⊂/LineCoords):[]◫2⊸PointsToPx
+  °⊚/◇⊂⍚/LineCoords◫2⊸PointsToPx
   ⇌⬚0↙⇌PC~Size,
   ↧1↘¯⟜↘⌊÷2△⟜FFTConvolve WidthKernel PC~LineWidth,
   ⍉⊞×C PC~PlotColor:

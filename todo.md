@@ -3,6 +3,7 @@
 - Config option for whether to display axis numbers
 - Support for minor gridlines by passing higher rank arrays to `GridlineInterval`, `GridlineWidth`, and `GridlineColor`
 - Give axis numbers backdrops so that they can be seen when intersecting with axes/gridlines?
+- Function plotter integration?
 
 ## Bugs
 - Error if a data series is empty or entirely out of bounds of the plot

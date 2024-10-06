@@ -1,7 +1,7 @@
 # Experimental!
 # Uiua data plotting library
 
-~ "git: github.com/Omnikar/uiua-math" ~ FFTConvolve Gaussian
+~ "git: github.com/Omnikar/uiua-math" ~ FFTConvolve Gaussian ε
 
 # Set struct field (should be replaced by °⊸ eventually)
 S! ← ⍜^0◌:
@@ -104,7 +104,7 @@ Dots ← (
 # 1 along the diagonal of the rectangle, and 0 elsewhere.
 DiagLine ↚ ⍥⍉:°⊚⁅≡⊟⊙×⤙÷⟜⇡/↥⟜/↧⟜/>
 # Draws a line connecting two pixel coordinates
-CnxPoints ↚ ˘↘+↧0⊙::⍜△×DiagLine⊸⊃⌵(±+0.1)⤚-
+CnxPoints ↚ ˘↘+↧0⊙::⍜△×DiagLine⊸⊃⌵(±+ε)⤚-
 
 # FIXME: Fix behavior when points are outside of the graph
 # bounding box. Currently, points outside are taken completely

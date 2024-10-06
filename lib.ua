@@ -79,7 +79,7 @@ AxisNums ← ⬚∘(
     ⍚layout PC~FontSize°◌⊃°⋕(×˜-)
   )∘
   ⊓⍚⍉⊙⊙⍚⇌⍚⇌
-  ∩/↥∩⬚0≡◇(⬚0↙⁅⊟⊙:¯+⌊÷2⤚⧻)
+  ∩(∧◇(⬚0↥⬚0↙⁅⊟⊙:¯+⌊÷2⤚⧻)⊙⊙⊙[[0]])
   ↥∩⇌∩⬚0↙’⇌PC~Size°◌⍉
   ⍉⊞×C PC~FontColor°◌
 )
@@ -111,7 +111,7 @@ CnxPoints ↚ ˘↘+↧0⊙::⍜△×DiagLine⊸⊃⌵(±+0.1)⤚-
 # out of consideration, and visible points that should connect
 # to them connect to each other instead.
 Lines ← (
-  /↥⬚0≡/CnxPoints◫2⊸PointsToPx
+  ∧(⬚0↥/CnxPoints):¤¤0◫2⊸PointsToPx
   ⇌⬚0↙⇌PC~Size,
   ↧1↘¯⟜↘⌊÷2△⟜FFTConvolve WidthKernel PC~LineWidth,
   ⍉⊞×C PC~PlotColor:

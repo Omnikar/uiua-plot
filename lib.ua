@@ -1,7 +1,7 @@
 # Experimental!
 # Uiua data plotting library
 
-~ "git: github.com/Omnikar/uiua-math" ~ FFTConvolve Gaussian ε
+~ "git: github.com/Omnikar/uiua-math" ~ FFTConvolve Gaussian
 
 # Set struct field (should be replaced by °⊸ eventually)
 S! ← ⍜^0◌:

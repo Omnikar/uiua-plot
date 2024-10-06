@@ -19,15 +19,15 @@ C ↚ ⬚1↙₄
 ---PlotConfig
   # New `PlotConfig` with default values
   struct{
-    Min(0_0) 0
-    Max(1_1) 0
-    Size(100_100) 0
+    Min(⊟.∞) 0
+    Max(⊟.∞) 0
+    Size(512_512) 0
     BgColor(↯3 1) 0
     AxisWidth(3) 0
     AxisColor(↯3 0) 0
     GridlineWidth(1) 0
     GridlineColor(↯3 0.7) 0
-    GridlineInterval(⊟.0.2) 0
+    GridlineInterval(⊟.∞) 0
     FontSize(15) 0
     FontColor(↯3 0.3) 0
     PlotColor(⋯+1⇡6) 0
@@ -122,23 +122,29 @@ DistrFields! ↚^ (
   ⍚$"⟜⍜⊙_(⊡◿⧻,)"⟜⍚$"⊙⍜_(☇_)"⍚°$"_:_"⊙◌
   ⊂□$"◌≡(_)⊓⇡¤"/$"_\n_")
 
+Infer‼ ← ⟜(⍜^0(⍜∩▽◌’⊸=∞):^1)
+
 # TODO: Document this more
 # Plot some data with a specified `PlotConfig`
 # Data can be a single shape 2_n array or a
 # list of boxed shape 2_n arrays.
 # Image ? Data PlotConfig
-Plot ← /Stack⬚∘[
-  ⬚◌/Stack≡(
-    ⬚◌/Stack◇[
-      ⋅◌⍥◠Dots PC~DrawDots,
-      ⍥◠Lines PC~DrawLines,])
-  ⊙PC!DistrFields!(
-    PlotColor : 1
-  | DotSize : 0
-  | LineWidth : 0
-  | DrawDots : 0
-  | DrawLines : 0
-  )⟜⧻ ⍥¤=2⧻⊸△°◌
-  ⟜AxisNums⟜Axes
-  ⟜Gridlines⟜Background
-]
+Plot ← (
+  PC!Infer‼GridlineInterval(⍜×⁅˜ⁿ10⌵⌊⊸ₙ10÷5-⊃/↧/↥/◇⊂)
+  PC!Infer‼Min(-÷5GridlineInterval,/↧/◇⊂)
+  PC!Infer‼Max(+÷5GridlineInterval,/↥/◇⊂)
+  /Stack⬚∘[
+    ⬚◌/Stack≡(
+      ⬚◌/Stack◇[
+        ⋅◌⍥◠Dots PC~DrawDots,
+        ⍥◠Lines PC~DrawLines,])
+    ⊙PC!DistrFields!(
+      PlotColor : 1
+    | DotSize : 0
+    | LineWidth : 0
+    | DrawDots : 0
+    | DrawLines : 0
+    )⟜⧻ ⍥¤=2⧻⊸△°◌
+    ⟜AxisNums⟜Axes
+    ⟜Gridlines⟜Background
+  ])

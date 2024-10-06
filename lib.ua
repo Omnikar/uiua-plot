@@ -76,7 +76,7 @@ AxisNums ← ⬚∘(
   ∩⊓(
     ⤙×▽⊸≠0⍜-(⇡+1)
     ⍜×⁅˜ⁿ10⬚0⊗@.⇌°⋕ # Round values to precision of original factor
-    ⍚layout PC~FontSize°◌⊃°⋕(×˜-)
+    ⍚(∧˘↘⊟⊸¯⊟.⁅÷8⟜layout) PC~FontSize°◌⊃°⋕(×˜-)
   )∘
   ⊓⍚⍉⊙⊙⍚⇌⍚⇌
   ∩(∧◇(⬚0↥⬚0↙⁅⊟⊙:¯+⌊÷2⤚⧻)⊙⊙⊙[[0]])

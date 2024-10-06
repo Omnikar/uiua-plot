@@ -112,8 +112,8 @@ Dots ← (
   °⊚▽≡/×⊸PointsToPx
   ⇌⬚0↙⇌PC~Size,
   WidthKernel PC~DotSize,
-  ↧1↘¯⟜↘⌊÷2△⟜FFTConvolve
-  C PC~PlotColor:)
+  ↘¯⟜↘⌊÷2△⟜FFTConvolve
+  ↧1C PC~PlotColor:)
 
 # Coordinates of pixels creating a line
 # between two given pixel coordinates
@@ -137,8 +137,8 @@ Lines ← (
 
   °⊚/◇⊂⍚/LineCoords
   ⇌⬚0↙⇌PC~Size,
-  ↧1↘¯⟜↘⌊÷2△⟜FFTConvolve WidthKernel PC~LineWidth,
-  C PC~PlotColor:
+  ↘¯⟜↘⌊÷2△⟜FFTConvolve WidthKernel PC~LineWidth,
+  ↧1C PC~PlotColor:
 )
 
 # Distribute specified fields of a `PlotConfig`

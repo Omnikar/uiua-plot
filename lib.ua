@@ -100,18 +100,17 @@ Dots ← (
   ↧1↘¯⟜↘⌊÷2△⟜FFTConvolve
   ⍉⊞×C PC~PlotColor:)
 
-# Given a shape, creates an array of that shape with
-# 1 along the diagonal of the rectangle, and 0 elsewhere.
-DiagLine ↚ ⍥⍉:°⊚⁅≡⊟⊙×⤙÷⟜⇡/↥⟜/↧⟜/>
-# Draws a line connecting two pixel coordinates
-CnxPoints ↚ ˘↘+↧0⊙::⍜△×DiagLine⊸⊃⌵(±+ε)⤚-
+# Coordinates of pixels creating a line
+# between two given pixel coordinates
+# CoordList ? StartCoord EndCoord
+CnxCoords ↚ +×¤: ⍥≡⇌:⁅≡⊟⊙×⤙÷⟜⇡/↥⟜/↧⟜/> ⊃⌵±⊃-¤
 
 # FIXME: Fix behavior when points are outside of the graph
 # bounding box. Currently, points outside are taken completely
 # out of consideration, and visible points that should connect
 # to them connect to each other instead.
 Lines ← (
-  ∧(⬚0↥/CnxPoints):¤¤0◫2⊸PointsToPx
+  °⊚∧(⊂/CnxCoords):[]◫2⊸PointsToPx
   ⇌⬚0↙⇌PC~Size,
   ↧1↘¯⟜↘⌊÷2△⟜FFTConvolve WidthKernel PC~LineWidth,
   ⍉⊞×C PC~PlotColor:

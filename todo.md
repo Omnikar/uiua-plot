@@ -4,7 +4,6 @@
 - Legend?
 - Config option for whether to display axis numbers
 - Support for minor gridlines by passing higher rank arrays to `GridlineInterval`, `GridlineWidth`, and `GridlineColor`
-- Optimize line drawing by putting all pixel coords into a single `°⊚`, instead of handling each segment separately.
 
 ## Bugs
 - When drawing lines, out-of-bounds points are taken completely out of consideration, and visible points that should connect to them connect to each other instead.

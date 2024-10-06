@@ -71,6 +71,8 @@ PlotConfig
 ```
 ![Example plot without configuration](examples/example-plot-1.png)
 
+Fields supporting inference actually have their values default to `[∞ ∞]`, and these are replaced with inferred values when `Plot` is called. If you want, you can take advantage of this to partially infer some fields, for example by setting `Max` to `[10 ∞]` to use an upper bound of `10` in the x direction, but infer the upper bound in the y direction.
+
 All available configuration values for `PlotConfig` are in the following table. Any field marked with "Distributive" will distribute its values across multiple data series, cycling if necessary.
 | Field | Shape | Description | Default |
 |---|---|---|---|

@@ -30,7 +30,18 @@ C ↚ ⬚1↙₄
     GridlineInterval(⊟.∞) 0
     FontSize(15) 0
     FontColor(↯3 0.3) 0
-    PlotColor(⋯+1⇡6) 0
+    PlotColor(
+      # Colors from Desmos graphing calculator
+      # https://www.desmos.com/api/v1.7/docs/index.html#document-colors
+      ÷255[
+        199_68_64
+        45_112_179
+        56_140_70
+        96_66_166
+        250_126_25
+        0_0_0
+      ]
+    ) 0
     DrawDots(1) 0
     DotSize(40) 0
     DrawLines(1) 0

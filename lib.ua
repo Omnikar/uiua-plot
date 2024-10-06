@@ -48,7 +48,7 @@ C ↚ ⬚1↙₄
     LineWidth(8) 0
   }
   # Pixels per unit
-  Ppu ← ⁅÷-⊃Min⊃Max Size
+  Ppu ← ÷-⊃Min⊃Max Size
 ---
 PC ↚ PlotConfig
 

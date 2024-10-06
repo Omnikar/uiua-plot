@@ -3,8 +3,6 @@
 
 ~ "git: github.com/Omnikar/uiua-math" ~ FFTConvolve Gaussian
 
-# Set struct field (should be replaced by °⊸ eventually)
-S! ← ⍜^0◌:
 # Force full 4 channel color
 C ↚ ⬚1↙₄
 

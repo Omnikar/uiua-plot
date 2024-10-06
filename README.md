@@ -12,52 +12,52 @@ If you just want to get straight to plotting data, you can just create a new `Pl
 ~ "git: github.com/Omnikar/uiua-plot" ~ PlotConfig
 PlotConfig
 ```
-On the other hand, if you want to configure how your plot is drawn, you can use a builder pattern as follows. Note that the current functionality of the `S!` macro will be replaced by `°⊸` in the near future.
+On the other hand, if you want to configure how your plot is drawn, you can use a builder pattern as follows, using `°⊸` to set fields.
 ```uiua
 # Experimental!
-~ "git: github.com/Omnikar/uiua-plot" ~ PlotConfig S!
+~ "git: github.com/Omnikar/uiua-plot" ~ PlotConfig
 PlotConfig!(
   New
   # Minimum x and y bounds
-  S!Min 2006.8_¯0.3
+  °⊸Min 2006.8_¯0.3
   # Maximum x and y bounds
-  S!Max 2009.2_4.3
+  °⊸Max 2009.2_4.3
   # Spacing between gridlines in the x and y directions
-  S!GridlineInterval 0.5_1
+  °⊸GridlineInterval 0.5_1
   # Size of the image to produce
-  S!Size 800_400
+  °⊸Size 800_400
   # Color(s) to use for plotting the data
-  S!PlotColor [0.33_0.51_0.93 0.85_0.32_0.25]
+  °⊸PlotColor [0.33_0.51_0.93 0.85_0.32_0.25]
   # Whether to draw dots or not
-  S!DrawDots 0
+  °⊸DrawDots 0
 )
 ```
 
 Once you have a `PlotConfig`, you can use it to plot some data with the `Plot` function. This function can take a single `N×2` array to plot one data series of N entries, or it can take a box list of such arrays to plot multiple data series.
 ```uiua
 # Experimental!
-~ "git: github.com/Omnikar/uiua-plot" ~ Plot PlotConfig S!
+~ "git: github.com/Omnikar/uiua-plot" ~ Plot PlotConfig
 PlotConfig!(
   New
   # Minimum x and y bounds
-  S!Min 2006.8_¯0.3
+  °⊸Min 2006.8_¯0.3
   # Maximum x and y bounds
-  S!Max 2009.2_4.3
+  °⊸Max 2009.2_4.3
   # Spacing between gridlines in the x and y directions
-  S!GridlineInterval 0.5_1
+  °⊸GridlineInterval 0.5_1
   # Size of the image to produce
-  S!Size 800_400
+  °⊸Size 800_400
   # Color(s) to use for plotting the data
-  S!PlotColor [0.33_0.51_0.93 0.85_0.32_0.25]
+  °⊸PlotColor [0.33_0.51_0.93 0.85_0.32_0.25]
   # Whether to draw dots or not
-  S!DrawDots 0
+  °⊸DrawDots 0
 )
 
 &ims Plot {
   [2007_2 2008_1 2009_3]
   [2007_2 2008_2 2009_4]}
 ```
-This code produces the following output ([try it online](https://www.uiua.org/pad?src=0_13_0-dev_2__IyBFeHBlcmltZW50YWwhCn4gImdpdDogZ2l0aHViLmNvbS9PbW5pa2FyL3VpdWEtcGxvdCIgfiBQbG90IFBsb3RDb25maWcgUyEKUGxvdENvbmZpZyEoCiAgTmV3CiAgIyBNaW5pbXVtIHggYW5kIHkgYm91bmRzCiAgUyFNaW4gMjAwNi44X8KvMC4zCiAgIyBNYXhpbXVtIHggYW5kIHkgYm91bmRzCiAgUyFNYXggMjAwOS4yXzQuMwogICMgU3BhY2luZyBiZXR3ZWVuIGdyaWRsaW5lcyBpbiB0aGUgeCBhbmQgeSBkaXJlY3Rpb25zCiAgUyFHcmlkbGluZUludGVydmFsIDAuNV8xCiAgIyBTaXplIG9mIHRoZSBpbWFnZSB0byBwcm9kdWNlCiAgUyFTaXplIDgwMF80MDAKICAjIENvbG9yKHMpIHRvIHVzZSBmb3IgcGxvdHRpbmcgdGhlIGRhdGEKICBTIVBsb3RDb2xvciBbMC4zM18wLjUxXzAuOTMgMC44NV8wLjMyXzAuMjVdCiAgIyBXaGV0aGVyIHRvIGRyYXcgZG90cyBvciBub3QKICBTIURyYXdEb3RzIDAKKQoKJmltcyBQbG90IHsKICBbMjAwN18yIDIwMDhfMSAyMDA5XzNdCiAgWzIwMDdfMiAyMDA4XzIgMjAwOV80XX0K)):
+This code produces the following output ([try it online](https://www.uiua.org/pad?src=0_13_0-dev_3__IyBFeHBlcmltZW50YWwhCn4gImdpdDogZ2l0aHViLmNvbS9PbW5pa2FyL3VpdWEtcGxvdCIgfiBQbG90IFBsb3RDb25maWcKUGxvdENvbmZpZyEoCiAgTmV3CiAgIyBNaW5pbXVtIHggYW5kIHkgYm91bmRzCiAgwrDiirhNaW4gMjAwNi44X8KvMC4zCiAgIyBNYXhpbXVtIHggYW5kIHkgYm91bmRzCiAgwrDiirhNYXggMjAwOS4yXzQuMwogICMgU3BhY2luZyBiZXR3ZWVuIGdyaWRsaW5lcyBpbiB0aGUgeCBhbmQgeSBkaXJlY3Rpb25zCiAgwrDiirhHcmlkbGluZUludGVydmFsIDAuNV8xCiAgIyBTaXplIG9mIHRoZSBpbWFnZSB0byBwcm9kdWNlCiAgwrDiirhTaXplIDgwMF80MDAKICAjIENvbG9yKHMpIHRvIHVzZSBmb3IgcGxvdHRpbmcgdGhlIGRhdGEKICDCsOKKuFBsb3RDb2xvciBbMC4zM18wLjUxXzAuOTMgMC44NV8wLjMyXzAuMjVdCiAgIyBXaGV0aGVyIHRvIGRyYXcgZG90cyBvciBub3QKICDCsOKKuERyYXdEb3RzIDAKKQoKJmltcyBQbG90IHsKICBbMjAwN18yIDIwMDhfMSAyMDA5XzNdCiAgWzIwMDdfMiAyMDA4XzIgMjAwOV80XX0K)):
 ![Example plot](examples/example-plot-0.png)
 
 If unspecified, plot bounds and gridline spacing are inferred, and a default selection of colors is used.

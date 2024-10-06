@@ -3,8 +3,8 @@
 
 ~ "git: github.com/Omnikar/uiua-math" ~ FFTConvolve Gaussian
 
-# Force full 4 channel color
-C ↚ ⬚1↙₄
+# Apply a color to an alpha map
+C ↚ ≡≡⊂¤¤ ⊙×:⍜⇌°⊂ ⬚1↙₄
 
 # TODO: Document this more
 # The following fields can take lists of
@@ -61,7 +61,7 @@ Stack ← ⍜°⍉⊂⊃(
 )∩⍜°⍉⍜⇌°⊂
 
 # Image ? PlotConfig
-Background ← ∧↯⊙C PC!⊃Size BgColor
+Background ← ∧↯⊙⬚1↙₄ PC!⊃Size BgColor
 
 # Image ? PlotConfig
 Axes ← (
@@ -70,7 +70,7 @@ Axes ← (
   ⊙(°⊟PC~Size,)°⊟⊞-
   ∩(°⊚⁅▽⊸>₀▽)⊓⤚>⊸<
   ∩⬚0↙⊙:°⊟◡⋅⋅PC~Size
-  ⍉⊞×C PC~AxisColor:⇌˜⊞↥)
+  C PC~AxisColor:⇌˜⊞↥)
 
 # Image ? PlotConfig
 Gridlines ← (
@@ -79,7 +79,7 @@ Gridlines ← (
   | ∩+⊙:∩⇡∩°⊟PC~Size,×)
   ∩(⌵⍜⊙+◿⤙÷2)⊙:°⊟
   ∩≤’÷2◡⋅⋅PC~GridlineWidth
-  ⍉⊞×C PC~GridlineColor:⇌˜⊞↥)
+  C PC~GridlineColor:⇌˜⊞↥)
 
 # Image ? PlotConfig
 AxisNums ← ⬚∘(
@@ -94,7 +94,7 @@ AxisNums ← ⬚∘(
   ⊓⍚⍉⊙⊙⍚⇌⍚⇌
   ∩(∧◇(⬚0↥⬚0↙⁅⊟⊙:¯+⌊÷2⤚⧻)⊙⊙⊙[])
   ↥∩⇌∩⬚0↙’⇌PC~Size°◌⍉
-  ⍉⊞×C PC~NumberColor°◌
+  C PC~NumberColor°◌
 )
 
 # Convolution kernel for thickening dots and lines
@@ -113,7 +113,7 @@ Dots ← (
   ⇌⬚0↙⇌PC~Size,
   WidthKernel PC~DotSize,
   ↧1↘¯⟜↘⌊÷2△⟜FFTConvolve
-  ⍉⊞×C PC~PlotColor:)
+  C PC~PlotColor:)
 
 # Coordinates of pixels creating a line
 # between two given pixel coordinates
@@ -138,7 +138,7 @@ Lines ← (
   °⊚/◇⊂⍚/LineCoords
   ⇌⬚0↙⇌PC~Size,
   ↧1↘¯⟜↘⌊÷2△⟜FFTConvolve WidthKernel PC~LineWidth,
-  ⍉⊞×C PC~PlotColor:
+  C PC~PlotColor:
 )
 
 # Distribute specified fields of a `PlotConfig`
@@ -181,7 +181,7 @@ Plot ← (
   ]
   PC!⊃LabelColor⊃LabelSize⊃XLabel YLabel:
   ⊙∩(∧˘↘⊟⊸¯⌊÷4⟜layout)⊙’
-  ⊡1△:⊙(⟜⧻,)∩(⤸1⍉⊞×)’C
+  ⊡1△:⊙(⟜⧻,)∩(⤸1⍉⊞×)’⬚1↙₄
   ⊙˜⊂:⤸1⊙⇌∩(↻⌊÷2-⊃⊙⧻⬚0↙)
   Stack↙×1_¯1⇌:≡⊂⬚0↙⧻,
 )

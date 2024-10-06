@@ -122,7 +122,9 @@ DistrFields! ↚^ (
   ⍚$"⟜⍜⊙_(⊡◿⧻,)"⟜⍚$"⊙⍜_(☇_)"⍚°$"_:_"⊙◌
   ⊂□$"◌≡(_)⊓⇡¤"/$"_\n_")
 
-Infer‼ ← ⟜(⍜^0(⍜∩▽◌’⊸=∞):^1)
+# Infer values for a `PlotConfig` field using
+# a function that operates on input data
+Infer‼ ↚ ⟜(⍜^0(⍜∩▽◌’⊸=∞):^1)
 
 # TODO: Document this more
 # Plot some data with a specified `PlotConfig`

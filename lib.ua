@@ -151,6 +151,7 @@ DistrFields! ↚^ (
 
 # Infer values for a `PlotConfig` field using
 # a function that operates on input data
+# ? FieldGetter InferenceFunction
 Infer‼ ↚ ⟜(⍜^0(⍜∩▽◌’⊸=∞):^1)
 
 # TODO: Document this more

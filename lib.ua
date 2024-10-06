@@ -103,14 +103,14 @@ Dots ← (
 # Coordinates of pixels creating a line
 # between two given pixel coordinates
 # CoordList ? StartCoord EndCoord
-CnxCoords ↚ +×¤: ⍥≡⇌:⁅≡⊟⊙×⤙÷⟜⇡/↥⟜/↧⟜/> ⊃⌵±⊃-¤
+LineCoords ↚ +×¤: ⍥≡⇌:⁅≡⊟⊙×⤙÷⟜⇡/↥⟜/↧⟜/> ⊃⌵±⊃-¤
 
 # FIXME: Fix behavior when points are outside of the graph
 # bounding box. Currently, points outside are taken completely
 # out of consideration, and visible points that should connect
 # to them connect to each other instead.
 Lines ← (
-  °⊚∧(⊂/CnxCoords):[]◫2⊸PointsToPx
+  °⊚∧(⊂/LineCoords):[]◫2⊸PointsToPx
   ⇌⬚0↙⇌PC~Size,
   ↧1↘¯⟜↘⌊÷2△⟜FFTConvolve WidthKernel PC~LineWidth,
   ⍉⊞×C PC~PlotColor:

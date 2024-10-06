@@ -130,7 +130,8 @@ Infer‼ ← ⟜(⍜^0(⍜∩▽◌’⊸=∞):^1)
 # list of boxed shape 2_n arrays.
 # Image ? Data PlotConfig
 Plot ← (
-  PC!Infer‼GridlineInterval(⍜×⁅˜ⁿ10⌵⌊⊸ₙ10÷5-⊃/↧/↥/◇⊂)
+  ⍥¤=2⧻⊸△
+  PC!Infer‼GridlineInterval(⍜×⁅˜ⁿ10¯⌊⊸ₙ10÷5-⊃/↧/↥/◇⊂)
   PC!Infer‼Min(-÷5GridlineInterval,/↧/◇⊂)
   PC!Infer‼Max(+÷5GridlineInterval,/↥/◇⊂)
   /Stack⬚∘[
@@ -144,7 +145,7 @@ Plot ← (
     | LineWidth : 0
     | DrawDots : 0
     | DrawLines : 0
-    )⟜⧻ ⍥¤=2⧻⊸△°◌
+    )⟜⧻ °◌
     ⟜AxisNums⟜Axes
     ⟜Gridlines⟜Background
   ])

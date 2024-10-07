@@ -7,6 +7,10 @@
 C ↚ ≡≡⊂¤¤ ⊙×:⍜⇌°⊂ ⬚1↙₄
 
 # TODO: Document this more
+# The following fields can infer their values based on data:
+# - `Min`
+# - `Max`
+# - `GridlineInterval`
 # The following fields can take lists of
 # values to map over multiple data series:
 # - `PlotColor`

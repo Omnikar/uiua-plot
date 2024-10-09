@@ -145,6 +145,12 @@ Lines ← (
   ↧1C PC~PlotColor:
 )
 
+# Plot a single series
+# Image ? Data PlotConfig
+SingleSeries ← /Stack◇[
+  ⋅◌⍥◠Dots PC~DrawDots,
+  ⍥◠Lines PC~DrawLines,]
+
 # Distribute specified fields of a `PlotConfig`
 # ? (FieldGetter:ArgRank)+
 DistrFields! ↚^ (
@@ -156,6 +162,14 @@ DistrFields! ↚^ (
 # ? FieldGetter InferenceFunction
 Infer‼ ↚ ⟜(⍜^0(⍜∩▽◌’⊸=∞):^1)
 
+# Automatically infer `PlotConfig` fields based on data
+# Data NewPlotConfig ? Data PlotConfig
+AutoInfer ← (
+  PC!Infer‼GridlineInterval(⍜×⁅˜ⁿ10¯⌊⊸ₙ10÷5-⊃/↧/↥/◇⊂)
+  PC!Infer‼Min(-÷5GridlineInterval,/↧/◇⊂)
+  PC!Infer‼Max(+÷5GridlineInterval,/↥/◇⊂)
+)
+
 # TODO: Document this more
 # Plot some data with a specified `PlotConfig`
 # Data can be a single shape 2_n array or a
@@ -164,25 +178,20 @@ Infer‼ ↚ ⟜(⍜^0(⍜∩▽◌’⊸=∞):^1)
 Plot ← (
   ⊙(>0⊸[∩⧻PC!⊃YLabel XLabel]⟜PC~Size⟜Background
     ⍜⊙PC~Size-×+⟜+⌊⊸÷4 PC~LabelSize,)
-  ⍥¤=2⧻⊸△
-  PC!Infer‼GridlineInterval(⍜×⁅˜ⁿ10¯⌊⊸ₙ10÷5-⊃/↧/↥/◇⊂)
-  PC!Infer‼Min(-÷5GridlineInterval,/↧/◇⊂)
-  PC!Infer‼Max(+÷5GridlineInterval,/↥/◇⊂)
-  /Stack⊸⬚∘[
-    ⬚◌/Stack≡(
-      ⬚◌/Stack◇[
-        ⋅◌⍥◠Dots PC~DrawDots,
-        ⍥◠Lines PC~DrawLines,])
+  ⍥¤=2⧻⊸△ # Fix if single rank 2 array
+  AutoInfer
+  /Stack⊸[
+    /Stack≡SingleSeries
     ⊙PC!DistrFields!(
       PlotColor : 1
     | DotSize : 0
     | LineWidth : 0
     | DrawDots : 0
     | DrawLines : 0
-    )⟜⧻ °◌
-    ⟜AxisNums
-    ⟜Axes⟜Gridlines
-  ]
+    )⟜⧻
+    ⊙(⟜AxisNums
+      ⟜Axes⟜Gridlines
+    )]
   PC!⊃LabelColor⊃LabelSize⊃XLabel YLabel:
   ⊙∩(∧˘↘⊟⊸¯⌊÷4⟜layout)⊙’
   ⊡1△:⊙(⟜⧻,)∩(⤸1⍉⊞×)’⬚1↙₄

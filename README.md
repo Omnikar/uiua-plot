@@ -18,10 +18,10 @@ On the other hand, if you want to configure how your plot is drawn, you can use 
 ~ "git: github.com/Omnikar/uiua-plot" ~ PlotConfig
 PlotConfig!(
   New
-  # Minimum x and y bounds
-  °⊸Min 2006.8_¯0.3
-  # Maximum x and y bounds
-  °⊸Max 2009.2_4.3
+  # Minimum and maximum x bounds
+  °⊸XBounds 2006.8_2009.2
+  # Minimum and maximum y bounds
+  °⊸YBounds ¯0.3_4.3
   # Spacing between gridlines in the x and y directions
   °⊸GridlineInterval 0.5_1
   # Size of the image to produce
@@ -41,10 +41,10 @@ Once you have a `PlotConfig`, you can use it to plot some data with the `Plot` f
 ~ "git: github.com/Omnikar/uiua-plot" ~ Plot PlotConfig
 PlotConfig!(
   New
-  # Minimum x and y bounds
-  °⊸Min 2006.8_¯0.3
-  # Maximum x and y bounds
-  °⊸Max 2009.2_4.3
+  # Minimum and maximum x bounds
+  °⊸XBounds 2006.8_2009.2
+  # Minimum and maximum y bounds
+  °⊸YBounds ¯0.3_4.3
   # Spacing between gridlines in the x and y directions
   °⊸GridlineInterval 0.5_1
   # Size of the image to produce
@@ -61,7 +61,7 @@ PlotConfig!(
   [2007_2 2008_1 2009_3]
   [2007_2 2008_2 2009_4]}
 ```
-This code produces the following output ([try it online](https://www.uiua.org/pad?src=0_13_0-dev_3__IyBFeHBlcmltZW50YWwhCn4gImdpdDogZ2l0aHViLmNvbS9PbW5pa2FyL3VpdWEtcGxvdCIgfiBQbG90IFBsb3RDb25maWcKUGxvdENvbmZpZyEoCiAgTmV3CiAgIyBNaW5pbXVtIHggYW5kIHkgYm91bmRzCiAgwrDiirhNaW4gMjAwNi44X8KvMC4zCiAgIyBNYXhpbXVtIHggYW5kIHkgYm91bmRzCiAgwrDiirhNYXggMjAwOS4yXzQuMwogICMgU3BhY2luZyBiZXR3ZWVuIGdyaWRsaW5lcyBpbiB0aGUgeCBhbmQgeSBkaXJlY3Rpb25zCiAgwrDiirhHcmlkbGluZUludGVydmFsIDAuNV8xCiAgIyBTaXplIG9mIHRoZSBpbWFnZSB0byBwcm9kdWNlCiAgwrDiirhTaXplIDgwMF80MDAKICAjIENvbG9yKHMpIHRvIHVzZSBmb3IgcGxvdHRpbmcgdGhlIGRhdGEKICDCsOKKuFBsb3RDb2xvciBbMC4zM18wLjUxXzAuOTMgMC44NV8wLjMyXzAuMjVdCiAgIyBXaGV0aGVyIHRvIGRyYXcgZG90cyBvciBub3QKICDCsOKKuERyYXdEb3RzIDAKICAjIExhYmVsIG9mIHRoZSB4LWF4aXMKICDCsOKKuFhMYWJlbCAiWWVhciIKKQoKJmltcyBQbG90IHsKICBbMjAwN18yIDIwMDhfMSAyMDA5XzNdCiAgWzIwMDdfMiAyMDA4XzIgMjAwOV80XX0K)):
+This code produces the following output ([try it online](https://uiua.org/pad?src=0_13_0-dev_3__IyBFeHBlcmltZW50YWwhCn4gImdpdDogZ2l0aHViLmNvbS9PbW5pa2FyL3VpdWEtcGxvdCIgfiBQbG90IFBsb3RDb25maWcKUGxvdENvbmZpZyEoCiAgTmV3CiAgIyBNaW5pbXVtIGFuZCBtYXhpbXVtIHggYm91bmRzCiAgwrDiirhYQm91bmRzIDIwMDYuOF8yMDA5LjIKICAjIE1pbmltdW0gYW5kIG1heGltdW0geSBib3VuZHMKICDCsOKKuFlCb3VuZHMgwq8wLjNfNC4zCiAgIyBTcGFjaW5nIGJldHdlZW4gZ3JpZGxpbmVzIGluIHRoZSB4IGFuZCB5IGRpcmVjdGlvbnMKICDCsOKKuEdyaWRsaW5lSW50ZXJ2YWwgMC41XzEKICAjIFNpemUgb2YgdGhlIGltYWdlIHRvIHByb2R1Y2UKICDCsOKKuFNpemUgODAwXzQwMAogICMgQ29sb3IocykgdG8gdXNlIGZvciBwbG90dGluZyB0aGUgZGF0YQogIMKw4oq4UGxvdENvbG9yIFswLjMzXzAuNTFfMC45MyAwLjg1XzAuMzJfMC4yNV0KICAjIFdoZXRoZXIgdG8gZHJhdyBkb3RzIG9yIG5vdAogIMKw4oq4RHJhd0RvdHMgMAogICMgTGFiZWwgb2YgdGhlIHgtYXhpcwogIMKw4oq4WExhYmVsICJZZWFyIgopCgomaW1zIFBsb3QgewogIFsyMDA3XzIgMjAwOF8xIDIwMDlfM10KICBbMjAwN18yIDIwMDhfMiAyMDA5XzRdfQo=)):
 ![Example plot](examples/example-plot-0.png)
 
 If unspecified, plot bounds and gridline spacing are inferred, and a default selection of colors is used.
@@ -80,8 +80,10 @@ Fields supporting inference actually have their values default to `[∞ ∞]`, a
 All available configuration values for `PlotConfig` are in the following table. Any field marked with "Distributive" will distribute its values across multiple data series, cycling if necessary.
 | Field | Shape | Description | Default |
 |---|---|---|---|
-| `Min` | `[2]` | The minimum x and y bounds of the plot | Inferred |
-| `Max` | `[2]` | The maximum x and y bounds of the plot | Inferred |
+| `XBounds` | `[2]` | The minimum and maximum x bounds of the plot (overrides `Min` and `Max`) | Inferred |
+| `YBounds` | `[2]` | The minimum and maximum y bounds of the plot (overrides `Min` and `Max`) | Inferred |
+| `Min` | `[2]` | The minimum x and y bounds of the plot (overrides `XBounds` and `YBounds`) | Inferred |
+| `Max` | `[2]` | The maximum x and y bounds of the plot (overrides `XBounds` and `YBounds`) | Inferred |
 | `Size` | `[2]` | The pixel dimensions of the image to output | `[512 512]` |
 | `BgColor` | `[3]` or `[4]` | Plot background color | `[1 1 1]` |
 | `AxisWidth` | `[]` | Thickness of the main axes | `3` |

@@ -200,9 +200,8 @@ Plot ← (
     | DrawDots : 0
     | DrawLines : 0
     )⟜⧻
-    ⊙(⟜AxisNums
-      ⟜Axes⟜Gridlines
-    )]
+    ⊙(⟜Axes⟜Gridlines
+      ⟜AxisNums)]
   PC!⊃LabelColor⊃LabelSize⊃XLabel YLabel:
   ⊙∩(∧˘↘⊟⊸¯⌊÷4⟜layout)⊙’
   ⊡1△:⊙(⟜⧻,)∩(⤸1⍉⊞×)’⬚1↙₄

@@ -110,6 +110,11 @@ WidthKernel ↚ °√₄↧1×2√₁₆Gaussian⤙÷40⍜(÷2+1)⁅
 # Rounding dot size up to an odd number
 # gives the post-convolution array the correct shape
 
+XKernel ↚ (
+  0.3:¤↥⊸⇌⊞=.⊸⇡⍜(÷2+1)⁅×0.3
+  /↥≡↻☇1⊞⊟.-÷2-1⟜⇡⍜(÷2+1)⌊×
+)
+
 # Returns pixel coordinates of points and whether each
 # point is inside the x bounds and the y bounds
 PointsToPx ↚ ∩≡⇌⊃(⍉×⊓<>’⊓⍉PC!⊃Min Max|⁅×⊙-∩¤PC!⊃Ppu Min:)
@@ -140,7 +145,10 @@ Lines ← (
       ⊃(∩(˜÷∩-,)0_0◡⋅⊙∘)⋅⊙∘
       ⁅⍜⊙-×↥0/↥↧
     )⊢≡⊓≡/×(⊟⟜⇌))
-  ▽≡(/×♭)∩⍉×⊓≥<0_0,⇌PC~Size◡:°⍉
+  ⇌PC~Size◡:°⍉
+  ▽≡(/×♭)∩⍉×⊓≥<0_0,
+  # TODO: Use this instead once ∈☇1⇡ is optimized
+  # ▽⊓/×⍉∈☇1⇡
 
   °⊚/◇⊂⍚/LineCoords
   ⇌⬚0↙⇌PC~Size,

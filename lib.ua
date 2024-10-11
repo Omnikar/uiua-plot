@@ -231,7 +231,7 @@ Plot ← (
     ⍜⊙PC~Size-×+⟜+⌊⊸÷4 PC~AxisLabelSize,)
   AutoInfer
   /Stack⊸[
-    /Stack≡SingleSeries
+    /Stack⇌≡SingleSeries
     ⊙AutoDistrFields⟜⧻
     ⊙(⟜Axes⟜Gridlines
       ⟜AxisNums)]

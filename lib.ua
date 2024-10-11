@@ -96,7 +96,7 @@ AxisNums ← ⬚∘(
   ∩⊓(
     ⤙×▽⊸≠0⍜-(⇡+1)
     ⍜×⁅˜ⁿ10⬚0⊗@.⇌°⋕ # Round values to precision of original factor
-    ⍚(∧˘↘⊟⊸¯⊟.⁅÷8⟜layout) PC~NumberSize°◌⊃°⋕(×˜-)
+    ⍚(∧⌝↘⊟⊸¯⊟.⁅÷8⟜layout) PC~NumberSize°◌⊃°⋕(×˜-)
   )∘
   ⊓⍚⍉⊙⊙⍚⇌⍚⇌
   ∩(∧◇(⬚0↥⬚0↙⁅⊟⊙:¯+⌊÷2⤚⧻)⊙⊙⊙[])
@@ -183,8 +183,8 @@ AutoInfer ← (
 
 # TODO: Document this more
 # Plot some data with a specified `PlotConfig`
-# Data can be a single shape 2_n array or a
-# list of boxed shape 2_n arrays.
+# Data can be a single shape N_2 array or a
+# list of boxed shape N_2 arrays.
 # Image ? Data PlotConfig
 Plot ← (
   ⊙(>0⊸[∩⧻PC!⊃YLabel XLabel]⟜PC~Size⟜Background
@@ -203,7 +203,7 @@ Plot ← (
     ⊙(⟜Axes⟜Gridlines
       ⟜AxisNums)]
   PC!⊃LabelColor⊃LabelSize⊃XLabel YLabel:
-  ⊙∩(∧˘↘⊟⊸¯⌊÷4⟜layout)⊙’
+  ⊙∩(∧⌝↘⊟⊸¯⌊÷4⟜layout)⊙’
   ⊡1△:⊙(⟜⧻,)∩(⤸1⍉⊞×)’⬚1↙₄
   ⊙˜⊂:⤸1⊙⇌∩(↻⌊÷2-⊃⊙⧻⬚0↙)
   Stack↙×1_¯1⇌:≡⊂⬚0↙⧻,

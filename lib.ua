@@ -207,10 +207,10 @@ AutoInfer ← (
 Legend ← (
   ⊸AutoDistrFields
   ≡PC!⊃PlotLabelSize⊃PlotColor⊃PlotLabel PlotLabelColor
-  ⍚(≡⊂⊓(C:≡⬚0↙⌊×1.5⊸⧻¬↯⟜⊚|C:layout))’
+  ⍚(≡⊂⊓(C:≡⬚0↙⌊×3/2⊸⧻¬↯⟜⊚|C:layout))’
   PC~PlotLabelSize⤙⊙⊓(⊢PC~Size)⊓0[]⤚≡◇(⧻⊢)
   ⟜⊃(⊕□˜▽°⊏⇌⊂◌∧(⨬⋅⊓-+₁⊓˜-⋅⊓1⊂:⊙◡<⊙+)⤙⊓:∘)⋅⋅∘
-  ⟜(≡◇∧≡⬚0↙≡⊟¯⌊÷2⊸+≡◇(⧻⊢)’⍚(/◇≡(⊂⊂))¤⍉↯4↯⟜⊚)
+  ⟜(≡◇∧≡⬚0↙≡⊟¯⌊÷2⊸+≡◇(⧻⊢)’⍚/◇≡(⊂⊂)¤⍉↯4↯⟜⊚)
   ⟜(/(⊂⊂)⍉↯4˜↯0˜⊟⊡2△,)
   ∧⌝↘⊟⊸¯⌊÷2
 )

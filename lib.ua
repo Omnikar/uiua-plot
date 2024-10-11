@@ -4,7 +4,7 @@
 ~ "git: github.com/Omnikar/uiua-math" ~ FFTConvolve Gaussian
 
 # Apply a color to an alpha map
-C ↚ ≡≡(⍜⊣×)¤¤⬚1↙₄
+C ↚ ⍜(⊣°⍉)×∧↯⇌△,⬚1↙₄
 
 # TODO: Document this more
 # The following fields can infer their values based on data:

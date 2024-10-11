@@ -4,7 +4,7 @@
 ~ "git: github.com/Omnikar/uiua-math" ~ FFTConvolve Gaussian
 
 # Apply a color to an alpha map
-C ↚ ≡≡⊂¤¤ ⊙×:⍜⇌°⊂ ⬚1↙₄
+C ↚ ≡≡(⍜⊣×)¤¤⬚1↙₄
 
 # TODO: Document this more
 # The following fields can infer their values based on data:
@@ -14,6 +14,8 @@ C ↚ ≡≡⊂¤¤ ⊙×:⍜⇌°⊂ ⬚1↙₄
 # The following fields can take lists of
 # values to map over multiple data series:
 # - `PlotColor`
+# - `PlotLabel`
+# - `PlotLabelColor`
 # - `DrawDots`
 # - `DotSize`
 # - `DrawLines`
@@ -34,8 +36,8 @@ C ↚ ≡≡⊂¤¤ ⊙×:⍜⇌°⊂ ⬚1↙₄
     NumberColor(↯3 0.3) 0
     XLabel("") 2
     YLabel("") 2
-    LabelSize(20) 0
-    LabelColor(↯3 0.2) 0
+    AxisLabelSize(20) 0
+    AxisLabelColor(↯3 0.2) 0
     PlotColor(
       # Colors from Desmos graphing calculator
       # https://www.desmos.com/api/v1.7/docs/index.html#document-colors
@@ -48,6 +50,9 @@ C ↚ ≡≡⊂¤¤ ⊙×:⍜⇌°⊂ ⬚1↙₄
         0_0_0
       ]
     ) 0
+    PlotLabel(□"") 3
+    PlotLabelSize(15) 0
+    PlotLabelColor(↯3 0.2) 0
     DrawDots(1) 0
     DotSize(40) 0
     DrawLines(1) 0
@@ -163,10 +168,27 @@ SingleSeries ← /Stack◇[
   ⍥◠Lines PC~DrawLines,]
 
 # Distribute specified fields of a `PlotConfig`
-# ? (FieldGetter:ArgRank)+
+# ? Default (FieldGetter:ArgRank:PickFunction)+
 DistrFields! ↚^ (
-  ⍚$"⟜⍜⊙_(⊡◿⧻,)"⟜⍚$"⊙⍜_(☇_)"⍚°$"_:_"⊙◌
+  °⊂⊙◌
+  ⊙(⍚°$"_:_:_"
+    ⊙:⟜⍚$"⊙⍜(_|☇_)")
+  # ⍚$"⟜⍜⊙(_)(⬚(_ _|_))".:
+  ⍚$"⟜⍜⊙(_)(⍣(_|_ _))"⤚⋅’
   ⊂□$"◌≡(_)⊓⇡¤"/$"_\n_")
+
+# Distribute appropriate fields of a `PlotConfig` over N rows
+# NewPlotConfigs ? N PlotConfig
+AutoDistrFields ← PC!DistrFields!(
+  New
+| PlotColor : 1 : ⊡◿⧻,
+| PlotLabel : 0 : ⊡
+| PlotLabelColor : 1 : ⊡↧-1⧻,
+| DotSize : 0 : ⊡↧-1⧻,
+| LineWidth : 0 : ⊡↧-1⧻,
+| DrawDots : 0 : ⊡↧-1⧻,
+| DrawLines : 0 : ⊡↧-1⧻,
+)
 
 # Infer values for a `PlotConfig` field using
 # a function that operates on input data
@@ -181,30 +203,41 @@ AutoInfer ← (
   PC!Infer‼Max(+÷5GridlineInterval,/↥/◇⊂)
 )
 
+# Legend ? NumSeries PlotConfig
+Legend ← (
+  ⊸AutoDistrFields
+  ≡PC!⊃PlotLabelSize⊃PlotColor⊃PlotLabel PlotLabelColor
+  ⍚(≡⊂⊓(C:≡⬚0↙⌊×1.5⊸⧻¬↯⟜⊚|C:layout))’
+  PC~PlotLabelSize⤙⊙⊓(⊢PC~Size)⊓0[]⤚≡◇(⧻⊢)
+  ⟜⊃(⊕□˜▽°⊏⇌⊂◌∧(⨬⋅⊓-+₁⊓˜-⋅⊓1⊂:⊙◡<⊙+)⤙⊓:∘)⋅⋅∘
+  ⟜(≡◇∧≡⬚0↙≡⊟¯⌊÷2⊸+≡◇(⧻⊢)’⍚(/◇≡(⊂⊂))¤⍉↯4↯⟜⊚)
+  ⟜(/(⊂⊂)⍉↯4˜↯0˜⊟⊡2△,)
+  ∧⌝↘⊟⊸¯⌊÷2
+)
+
 # TODO: Document this more
 # Plot some data with a specified `PlotConfig`
 # Data can be a single shape N_2 array or a
 # list of boxed shape N_2 arrays.
 # Image ? Data PlotConfig
 Plot ← (
-  ⊙(>0⊸[∩⧻PC!⊃YLabel XLabel]⟜PC~Size⟜Background
-    ⍜⊙PC~Size-×+⟜+⌊⊸÷4 PC~LabelSize,)
   ⍥¤=2⧻⊸△ # Fix if single rank 2 array
+  ⊙⟜Background
+  # Check if there is only one data series with no label
+  ×◡⊓(=1⧻|◇≍""⊢PC~PlotLabel)
+  # Make a legend if the above was false, otherwise make an empty legend
+  ⨬⟜(⤚(⍜⊙(⊣PC~Size)-⧻)⊸Legend⧻)⊙⟜(°△[0⊙4]⊢PC~Size)
+  ⊙(>0⊸[∩⧻PC!⊃YLabel XLabel]⟜PC~Size
+    ⍜⊙PC~Size-×+⟜+⌊⊸÷4 PC~AxisLabelSize,)
   AutoInfer
   /Stack⊸[
     /Stack≡SingleSeries
-    ⊙PC!DistrFields!(
-      PlotColor : 1
-    | DotSize : 0
-    | LineWidth : 0
-    | DrawDots : 0
-    | DrawLines : 0
-    )⟜⧻
+    ⊙AutoDistrFields⟜⧻
     ⊙(⟜Axes⟜Gridlines
       ⟜AxisNums)]
-  PC!⊃LabelColor⊃LabelSize⊃XLabel YLabel:
+  PC!⊃AxisLabelColor⊃AxisLabelSize⊃XLabel YLabel:
   ⊙∩(∧⌝↘⊟⊸¯⌊÷4⟜layout)⊙’
   ⊡1△:⊙(⟜⧻,)∩(⤸1⍉⊞×)’⬚1↙₄
   ⊙˜⊂:⤸1⊙⇌∩(↻⌊÷2-⊃⊙⧻⬚0↙)
-  Stack↙×1_¯1⇌:≡⊂⬚0↙⧻,
+  Stack˜⊂↙×1_¯1⇌:≡⊂⬚0↙⧻,
 )

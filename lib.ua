@@ -20,7 +20,7 @@ C ↚ ⍜(⊣°⍉)×∧↯⇌△,⬚1↙₄
 # - `DotSize`
 # - `DrawLines`
 # - `LineWidth`
----PlotConfig
+┌─╴PlotConfig
   # New `PlotConfig` with default values
   struct{
     Min(⊟.∞) 0
@@ -57,13 +57,17 @@ C ↚ ⍜(⊣°⍉)×∧↯⇌△,⬚1↙₄
     DotSize(40) 0
     DrawLines(1) 0
     LineWidth(8) 0
+    BarWidth(40) 0
+    BarLabel(□"") 3
+    BarLabelSize(15) 0
+    BarLabelColor(↯3 0.2) 0
   }
   # Pixels per unit
   Ppu     ← ÷-⊃Min⊃Max Size
   Bounds  ← ⌅([⊃Min Max]|⟜[⊃Min Max]|⍜Max◌⍜Min◌⊙°⊟)
   XBounds ← ⊢⍉Bounds
   YBounds ← ⊣⍉Bounds
----
+└─╴
 PC ↚ PlotConfig
 
 # Stack one RGBA image atop another
@@ -80,7 +84,7 @@ Axes ← (
   -⌊÷2⟜⇡⊸PC~AxisWidth
   ×PC!⊃Min Ppu,
   ⊙(°⊟PC~Size,)°⊟⊞-
-  ∩(°⊚⁅▽⊸>₀▽)⊓⤚>⊸<
+  ∩(°⊚⁅▽⊸≥0▽)⊓⤚>⊸<
   ∩⬚0↙⊙:°⊟◡⋅⋅PC~Size
   C PC~AxisColor:⇌˜⊞↥)
 
@@ -104,7 +108,7 @@ AxisNums ← ⬚∘(
     ⍚(∧⌝↘⊟⊸¯⊟.⁅÷8⟜layout) PC~NumberSize°◌⊃°⋕(×˜-)
   )∘
   ⊓⍚⍉⊙⊙⍚⇌⍚⇌
-  ∩(∧◇(⬚0↥⬚0↙⁅⊟⊙:¯+⌊÷2⤚⧻)⊙⊙⊙[])
+  ∩(☇1∧◇(⬚0↥⬚0↙⁅⊟⊙:¯+⌊÷2⤚⧻)⊙⊙⊙[])
   ↥∩⇌∩⬚0↙’⇌PC~Size°◌⍉
   C PC~NumberColor°◌
 )
@@ -188,12 +192,13 @@ AutoDistrFields ← PC!DistrFields!(
 | LineWidth : 0 : ⊡↧-1⧻,
 | DrawDots : 0 : ⊡↧-1⧻,
 | DrawLines : 0 : ⊡↧-1⧻,
+| BarWidth : 0 : ⊡↧-1⧻,
 )
 
 # Infer values for a `PlotConfig` field using
 # a function that operates on input data
 # ? FieldGetter InferenceFunction
-Infer‼ ↚ ⟜(⍜^0(⍜∩▽◌’⊸=∞):^1)
+Infer‼ ↚ ⟜(⍜^0(⍜∩▽◌’⊸=∞∩♭):^1)
 
 # Automatically infer `PlotConfig` fields based on data
 # Data NewPlotConfig ? Data PlotConfig
@@ -215,6 +220,35 @@ Legend ← (
   ∧⌝↘⊟⊸¯⌊÷2
 )
 
+SingleBars ← (
+  ×⊣PC~Ppu,↥0-⊣PC~Min,
+  ⬚0≡∧↯⊙1⁅≡⊟PC~BarWidth,
+  PC!⊃BarWidth Size,
+  ⁅+÷2-⊙(⊸⊡1×÷⟜⇡⧻,⊢)
+  ⇌⬚0↙⇌PC~Size,/↥⬚0≡≡⌝↘
+  C PC~PlotColor:)
+
+Bars ← (
+  ⊙⊸AutoDistrFields⟜⧻
+  ≡SingleBars
+  PC~BarWidth:
+  ⁅×⇌-÷2-1⟜⇡⧻,
+  /Stack≡≡↻)
+
+PreChart ← (
+  ⊙⟜Background
+  ×◡⊓(=1⧻|◇≍""⊢PC~PlotLabel)
+  ⨬⟜(⤚(⍜⊙(⊣PC~Size)-⧻)⊸($Legend Legend)⧻)⊙⟜(°△[0⊙4]⊢PC~Size)
+  ⊙(>0⊸[∩⧻PC!⊃YLabel XLabel]⟜PC~Size
+    ⍜⊙PC~Size-×+⟜+⌊⊸÷4 PC~AxisLabelSize,))
+
+PostChart ← (
+  PC!⊃AxisLabelColor⊃AxisLabelSize⊃XLabel YLabel:
+  ⊙∩(∧⌝↘⊟⊸¯⌊÷4⟜layout)⊙’
+  ⊡1△:⊙(⟜⧻,)∩(⤸1⍉⊞×)’⬚1↙₄
+  ⊙˜⊂:⤸1⊙⇌∩(↻⌊÷2-⊃⊙⧻⬚0↙)
+  Stack˜⊂↙×1_¯1⇌:≡⊂⬚0↙⧻,)
+
 # TODO: Document this more
 # Plot some data with a specified `PlotConfig`
 # Data can be a single shape N_2 array or a
@@ -222,22 +256,37 @@ Legend ← (
 # Image ? Data PlotConfig
 Plot ← (
   ⍥¤=2⧻⊸△ # Fix if single rank 2 array
-  ⊙⟜Background
-  # Check if there is only one data series with no label
-  ×◡⊓(=1⧻|◇≍""⊢PC~PlotLabel)
-  # Make a legend if the above was false, otherwise make an empty legend
-  ⨬⟜(⤚(⍜⊙(⊣PC~Size)-⧻)⊸Legend⧻)⊙⟜(°△[0⊙4]⊢PC~Size)
-  ⊙(>0⊸[∩⧻PC!⊃YLabel XLabel]⟜PC~Size
-    ⍜⊙PC~Size-×+⟜+⌊⊸÷4 PC~AxisLabelSize,)
   AutoInfer
+  PreChart
   /Stack⊸[
     /Stack⇌≡SingleSeries
     ⊙AutoDistrFields⟜⧻
-    ⊙(⟜Axes⟜Gridlines
-      ⟜AxisNums)]
-  PC!⊃AxisLabelColor⊃AxisLabelSize⊃XLabel YLabel:
-  ⊙∩(∧⌝↘⊟⊸¯⌊÷4⟜layout)⊙’
-  ⊡1△:⊙(⟜⧻,)∩(⤸1⍉⊞×)’⬚1↙₄
-  ⊙˜⊂:⤸1⊙⇌∩(↻⌊÷2-⊃⊙⧻⬚0↙)
-  Stack˜⊂↙×1_¯1⇌:≡⊂⬚0↙⧻,
+    ⊙⟜(AxisNums|Axes|Gridlines)]
+  PostChart
+)
+
+# Create a bar chart with some data and a specified `PlotConfig`
+# Data should be a rank 2 array where rows are data series
+# and columns are bar groups, or a rank 1 array representing a
+# single series.
+# Image ? Data PlotConfig
+BarChart ← (
+  ⊙⍜PC~XBounds⋅1_1 ☇1
+  PC!Infer‼YBounds(⊟0+⊸÷25/↥♭)
+  PC!Infer‼(⊣GridlineInterval|⍜×⁅˜ⁿ10¯⌊⊸ₙ10÷5/-⋅⊸YBounds)
+  ⊙⍜(⊢PC~GridlineInterval)⋅∞
+
+  PreChart
+
+  ◠(⬚""↙⊙⊸PC~BarLabel⧻⊢
+    ⍚⌝↘⁅÷8⟜⍚layoutPC~BarLabelSize,
+    ×÷⟜⇡⧻,⊢PC~Size,
+    ⁅+÷2-⊙⊸⊡₁≡◇(⧻⊢),
+    ≡⬚0↙⊢PC~Size,/↥⬚0≡◇≡⌝↘
+    C PC~BarLabelColor:)
+  ⊙(⍜⊙(⊣PC~Size)-⧻,)
+
+  ⊂⊙:/Stack⊸[⊙::Bars⊙⟜(AxisNums|Axes|Gridlines)]
+
+  PostChart
 )

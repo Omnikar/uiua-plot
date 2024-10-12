@@ -105,8 +105,12 @@ All available configuration values for `PlotConfig` are in the following table. 
 | `PlotColor` | `[3]`, `[4]`, `[x 3]`, or `[x 4]` | (Distributive) Colors with which to plot data series | [Desmos graph colors](https://www.desmos.com/api/v1.7/docs/index.html#document-colors) |
 | `PlotLabel` | boxed string list | (Distributive) Labels, for each data series, to put in the legend | `□""` |
 | `PlotLabelSize` | `[]` | Font size to use for data series labels | `15` |
-| `PlotLabelColors` | `[3]`, `[4]`, `[x 3]`, or `[x 4]` | (Distributive) Font colors to use for data series labels | `[0.2 0.2 0.2]` |
+| `PlotLabelColor` | `[3]`, `[4]`, `[x 3]`, or `[x 4]` | (Distributive) Font colors to use for data series labels | `[0.2 0.2 0.2]` |
 | `DrawDots` | `[]` or `[x]` | (Distributive) Whether to draw dots when plotting a series; expects `0` or `1` | `1` |
 | `DotSize` | `[]` or `[x]` | (Distributive) Size with which to draw dots | `40` |
 | `DrawLines` | `[]` or `[x]` | (Distributive) Whether to draw lines when plotting a series; expects `0` or `1` | `1` |
 | `LineWidth` | `[]` or `[x]` | (Distributive) Thickness with which to draw lines | `8` |
+| `BarWidth` | `[]` | Width with which to draw each bar | `40` |
+| `BarLabel` | boxed string list | Labels to use for each bar/bar cluster | `□""` |
+| `BarLabelSize` | `[]` | Font size to use for bar/bar cluster labels | `15` |
+| `PlotLabelColor` | `[3]` or `[4]` | Font color to use for bar/bar cluster labels | `[0.2 0.2 0.2]` |

@@ -6,6 +6,7 @@
 - Function plotter integration?
 
 - Document bar chart example usage
+- Make histogram and bar chart numbers render outside the chart
 
 ## Bugs
 - Error if a data series is empty or entirely out of bounds of the plot

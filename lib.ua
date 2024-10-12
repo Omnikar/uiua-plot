@@ -5,6 +5,8 @@
 
 # Apply a color to an alpha map
 C ↚ ⍜(⊣°⍉)×∧↯⇌△,⬚1↙₄
+# Round to one significant figure
+AutoRound ↚ ⍜×⁅˜ⁿ10¯⌊⊸ₙ10
 
 # TODO: Document this more
 # The following fields can infer their values based on data:
@@ -203,7 +205,7 @@ Infer‼ ↚ ⟜(⍜^0(⍜∩▽◌’⊸=∞∩♭):^1)
 # Automatically infer `PlotConfig` fields based on data
 # Data NewPlotConfig ? Data PlotConfig
 AutoInfer ← (
-  PC!Infer‼GridlineInterval(⍜×⁅˜ⁿ10¯⌊⊸ₙ10÷5-⊃/↧/↥/◇⊂)
+  PC!Infer‼GridlineInterval(AutoRound÷5-⊃/↧/↥/◇⊂)
   PC!Infer‼Min(-÷5GridlineInterval,/↧/◇⊂)
   PC!Infer‼Max(+÷5GridlineInterval,/↥/◇⊂)
 )
@@ -273,7 +275,7 @@ Plot ← (
 BarChart ← (
   ⊙⍜PC~XBounds⋅1_1 ☇1
   PC!Infer‼YBounds(⊟0+⊸÷25/↥♭)
-  PC!Infer‼(⊣GridlineInterval|⍜×⁅˜ⁿ10¯⌊⊸ₙ10÷5/-⋅⊸YBounds)
+  PC!Infer‼(⊣GridlineInterval|AutoRound÷5/-⋅⊸YBounds)
   ⊙⍜(⊢PC~GridlineInterval)⋅∞
 
   PreChart
@@ -287,6 +289,30 @@ BarChart ← (
   ⊙(⍜⊙(⊣PC~Size)-⧻,)
 
   ⊂⊙:/Stack⊸[⊙::Bars⊙⟜(AxisNums|Axes|Gridlines)]
+
+  PostChart
+)
+
+# Create a histogram with some data and a specified `PlotConfig`
+# Does not support multiple data series. Data is expected as a
+# single rank 1 list of numbers. Histogram bucket intervals can
+# be specified through the x component of `GridlineInterval` in
+# the `PlotConfig`.
+# Image ? Data PlotConfig
+Histogram ← (
+  PC!Infer‼XBounds(⊟⊃/↧/↥)
+  PC!Infer‼(⊢GridlineInterval|AutoRound÷10/-⋅⊸XBounds)
+  ⊢PC!⊃GridlineInterval XBounds,
+  °⊂⍜÷(⍜-(⇡⁅+1)°⊟)
+  ⬚0↙⧻:°⊚⊗1⊸⊞≥▽⊸≥⊙:
+  ⊙⍜PC~PlotColor(⊢☇1)
+
+  ⍜¤PreChart
+
+  ⊙°⊸PC~BarWidth:⌈÷⧻,⊢PC~Size,
+  PC!Infer‼YBounds(⊟0⁅×1.04/↥)
+  PC!Infer‼(⊣GridlineInterval|AutoRound÷5/-⋅⊸YBounds)
+  /Stack⊸[⊙::SingleBars⊙⟜(AxisNums|Axes|Gridlines)]
 
   PostChart
 )

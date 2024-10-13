@@ -141,7 +141,7 @@ Lines ← (
   ◫2◌⊸PointsToPx
   °⍉⇡⇌PC~Size,
   ⇌/↧≡/(⌵-×↥0↧1÷∩(/+×∩[°ℂ]).⊃,:∩-,∩₃°[°ℂ]:)¤
-  ¬↥0↧1-÷20PC~LineWidth,÷2
+  ¬↥0↧1-÷10PC~LineWidth,×0.7
   C PC~PlotColor:)
 
 # Plot a single series

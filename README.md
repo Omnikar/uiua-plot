@@ -113,4 +113,4 @@ All available configuration values for `PlotConfig` are in the following table. 
 | `BarWidth` | `[]` | Width with which to draw each bar | `40` |
 | `BarLabel` | boxed string list | Labels to use for each bar/bar cluster | `□""` |
 | `BarLabelSize` | `[]` | Font size to use for bar/bar cluster labels | `15` |
-| `PlotLabelColor` | `[3]` or `[4]` | Font color to use for bar/bar cluster labels | `[0.2 0.2 0.2]` |
+| `BarLabelColor` | `[3]` or `[4]` | Font color to use for bar/bar cluster labels | `[0.2 0.2 0.2]` |

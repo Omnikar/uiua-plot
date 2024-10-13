@@ -223,8 +223,10 @@ Legend ← (
 )
 
 SingleBars ← (
-  ×⊣PC~Ppu,↥0-⊣PC~Min,
-  ⬚0≡∧↯⊙1⁅≡⊟PC~BarWidth,
+  ⟜⊃(↥⊙↧°⊟)⊢PC~YBounds,
+  ↥⊃(↥0-↥0⊢|⌵↧0-↧0⊣|¯↧0-↧0◌)
+  ∩×,⊙(⊣PC~Ppu,)
+  ⬚0≡⌝↘⁅:⬚0≡↯⊙1⁅≡⊟⊙PC~BarWidth⊙,
   PC!⊃BarWidth Size,
   ⁅+÷2-⊙(⊸⊡1×÷⟜⇡⧻,⊢)
   ⇌⬚0↙⇌PC~Size,/↥⬚0≡≡⌝↘
@@ -274,7 +276,7 @@ Plot ← (
 # Image ? Data PlotConfig
 BarChart ← (
   ⊙⍜PC~XBounds⋅1_1 ☇1
-  PC!Infer‼YBounds(⊟0+⊸÷25/↥♭)
+  PC!Infer‼YBounds(⊟⊓↧↥’0∩(+⊸÷20)⊃/↧/↥♭)
   PC!Infer‼(⊣GridlineInterval|AutoRound÷5/-⋅⊸YBounds)
   ⊙⍜(⊢PC~GridlineInterval)⋅∞
 

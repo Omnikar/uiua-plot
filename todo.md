@@ -1,5 +1,4 @@
 ## Features
-- Support for negative bars (extending downward from the zero axis)
 - Config option for whether to display axis numbers
 - Support for minor gridlines by passing higher rank arrays to `GridlineInterval`, `GridlineWidth`, and `GridlineColor`
 - Give axis numbers backdrops so that they can be seen when intersecting with axes/gridlines?

@@ -112,8 +112,7 @@ AxisNums ← ⬚∘(
   ⊓⍚⍉⊙⊙⍚⇌⍚⇌
   ∩(☇1∧◇(⬚0↥⬚0↙⁅⊟⊙:¯+⌊÷2⤚⧻)⊙⊙⊙[])
   ↥∩⇌∩⬚0↙’⇌PC~Size°◌⍉
-  C PC~NumberColor°◌
-)
+  C PC~NumberColor°◌)
 
 # Convolution kernel for thickening dots and lines
 # Kernel ? Size
@@ -123,8 +122,7 @@ WidthKernel ↚ °√₄↧1×2√₁₆Gaussian⤙÷40⍜(÷2+1)⁅
 
 XKernel ↚ (
   0.3:¤↥⊸⇌⊞=.⊸⇡⍜(÷2+1)⁅×0.3
-  /↥≡↻☇1⊞⊟.-÷2-1⟜⇡⍜(÷2+1)⌊×
-)
+  /↥≡↻☇1⊞⊟.-÷2-1⟜⇡⍜(÷2+1)⌊×)
 
 # Returns pixel coordinates of points and whether each
 # point is inside the x bounds and the y bounds
@@ -138,34 +136,13 @@ Dots ← (
   ↘¯⟜↘⌊÷2△⟜FFTConvolve
   ↧1C PC~PlotColor:)
 
-# Coordinates of pixels creating a line
-# between two given pixel coordinates
-# CoordList ? StartCoord EndCoord
-LineCoords ↚ +×¤: ⍥≡⇌:⁅≡⊟⊙×⤙÷⟜⇡/↥⟜/↧⟜/> ⊃⌵±⊃-¤
-
+# Image ? Data PlotConfig
 Lines ← (
-  ⊸PointsToPx
-
-  # Handle lines connecting to out-of-bounds points by
-  # projecting said points onto the bounding box
-  ∩◫₂⊙⊙⊸⍥₂¤
-  ▽’¬⊸≡(/×♭)
-  ⍜⊙▽(
-    ≡⨬(
-      -1⇌⊓PC~Size°⊟:
-      ⊃(∩(˜÷∩-,)0_0◡⋅⊙∘)⋅⊙∘
-      ⁅⍜⊙-×↥0/↥↧
-    )⊢≡⊓≡/×(⊟⟜⇌))
-  ⇌PC~Size◡:°⍉
-  ▽≡(/×♭)∩⍉×⊓≥<0_0,
-  # TODO: Use this instead once ∈☇1⇡ is optimized
-  # ▽⊓/×⍉∈☇1⇡
-
-  °⊚/◇⊂⍚/LineCoords
-  ⇌⬚0↙⇌PC~Size,
-  ↘¯⟜↘⌊÷2△⟜FFTConvolve WidthKernel PC~LineWidth,
-  ↧1C PC~PlotColor:
-)
+  ◫2◌⊸PointsToPx
+  °⍉⇡⇌PC~Size,
+  ⇌/↧≡/(⌵-×↥0↧1÷∩(/+×∩[°ℂ]).⊃,:∩-,∩₃°[°ℂ]:)¤
+  ¬↥0↧1-÷20PC~LineWidth,÷2
+  C PC~PlotColor:)
 
 # Plot a single series
 # Image ? Data PlotConfig
@@ -207,8 +184,7 @@ Infer‼ ↚ ⟜(⍜^0(⍜∩▽◌’⊸=∞∩♭):^1)
 AutoInfer ← (
   PC!Infer‼GridlineInterval(AutoRound÷5-⊃/↧/↥/◇⊂)
   PC!Infer‼Min(-÷5GridlineInterval,/↧/◇⊂)
-  PC!Infer‼Max(+÷5GridlineInterval,/↥/◇⊂)
-)
+  PC!Infer‼Max(+÷5GridlineInterval,/↥/◇⊂))
 
 # Legend ? NumSeries PlotConfig
 Legend ← (
@@ -219,8 +195,7 @@ Legend ← (
   ⟜⊃(⊕□˜▽°⊏⇌⊂◌∧(⨬⋅⊓-+₁⊓˜-⋅⊓1⊂: ⊙◡< ⊙+)⤙⊓:∘)⋅⋅∘
   ⟜(≡◇∧≡⬚0↙≡⊟¯⌊÷2⊸+≡◇(⧻⊢)’⍚/◇≡(⊂⊂)¤⍉↯4↯⟜⊚)
   ⟜(/(⊂⊂)⍉↯4˜↯0˜⊟⊡2△,)
-  ∧⌝↘⊟⊸¯⌊÷2
-)
+  ∧⌝↘⊟⊸¯⌊÷2)
 
 SingleBars ← (
   ⟜⊃(↥⊙↧°⊟)⊢PC~YBounds,
@@ -266,8 +241,7 @@ Plot ← (
     /Stack⇌≡SingleSeries
     ⊙AutoDistrFields⟜⧻
     ⊙⟜(AxisNums|Axes|Gridlines)]
-  PostChart
-)
+  PostChart)
 
 # Create a bar chart with some data and a specified `PlotConfig`
 # Data should be a rank 2 array where rows are data series
@@ -292,8 +266,7 @@ BarChart ← (
 
   ⊂⊙:/Stack⊸[⊙::Bars⊙⟜(AxisNums|Axes|Gridlines)]
 
-  PostChart
-)
+  PostChart)
 
 # Create a histogram with some data and a specified `PlotConfig`
 # Does not support multiple data series. Data is expected as a
@@ -316,5 +289,4 @@ Histogram ← (
   PC!Infer‼(⊣GridlineInterval|AutoRound÷5/-⋅⊸YBounds)
   /Stack⊸[⊙::SingleBars⊙⟜(AxisNums|Axes|Gridlines)]
 
-  PostChart
-)
+  PostChart)

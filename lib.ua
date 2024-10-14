@@ -114,15 +114,20 @@ AxisNums ← ⬚∘(
   ↥∩⇌∩⬚0↙’⇌PC~Size°◌⍉
   C PC~NumberColor°◌)
 
-# Convolution kernel for thickening dots and lines
-# Kernel ? Size
-WidthKernel ↚ °√₄↧1×2√₁₆Gaussian⤙÷40⍜(÷2+1)⁅
-# Rounding dot size up to an odd number
-# gives the post-convolution array the correct shape
+# Convolution kernels
+# Rounding dot size up to an odd number gives
+# the post-convolution array the correct shape
 
+# Kernel ? Size
+CircleKernel ↚ ⁿ4↧1×2√₁₆Gaussian⤙÷40⍜(÷2+1)⁅
+
+# Kernel ? Size
 XKernel ↚ (
   0.3:¤↥⊸⇌⊞=.⊸⇡⍜(÷2+1)⁅×0.3
   /↥≡↻☇1⊞⊟.-÷2-1⟜⇡⍜(÷2+1)⌊×)
+
+# Kernel ? Size
+BoxKernel ↚ ¬↯⟜⊚⍜(÷2+1)⁅×0.3
 
 # Returns non-rounded pixel coordinates of points and whether
 # each point is inside the x bounds and the y bounds
@@ -132,7 +137,7 @@ PointsToPx ↚ ∩≡⇌⊃(⍉×⊓<>’⊓⍉PC!⊃Min Max|×⊙-∩¤PC!⊃Pp
 Dots ← (
   °⊚⁅▽≡/×⊸PointsToPx
   ⇌⬚0↙⇌PC~Size,
-  WidthKernel PC~DotSize,
+  CircleKernel PC~DotSize,
   ↘¯⟜↘⌊÷2△⟜FFTConvolve
   ↧1C PC~PlotColor:)
 

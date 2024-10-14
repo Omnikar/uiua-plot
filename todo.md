@@ -3,7 +3,8 @@
 - Config option for whether to display axis numbers?
 - Support for minor gridlines by passing higher rank arrays to `GridlineInterval`, `GridlineWidth`, and `GridlineColor`?
 - Give axis numbers backdrops so that they can be seen when intersecting with axes/gridlines?
-- Function plotter integration?
+- Convenient interface for harnessing the lib's modularity capabilities and making more custom chart configurations.
+  - Manually combining `Axes`, `Gridlines`, `SingleSeries`, etc.
 
 - Document bar chart example usage
 - Make histogram and bar chart numbers render outside the chart

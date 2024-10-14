@@ -275,8 +275,8 @@ BarChart ← (
 # the `PlotConfig`.
 # Image ? Data PlotConfig
 Histogram ← (
-  PC!Infer‼XBounds(⊟⊃/↧/↥)
-  PC!Infer‼(⊢GridlineInterval|AutoRound÷10/-⋅⊸XBounds)
+  PC!Infer‼(⊢GridlineInterval|AutoRound÷10-⊃/↧/↥)
+  PC!Infer‼XBounds(⍜÷⁅⊢GridlineInterval,⊟⊃/↧/↥)
   ⊢PC!⊃GridlineInterval XBounds,
   °⊂⍜÷(⍜-(⇡⁅+1)°⊟)
   ⬚0↙⧻:°⊚⊗1⊸⊞≥▽⊸≥⊙:

@@ -124,13 +124,13 @@ XKernel ↚ (
   0.3:¤↥⊸⇌⊞=.⊸⇡⍜(÷2+1)⁅×0.3
   /↥≡↻☇1⊞⊟.-÷2-1⟜⇡⍜(÷2+1)⌊×)
 
-# Returns pixel coordinates of points and whether each
-# point is inside the x bounds and the y bounds
-PointsToPx ↚ ∩≡⇌⊃(⍉×⊓<>’⊓⍉PC!⊃Min Max|⁅×⊙-∩¤PC!⊃Ppu Min:)
+# Returns non-rounded pixel coordinates of points and whether
+# each point is inside the x bounds and the y bounds
+PointsToPx ↚ ∩≡⇌⊃(⍉×⊓<>’⊓⍉PC!⊃Min Max|×⊙-∩¤PC!⊃Ppu Min:)
 
 # Image ? Data PlotConfig
 Dots ← (
-  °⊚▽≡/×⊸PointsToPx
+  °⊚⁅▽≡/×⊸PointsToPx
   ⇌⬚0↙⇌PC~Size,
   WidthKernel PC~DotSize,
   ↘¯⟜↘⌊÷2△⟜FFTConvolve

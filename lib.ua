@@ -23,46 +23,46 @@ AutoRound ↚ ⍜×⁅˜ⁿ10¯⌊⊸ₙ10
 # - `DrawLines`
 # - `LineWidth`
 ┌─╴PlotConfig
-  # New `PlotConfig` with default values
-  struct{
-    Min(⊟.∞) 0
-    Max(⊟.∞) 0
-    Size(512_512) 0
-    BgColor(↯3 1) 0
-    AxisWidth(3) 0
-    AxisColor(↯3 0) 0
-    GridlineWidth(1) 0
-    GridlineColor(↯3 0.7) 0
-    GridlineInterval(⊟.∞) 0
-    NumberSize(15) 0
-    NumberColor(↯3 0.3) 0
-    XLabel("") 2
-    YLabel("") 2
-    AxisLabelSize(20) 0
-    AxisLabelColor(↯3 0.2) 0
-    PlotColor(
-      # Colors from Desmos graphing calculator
-      # https://www.desmos.com/api/v1.7/docs/index.html#document-colors
-      ÷255[
-        199_68_64
-        45_112_179
-        56_140_70
-        96_66_166
-        250_126_25
-        0_0_0
-      ]
-    ) 0
-    PlotLabel(□"") 3
-    PlotLabelSize(15) 0
-    PlotLabelColor(↯3 0.2) 0
-    DrawDots(1) 0
-    DotSize(40) 0
-    DrawLines(1) 0
-    LineWidth(8) 0
-    BarWidth(40) 0
-    BarLabel(□"") 3
-    BarLabelSize(15) 0
-    BarLabelColor(↯3 0.2) 0
+  Num  ↚ °0type
+  Char ↚ °1type
+  Box  ↚ °2type
+  ~{
+    Min: °2°¤△⟜Num ← ⊟.∞
+    Max: °2°¤△⟜Num ← ⊟.∞
+    Size: °2°¤△⟜Num ← 512_512
+    BgColor: ⍣°3°4°¤△⟜Num ← ↯3 1
+    AxisWidth: °[]△⟜Num ← 3
+    AxisColor: ⍣°3°4°¤△⟜Num ← ↯3 0
+    GridlineWidth: °[]△⟜Num ← 1
+    GridlineColor: ⍣°3°4°¤△⟜Num ← ↯3 0.7
+    GridlineInterval: °2°¤△⟜Num ← ⊟.∞
+    NumberSize: °[]△⟜Num ← 15
+    NumberColor: ⍣°3°4°¤△⟜Num ← ↯3 0.3
+    XLabel: °[W]△⟜Char ← ""
+    YLabel: °[W]△⟜Char ← ""
+    AxisLabelSize: °[]△⟜Num ← 20
+    AxisLabelColor: ⍣°3°4°¤△⟜Num ← ↯3 0.2
+    # Colors from Desmos graphing calculator
+    # https://www.desmos.com/api/v1.7/docs/index.html#document-colors
+    PlotColor: ⊃(⍣°1°2⧻|⍣°3°4⊣)△⟜Num ← ÷255[
+      199_68_64
+      45_112_179
+      56_140_70
+      96_66_166
+      250_126_25
+      0_0_0
+    ]
+    PlotLabel: ⍣°[]°[W]△⟜∵◇Char⟜Box ← □""
+    PlotLabelSize: °[]△⟜Num ← 15
+    PlotLabelColor: ⊃(⍣°1°2⧻|⍣°3°4⊣)△⟜Num ← ↯3 0.2
+    DrawDots: ⍣°[]°[W]△⟜Num ← 1
+    DotSize: ⍣°[]°[W]△⟜Num ← 40
+    DrawLines: ⍣°[]°[W]△⟜Num ← 1
+    LineWidth: ⍣°[]°[W]△⟜Num ← 8
+    BarWidth: ⍣°[]°[W]△⟜Num ← 40
+    BarLabel: ⍣°[]°[W]△⟜∵◇Char⟜Box ← □""
+    BarLabelSize: °[]△⟜Num ← 15
+    BarLabelColor: ⍣°3°4°¤△⟜Num ← ↯3 0.2
   }
   # Pixels per unit
   Ppu     ← ÷-⊃Min⊃Max Size

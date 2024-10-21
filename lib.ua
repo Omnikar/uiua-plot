@@ -129,21 +129,21 @@ XKernel ↚ (
 # Kernel ? Size
 BoxKernel ↚ ¬↯⟜⊚⍜(÷2+1)⁅×0.3
 
-# Returns non-rounded pixel coordinates of points and whether
-# each point is inside the x bounds and the y bounds
-PointsToPx ↚ ∩≡⇌⊃(⍉×⊓<>’⊓⍉PC!⊃Min Max|×⊙-∩¤PC!⊃Ppu Min:)
+# Non-rounded non-bound-checked pixel coordinates of points
+# Coords ? Points PlotConfig
+PointsToPx ↚ ≡⇌×⊙-∩¤PC!⊃Ppu Min:
 
 # Image ? Data PlotConfig
 Dots ← (
-  °⊚⁅▽≡/×⊸PointsToPx
-  ⇌⬚0↙⇌PC~Size,
+  ▽⊸∈☇1⤚⇡⇌PC~Size,⁅⊸PointsToPx
+  ⇌⬚0↙:°⊚
   CircleKernel PC~DotSize,
   ↘¯⟜↘⌊÷2△⟜FFTConvolve
   ↧1C PC~PlotColor:)
 
 # Image ? Data PlotConfig
 Lines ← (
-  ◫2◌⊸PointsToPx
+  ◫2⊸PointsToPx
   °⍉⇡⇌PC~Size,
   ⇌/↧≡/(⌵-×↥0↧1÷∩(/+×∩[°ℂ]).⊃,:∩-,∩₃°[°ℂ]:)¤
   ¬↥0↧1-÷10PC~LineWidth,×0.7

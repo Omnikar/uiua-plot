@@ -222,7 +222,7 @@ Bars ← (
 PreChart ← (
   ⊙⟜Background
   ×◡⊓(=1⧻|◇≍""⊢PC~PlotLabel)
-  ⨬⟜(⤚(⍜⊙(⊣PC~Size)-⧻)⊸($Legend Legend)⧻)⊙⟜(°△[0⊙4]⊢PC~Size)
+  ⨬⟜(⤚(⍜⊙(⊣PC~Size)-⧻)⊸Legend⧻)⊙⟜(°△[0⊙4]⊢PC~Size)
   ⊙(>0⊸[∩⧻PC!⊃YLabel XLabel]⟜PC~Size
     ⍜⊙PC~Size-×+⟜+⌊⊸÷4 PC~AxisLabelSize,))
 

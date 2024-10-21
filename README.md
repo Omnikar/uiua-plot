@@ -82,7 +82,7 @@ PlotConfig
 
 Fields supporting inference actually have their values default to `[∞ ∞]`, and these are replaced with inferred values when `Plot` is called. If you want, you can take advantage of this to partially infer some fields, for example by setting `Max` to `[10 ∞]` to use an upper bound of `10` in the x direction, but infer the upper bound in the y direction.
 
-In addition to `Plot` for creating scatter/line plots, `BarChart` and `Histogram` are also available. See the in-code documentation for more information on how to use these. <sub>TODO: Document these more.</sub>
+In addition to `Plot` for creating scatter/line plots, `BarChart` and `Histogram` are also available. See the in-code documentation for more information on how to use these. You can also use `Plot Func!` to plot a function. <sub>TODO: Document these more.</sub>
 
 All available configuration values for `PlotConfig` are in the following table. Any field marked with "Distributive" will distribute its values across multiple data series, repeating values or defaults if necessary.
 | Field | Shape | Description | Default |

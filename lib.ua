@@ -219,6 +219,13 @@ Bars ← (
   ⁅×⇌-÷2-1⟜⇡⧻,
   /Stack≡≡↻)
 
+# Data points and PlotConfig to use for plotting a given function
+# Data PlotConfig ? XBounds
+Func! ← (
+  ⤚/-˜⊙⊸PC~Size°⊸PC~DrawDots0PC
+  ≡⊟⟜∵^0°⊸⊣⊣⤙⍜×/⍜-(⇡⁅+1)÷5÷⊙⊢
+)
+
 PreChart ← (
   ⊙⟜Background
   ×◡⊓(=1⧻|◇≍""⊢PC~PlotLabel)

@@ -8,6 +8,8 @@
 
 - Document bar chart example usage
 - Make histogram and bar chart numbers render outside the chart
+- Document `Func!` example usage
+- Variadic `Func!`?
 
 ## Bugs
 - Histogram bars do not align properly with the gridlines.

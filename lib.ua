@@ -8,24 +8,21 @@ C ↚ ⍜(⊣°⍉)×∧↯⇌△,⬚1↙₄
 # Round to one significant figure
 AutoRound ↚ ⍜×⁅˜ⁿ10¯⌊⊸ₙ10
 
+Num  ↚ °0type
+Char ↚ °1type
+Box  ↚ °2type
+
 # TODO: Document this more
 # The following fields can infer their values based on data:
 # - `Min`
 # - `Max`
 # - `GridlineInterval`
-# The following fields can take lists of
-# values to map over multiple data series:
-# - `PlotColor`
-# - `PlotLabel`
-# - `PlotLabelColor`
+# The following fields provide defaults for unspecified series-specific values:
 # - `DrawDots`
 # - `DotSize`
 # - `DrawLines`
 # - `LineWidth`
 ┌─╴PlotConfig
-  Num  ↚ °0type
-  Char ↚ °1type
-  Box  ↚ °2type
   ~{
     Min: °2°¤△⟜Num ← ⊟.∞
     Max: °2°¤△⟜Num ← ⊟.∞
@@ -42,27 +39,17 @@ AutoRound ↚ ⍜×⁅˜ⁿ10¯⌊⊸ₙ10
     YLabel: °[W]△⟜Char ← ""
     AxisLabelSize: °[]△⟜Num ← 20
     AxisLabelColor: ⍣°3°4°¤△⟜Num ← ↯3 0.2
-    # Colors from Desmos graphing calculator
-    # https://www.desmos.com/api/v1.7/docs/index.html#document-colors
-    PlotColor: ⊃(⍣°1°2⧻|⍣°3°4⊣)△⟜Num ← ÷255[
-      199_68_64
-      45_112_179
-      56_140_70
-      96_66_166
-      250_126_25
-      0_0_0
-    ]
-    PlotLabel: ⍣°[]°[W]△⟜∵◇Char⟜Box ← □""
     PlotLabelSize: °[]△⟜Num ← 15
-    PlotLabelColor: ⊃(⍣°1°2⧻|⍣°3°4⊣)△⟜Num ← ↯3 0.2
-    DrawDots: ⍣°[]°[W]△⟜Num ← 1
-    DotSize: ⍣°[]°[W]△⟜Num ← 40
-    DrawLines: ⍣°[]°[W]△⟜Num ← 1
-    LineWidth: ⍣°[]°[W]△⟜Num ← 8
-    BarWidth: ⍣°[]°[W]△⟜Num ← 40
-    BarLabel: ⍣°[]°[W]△⟜∵◇Char⟜Box ← □""
+    PlotLabelColor: ⍣°3°4°¤△⟜Num ← ↯3 0.2
+    BarWidth: °[]△⟜Num ← 40
+    BarLabels: ⍣°[]°[W]△⟜∵◇Char⟜Box ← □""
     BarLabelSize: °[]△⟜Num ← 15
     BarLabelColor: ⍣°3°4°¤△⟜Num ← ↯3 0.2
+    # Series-specific global defaults
+    DrawDots: °[]△⟜Num ← 1
+    DotSize: °[]△⟜Num ← 40
+    DrawLines: °[]△⟜Num ← 1
+    LineWidth: °[]△⟜Num ← 8
   }
   # Pixels per unit
   Ppu     ← ÷-⊃Min⊃Max Size
@@ -71,6 +58,18 @@ AutoRound ↚ ⍜×⁅˜ⁿ10¯⌊⊸ₙ10
   YBounds ← ⊣⍉Bounds
 └─╴
 PC ↚ PlotConfig
+
+┌─╴Data
+  ~{
+    Values
+    Color: ⍣°3°4°¤△⟜Num ← ↯4 ∞
+    Label: °[W]△⟜Char ← ""
+    DrawDots: °[]△⟜Num ← ∞
+    DotSize: °[]△⟜Num ← ∞
+    DrawLines: °[]△⟜Num ← ∞
+    LineWidth: °[]△⟜Num ← ∞
+  }
+└─╴
 
 # Stack one RGBA image atop another
 Stack ← ⍜°⍉⊂⊃(
@@ -114,6 +113,17 @@ AxisNums ← ⬚∘(
   ↥∩⇌∩⬚0↙’⇌PC~Size°◌⍉
   C PC~NumberColor°◌)
 
+# Legend ? Data PlotConfig
+Legend ← (
+  ⊙⊸¤
+  ≡PC!Data!⊃⋅PlotLabelSize⊃Color⊃°◇°Label⋅PlotLabelColor
+  ⍚(≡⊂⊓(C:≡⬚0↙⌊×3/2⊸⧻¬↯⟜⊚|C:layout))’
+  PC~PlotLabelSize⤙⊙⊓(⊢PC~Size)⊓0[]⤚≡◇(⧻⊢)
+  ⟜⊃(⊕□˜▽°⊏⇌⊂◌∧(⨬⋅⊓-+₁⊓˜-⋅⊓1⊂: ⊙◡< ⊙+)⤙⊓:∘)⋅⋅∘
+  ⟜(≡◇∧≡⬚0↙≡⊟¯⌊÷2⊸+≡◇(⧻⊢)’⍚/◇≡(⊂⊂)¤⍉↯4↯⟜⊚)
+  ⟜(/(⊂⊂)⍉↯4˜↯0˜⊟⊡2△,)
+  ∧⌝↘⊟⊸¯⌊÷2)
+
 # Convolution kernels
 # Rounding dot size up to an odd number gives
 # the post-convolution array the correct shape
@@ -135,101 +145,83 @@ PointsToPx ↚ ≡⇌×⊙-∩¤PC!⊃Ppu Min:
 
 # Image ? Data PlotConfig
 Dots ← (
-  ▽⊸∈☇1⤚⇡⇌PC~Size,⁅⊸PointsToPx
-  ⇌⬚0↙:°⊚
-  CircleKernel PC~DotSize,
+  ⤚⤙(⁅PointsToPx Data~Values)
+  ⇌⬚0↙:°⊚ ▽⊸∈☇1⤚⇡⇌PC~Size
+  CircleKernel Data~DotSize,
   ↘¯⟜↘⌊÷2△⟜FFTConvolve
-  ↧1C PC~PlotColor:)
+  ↧1C Data~Color:)
 
 # Image ? Data PlotConfig
 Lines ← (
-  ◫2⊸PointsToPx
-  °⍉⇡⇌PC~Size,
-  ⇌/↧≡/(⌵-×↥0↧1÷∩(/+×∩[°ℂ]).⊃,:∩-,∩₃°[°ℂ]:)¤
-  ¬↥0↧1-÷10PC~LineWidth,×0.7
-  C PC~PlotColor:)
+  ⤚⤙(◫2≡/ℂPointsToPx Data~Values)
+  ¤/ℂ°⍉⇡⇌PC~Size
+  ⇌/↧≡/(⌵-×↥0↧1÷∩(/+×∩⊟∩°ℂ)⤙⤙◠:∩-’)
+  ¬↥0↧1-÷10Data~LineWidth,×0.7
+  C Data~Color:)
 
 # Plot a single series
 # Image ? Data PlotConfig
-SingleSeries ← /Stack◇[
-  ⋅◌⍥◠Dots PC~DrawDots,
-  ⍥◠Lines PC~DrawLines,]
+SingleSeries ← /Stack[
+  ⋅◌⍥◠Dots⊸Data~DrawDots
+  # FIXME: This `⊙∘` should not be necessary.
+  # It exists to suppress an erroneous warning.
+  ⍥◠Lines⊸Data~DrawLines ⊙∘]
 
-# Distribute specified fields of a `PlotConfig`
-# ? Default (FieldGetter:ArgRank:PickFunction)+
-DistrFields! ↚^ (
-  °⊂⊙◌
-  ⊙(⍚°$"_:_:_"
-    ⊙:⟜⍚$"⊙⍜(_|☇_)")
-  # ⍚$"⟜⍜⊙(_)(⬚(_ _|_))".:
-  ⍚$"⟜⍜⊙(_)(⍣(_|_ _))"⤚⋅’
-  ⊂□$"◌≡(_)⊓⇡¤"/$"_\n_")
-
-# Distribute appropriate fields of a `PlotConfig` over N rows
-# NewPlotConfigs ? N PlotConfig
-AutoDistrFields ← PC!DistrFields!(
-  New
-| PlotColor : 1 : ⊡◿⧻,
-| PlotLabel : 0 : ⊡
-| PlotLabelColor : 1 : ⊡↧-1⧻,
-| DotSize : 0 : ⊡↧-1⧻,
-| LineWidth : 0 : ⊡↧-1⧻,
-| DrawDots : 0 : ⊡↧-1⧻,
-| DrawLines : 0 : ⊡↧-1⧻,
-| BarWidth : 0 : ⊡↧-1⧻,
-)
-
-# Infer values for a `PlotConfig` field using
-# a function that operates on input data
-# ? FieldGetter InferenceFunction
-Infer‼ ↚ ⟜(⍜^0(⍜∩▽◌’⊸=∞∩♭):^1)
-
-# Automatically infer `PlotConfig` fields based on data
-# Data NewPlotConfig ? Data PlotConfig
-AutoInfer ← (
-  PC!Infer‼GridlineInterval(AutoRound÷5-⊃/↧/↥/◇⊂)
-  PC!Infer‼Min(-÷5GridlineInterval,/↧/◇⊂)
-  PC!Infer‼Max(+÷5GridlineInterval,/↥/◇⊂))
-
-# Legend ? NumSeries PlotConfig
-Legend ← (
-  ⊸AutoDistrFields
-  ≡PC!⊃PlotLabelSize⊃PlotColor⊃PlotLabel PlotLabelColor
-  ⍚(≡⊂⊓(C:≡⬚0↙⌊×3/2⊸⧻¬↯⟜⊚|C:layout))’
-  PC~PlotLabelSize⤙⊙⊓(⊢PC~Size)⊓0[]⤚≡◇(⧻⊢)
-  ⟜⊃(⊕□˜▽°⊏⇌⊂◌∧(⨬⋅⊓-+₁⊓˜-⋅⊓1⊂: ⊙◡< ⊙+)⤙⊓:∘)⋅⋅∘
-  ⟜(≡◇∧≡⬚0↙≡⊟¯⌊÷2⊸+≡◇(⧻⊢)’⍚/◇≡(⊂⊂)¤⍉↯4↯⟜⊚)
-  ⟜(/(⊂⊂)⍉↯4˜↯0˜⊟⊡2△,)
-  ∧⌝↘⊟⊸¯⌊÷2)
-
+# Bars ? Data PlotConfig
 SingleBars ← (
-  ⟜⊃(↥⊙↧°⊟)⊢PC~YBounds,
+  PC~YBounds’˜⊙⊸Data~Values
+  ⟜⊃(↥⊙↧°⊟)⊢
   ↥⊃(↥0-↥0⊢|⌵↧0-↧0⊣|¯↧0-↧0◌)
   ∩×,⊙(⊣PC~Ppu,)
   ⬚0≡⌝↘⁅:⬚0≡↯⊙1⁅≡⊟⊙PC~BarWidth⊙,
   PC!⊃BarWidth Size,
   ⁅+÷2-⊙(⊸⊡1×÷⟜⇡⧻,⊢)
-  ⇌⬚0↙⇌PC~Size,/↥⬚0≡≡⌝↘
-  C PC~PlotColor:)
+  ⇌⬚0↙⇌PC~Size:/↥⬚0≡≡⌝↘
+  C Data~Color:)
 
 Bars ← (
-  ⊙⊸AutoDistrFields⟜⧻
-  ≡SingleBars
+  ⍜⬚0≡Data~Values∘
+  ≡SingleBars⊙⊸¤
   PC~BarWidth:
   ⁅×⇌-÷2-1⟜⇡⧻,
   /Stack≡≡↻)
 
-# Data points and PlotConfig to use for plotting a given function
-# Data PlotConfig ? XBounds
+# Generate a `Data` instance that plots a given function
+# Data ? XBounds
 Func! ← (
-  ⤚/-˜⊙⊸PC~Size°⊸PC~DrawDots0PC
-  ≡⊟⟜∵^0°⊸⊣⊣⤙⍜×/⍜-(⇡⁅+1)÷5÷⊙⊢
+  ⤚/-⊙PC!(Size New)
+  ≡⊟⟜∵^0˜⊂⊣⤙⍜×/⍜-(⇡⁅)÷5÷⊙⊢
+  Data!(°⊸DrawDots0New))
+
+# Colors from Desmos graphing calculator
+# https://www.desmos.com/api/v1.7/docs/index.html#document-colors
+DefaultColors ← ≡⊂÷255[
+  199_68_64
+  45_112_179
+  56_140_70
+  96_66_166
+  250_126_25
+  0_0_0
+]1
+
+# Infer values for a config field using
+# a function that operates on input data
+# ? FieldGetter InferenceFunction
+Infer‼ ↚ ⟜(⍜(∩♭^0|⍜∩▽◌’⊸=∞):^1)
+# Inherit defaults from a PlotConfig to
+# the DataConfigs of some data
+# ? DataConfigGetter PlotConfigGetter
+Inherit‼ ↚ ⍜:Infer‼≡^0(≡⊙∘^1)
+
+ColorAutoInfer ← (
+  ≡⍜Data~Color⬚∞↙₄
+  ⍜:Infer‼≡Data~Color⋅(⊏◿⧻,⇡⧻,DefaultColors)
 )
 
 PreChart ← (
   ⊙⟜Background
-  ×◡⊓(=1⧻|◇≍""⊢PC~PlotLabel)
-  ⨬⟜(⤚(⍜⊙(⊣PC~Size)-⧻)⊸Legend⧻)⊙⟜(°△[0⊙4]⊢PC~Size)
+  ×⊸⊃(=1⧻|≍""Data~Label⊢)
+  ⨬⟜(⤚(⍜⊙(⊣PC~Size)-⧻)⊸Legend)⊙⟜(°△[0⊙4]⊢PC~Size)
   ⊙(>0⊸[∩⧻PC!⊃YLabel XLabel]⟜PC~Size
     ⍜⊙PC~Size-×+⟜+⌊⊸÷4 PC~AxisLabelSize,))
 
@@ -241,34 +233,43 @@ PostChart ← (
   Stack˜⊂↙×1_¯1⇌:≡⊂⬚0↙⧻,)
 
 # TODO: Document this more
-# Plot some data with a specified `PlotConfig`
-# Data can be a single shape N_2 array or a
-# list of boxed shape N_2 arrays.
-# Image ? Data PlotConfig
+# Create a line/scatter plot with a list of `Data`
+# Each `Data~Values` should be a list of 2D coordinates,
+# stored as a single rank 2 array.
+# Use `⬚ fill` to provide a custom `PlotConfig`.
+# Image ? Data
 Plot ← (
-  ⍥¤=2⧻⊸△ # Fix if single rank 2 array
-  AutoInfer
+  ColorAutoInfer ⊙⍣°◌PC ☇1
+
+  PC!Infer‼GridlineInterval(AutoRound÷5-⊃/↧/↥/◇⊂⍚Data~Values)
+  PC!Infer‼Min(-÷5GridlineInterval,/↧/◇⊂⍚Data~Values)
+  PC!Infer‼Max(+÷5GridlineInterval,/↥/◇⊂⍚Data~Values)
+  Inherit‼Data~DrawDots PC~DrawDots
+  Inherit‼Data~DotSize PC~DotSize
+  Inherit‼Data~DrawLines PC~DrawLines
+  Inherit‼Data~LineWidth PC~LineWidth
+
   PreChart
   /Stack⊸[
-    /Stack⇌≡SingleSeries
-    ⊙AutoDistrFields⟜⧻
+    /Stack⇌≡SingleSeries⊙¤
     ⊙⟜(AxisNums|Axes|Gridlines)]
   PostChart)
 
-# Create a bar chart with some data and a specified `PlotConfig`
-# Data should be a rank 2 array where rows are data series
-# and columns are bar groups, or a rank 1 array representing a
-# single series.
-# Image ? Data PlotConfig
+# TODO: Document this more
+# Create a bar chart with a list of `Data`
+# Each `Data~Values` should be a list of bar heights.
+# Use `⬚ fill` to provide a custom `PlotConfig`.
+# Image ? Data
 BarChart ← (
-  ⊙⍜PC~XBounds⋅1_1 ☇1
-  PC!Infer‼YBounds(⊟⊓↧↥’0∩(+⊸÷20)⊃/↧/↥♭)
+  ⊙⍜PC~XBounds⋅1_1 ☇1 ⊙⍣°◌PC
+  PC!Infer‼YBounds(⊟⊓↧↥’0∩(+⊸÷20)⊃/↧/↥♭⬚0≡Data~Values)
   PC!Infer‼(⊣GridlineInterval|AutoRound÷5/-⋅⊸YBounds)
+  ColorAutoInfer
   ⊙⍜(⊢PC~GridlineInterval)⋅∞
 
   PreChart
 
-  ◠(⬚""↙⊙⊸PC~BarLabel⧻⊢
+  ◠(⬚""↙⊙⊸PC~BarLabels/↥≡(⧻Data~Values)
     ⍚⌝↘⁅÷8⟜⍚layoutPC~BarLabelSize,
     ×÷⟜⇡⧻,⊢PC~Size,
     ⁅+÷2-⊙⊸⊡₁≡◇(⧻⊢),
@@ -276,28 +277,32 @@ BarChart ← (
     C PC~BarLabelColor:)
   ⊙(⍜⊙(⊣PC~Size)-⧻,)
 
-  ⊂⊙:/Stack⊸[⊙::Bars⊙⟜(AxisNums|Axes|Gridlines)]
+  ⊂⊙:/Stack ⊸[⊙::Bars⊙⟜(AxisNums|Axes|Gridlines)]
 
   PostChart)
 
-# Create a histogram with some data and a specified `PlotConfig`
-# Does not support multiple data series. Data is expected as a
-# single rank 1 list of numbers. Histogram bucket intervals can
-# be specified through the x component of `GridlineInterval` in
-# the `PlotConfig`.
-# Image ? Data PlotConfig
+# TODO: Document this more
+# Create a histogram with a single set of `Data`
+# `Data~Values` should be a list of numbers.
+# Use `⬚ fill` to provide a custom `PlotConfig`.
+# Histogram bucket intervals can be specified
+# through the x component of `GridlineInterval`
+# in the `PlotConfig`.
+# Image ? Data
 Histogram ← (
-  PC!Infer‼(⊢GridlineInterval|AutoRound÷10-⊃/↧/↥)
-  PC!Infer‼XBounds(⍜÷⁅⊢GridlineInterval,⊟⊃/↧/↥)
-  ⊢PC!⊃GridlineInterval XBounds,
-  °⊂⍜÷(⍜-(⇡⁅+1)°⊟)
-  ⬚0↙⧻:°⊚⊗1⊸⊞≥▽⊸≥⊙:
-  ⊙⍜PC~PlotColor(⊢☇1)
+  ⊙⍣°◌PC
+  PC!Infer‼(⊢GridlineInterval|AutoRound÷10-⊃/↧/↥Data~Values)
+  PC!Infer‼XBounds(⍜÷⁅⊢GridlineInterval,⊟⊃/↧/↥Data~Values)
+  ⍜☇₁ColorAutoInfer
+  ⍜Data~Values(
+    ⊢PC!⊃GridlineInterval XBounds,
+    °⊂⍜÷(⍜-(⇡⁅+1)°⊟)
+    ⬚0↙⧻:°⊚⊗1⊸⊞≥▽⊸≥⊙:)
 
   ⍜¤PreChart
 
-  ⊙°⊸PC~BarWidth:⌈÷⧻,⊢PC~Size,
-  PC!Infer‼YBounds(⊟0⁅×1.04/↥)
+  ⊙°⊸PC~BarWidth:⌈⊢×PC!⊃Ppu GridlineInterval,
+  PC!Infer‼YBounds(⊟0⁅×1.04/↥Data~Values)
   PC!Infer‼(⊣GridlineInterval|AutoRound÷5/-⋅⊸YBounds)
   /Stack⊸[⊙::SingleBars⊙⟜(AxisNums|Axes|Gridlines)]
 

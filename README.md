@@ -113,6 +113,6 @@ All available configuration values for `PlotConfig` are in the following table. 
 | `DrawLines` | `[]` or `[x]` | (Distributive) Whether to draw lines when plotting a series; expects `0` or `1` | `1` |
 | `LineWidth` | `[]` or `[x]` | (Distributive) Thickness with which to draw lines | `8` |
 | `BarWidth` | `[]` | Width with which to draw each bar | `40` |
-| `BarLabel` | boxed string list | Labels to use for each bar/bar cluster | `□""` |
+| `BarLabels` | boxed string list | Labels to use for each bar/bar cluster | `□""` |
 | `BarLabelSize` | `[]` | Font size to use for bar/bar cluster labels | `15` |
 | `BarLabelColor` | `[3]` or `[4]` | Font color to use for bar/bar cluster labels | `[0.2 0.2 0.2]` |

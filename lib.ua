@@ -42,7 +42,7 @@ Box  ↚ °2type
     PlotLabelSize: °[]△⟜Num ← 15
     PlotLabelColor: ⍣°3°4°¤△⟜Num ← ↯3 0.2
     BarWidth: °[]△⟜Num ← 40
-    BarLabels: ⍣°[]°[W]△⟜∵◇Char⟜Box ← □""
+    BarLabels: °[W]△⟜∵◇Char⟜Box ← {}
     BarLabelSize: °[]△⟜Num ← 15
     BarLabelColor: ⍣°3°4°¤△⟜Num ← ↯3 0.2
     # Series-specific global defaults

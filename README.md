@@ -4,18 +4,82 @@
 
 The library requires `# Experimental!` due to reliance on the `layout` function for text rendering, reliance on [`uiua-math`](https://github.com/Omnikar/uiua-math), and internal usage of experimental modifiers/functions.
 
-To create a plot, you first need to make a `PlotConfig`. This can be done in two main ways.
+To be able to plot data, you need to turn it into a `Data` instance. `Data` wraps raw data with configuration that affects how it is plotted.
 
-If you just want to get straight to plotting data, you can just create a new `PlotConfig`, which is initialized with some default values.
+To wrap raw data using default configuration values, just call `Data` directly.
 ```uiua
 # Experimental!
-~ "git: github.com/Omnikar/uiua-plot" ~ PlotConfig
-PlotConfig
+~ "git: github.com/Omnikar/uiua-plot" ~ Data
+Data [2007_2 2008_1 2009_3]
 ```
-On the other hand, if you want to configure how your plot is drawn, you can use a builder pattern as follows, using `°⊸` to set fields.
+Or use `≡ rows` if you have multiple series.
 ```uiua
 # Experimental!
-~ "git: github.com/Omnikar/uiua-plot" ~ PlotConfig
+~ "git: github.com/Omnikar/uiua-plot" ~ Data
+≡Data [
+  [2007_2 2008_1 2009_3]
+  [2007_2 2008_2 2009_4]]
+```
+
+On the other hand, if you want to configure how series are drawn, you can use a builder pattern as follows, using `°⊸` to set fields.
+```uiua
+# Experimental!
+~ "git: github.com/Omnikar/uiua-plot" ~ Data
+[Data!(
+    New [2007_2 2008_1 2009_3]
+    # Color to draw the plot
+    °⊸Color 0.33_0.51_0.93
+    # Label to use in the plot legend
+    °⊸Label "Ice Cream Sales"
+  )
+ Data!(
+    New [2007_2 2008_2 2009_4]
+    °⊸Color 0.85_0.32_0.25
+    °⊸Label "Shark Attacks"
+  )]
+```
+
+## Scatter/Line plots
+
+Once you have the `Data` you want to plot (as either a single instance or an array of `Data`), you can use the `Plot` function to plot it.
+
+To plot without additional configuration, simply invoke `Plot` with the data. This will produce an RGBA image.
+```uiua
+# Experimental!
+~ "git: github.com/Omnikar/uiua-plot" ~ Data Plot
+[Data!(
+    New [2007_2 2008_1 2009_3]
+    # Color to draw the plot
+    °⊸Color 0.33_0.51_0.93
+    # Label to use in the plot legend
+    °⊸Label "Ice Cream Sales"
+  )
+ Data!(
+    New [2007_2 2008_2 2009_4]
+    °⊸Color 0.85_0.32_0.25
+    °⊸Label "Shark Attacks"
+  )]
+&ims Plot
+```
+This code produces the following output:  
+![Example plot without global configuration](example-images/example-plot-0.png)
+
+However, you will often want to configure specific parts of the actual plot. This can be done by creating a `PlotConfig`, again using a builder pattern to set fields. In order to pass a `PlotConfig` to the `Plot` function, use `⬚ fill`.
+```uiua
+# Experimental!
+~ "git: github.com/Omnikar/uiua-plot" ~ Data Plot PlotConfig
+[Data!(
+    New [2007_2 2008_1 2009_3]
+    # Color to draw the plot
+    °⊸Color 0.33_0.51_0.93
+    # Label to use in the plot legend
+    °⊸Label "Ice Cream Sales"
+  )
+ Data!(
+    New [2007_2 2008_2 2009_4]
+    °⊸Color 0.85_0.32_0.25
+    °⊸Label "Shark Attacks"
+  )]
 PlotConfig!(
   New
   # Minimum and maximum x bounds
@@ -26,65 +90,96 @@ PlotConfig!(
   °⊸GridlineInterval 0.5_1
   # Size of the image to produce
   °⊸Size 800_400
-  # Color(s) to use for plotting the data
-  °⊸PlotColor [0.33_0.51_0.93 0.85_0.32_0.25]
-  # Labels for the data series
-  °⊸PlotLabel {"Ice Cream Sales" "Shark Attacks"}
-  # Whether to draw dots or not
+  # Whether to draw dots
+  # Setting this in `PlotConfig` provides a default for all series.
+  # Use the identically-named field in `Data` for individual series.
   °⊸DrawDots 0
   # Label of the x-axis
   °⊸XLabel "Year"
 )
+&ims ⬚∘Plot
 ```
+This code produces the following output ([try it online](https://uiua.org/pad?src=0_14_0-dev_1__IyBFeHBlcmltZW50YWwhCn4gImdpdDogZ2l0aHViLmNvbS9PbW5pa2FyL3VpdWEtcGxvdCIgfiBEYXRhIFBsb3QgUGxvdENvbmZpZwpbRGF0YSEoCiAgICBOZXcgWzIwMDdfMiAyMDA4XzEgMjAwOV8zXQogICAgIyBDb2xvciB0byBkcmF3IHRoZSBwbG90CiAgICDCsOKKuENvbG9yIDAuMzNfMC41MV8wLjkzCiAgICAjIExhYmVsIHRvIHVzZSBpbiB0aGUgcGxvdCBsZWdlbmQKICAgIMKw4oq4TGFiZWwgIkljZSBDcmVhbSBTYWxlcyIKICApCiBEYXRhISgKICAgIE5ldyBbMjAwN18yIDIwMDhfMiAyMDA5XzRdCiAgICDCsOKKuENvbG9yIDAuODVfMC4zMl8wLjI1CiAgICDCsOKKuExhYmVsICJTaGFyayBBdHRhY2tzIgogICldClBsb3RDb25maWchKAogIE5ldwogICMgTWluaW11bSBhbmQgbWF4aW11bSB4IGJvdW5kcwogIMKw4oq4WEJvdW5kcyAyMDA2LjlfMjAwOS4xCiAgIyBNaW5pbXVtIGFuZCBtYXhpbXVtIHkgYm91bmRzCiAgwrDiirhZQm91bmRzIMKvMC4zXzQuMwogICMgU3BhY2luZyBiZXR3ZWVuIGdyaWRsaW5lcyBpbiB0aGUgeCBhbmQgeSBkaXJlY3Rpb25zCiAgwrDiirhHcmlkbGluZUludGVydmFsIDAuNV8xCiAgIyBTaXplIG9mIHRoZSBpbWFnZSB0byBwcm9kdWNlCiAgwrDiirhTaXplIDgwMF80MDAKICAjIFdoZXRoZXIgdG8gZHJhdyBkb3RzCiAgIyBTZXR0aW5nIHRoaXMgaW4gYFBsb3RDb25maWdgIHByb3ZpZGVzIGEgZGVmYXVsdCBmb3IgYWxsIHNlcmllcy4KICAjIFVzZSB0aGUgaWRlbnRpY2FsbHktbmFtZWQgYERhdGFgIGZpZWxkIGZvciBpbmRpdmlkdWFsIHNlcmllcy4KICDCsOKKuERyYXdEb3RzIDAKICAjIExhYmVsIG9mIHRoZSB4LWF4aXMKICDCsOKKuFhMYWJlbCAiWWVhciIKKQomaW1zIOKsmuKImFBsb3QK)):  
+![Example plot with global configuration](example-images/example-plot-1.png)
 
-Once you have a `PlotConfig`, you can use it to plot some data with the `Plot` function. This function can take a single `N×2` array to plot one data series of N entries, or it can take a box list of such arrays to plot multiple data series.
+## Bar charts
+
+In addition to `Plot` for creating scatter/line plots, `BarChart` can be used to create bar graphs.
+
+For instance:
 ```uiua
 # Experimental!
-~ "git: github.com/Omnikar/uiua-plot" ~ Plot PlotConfig
+~ "git: https://github.com/Omnikar/uiua-plot" ~ BarChart Data PlotConfig
+[Data!(
+    # Data for bar charts should be lists of scalars,
+    # rather than lists of coordinates.
+    New 2_1_3
+    °⊸Label "Ice Cream Sales"
+  )
+ Data!(
+    New 2_2_4
+    °⊸Label "Shark Attacks"
+  )]
 PlotConfig!(
   New
-  # Minimum and maximum x bounds
-  °⊸XBounds 2006.9_2009.1
-  # Minimum and maximum y bounds
-  °⊸YBounds ¯0.3_4.3
-  # Spacing between gridlines in the x and y directions
-  °⊸GridlineInterval 0.5_1
   # Size of the image to produce
-  °⊸Size 800_400
-  # Color(s) to use for plotting the data
-  °⊸PlotColor [0.33_0.51_0.93 0.85_0.32_0.25]
-  # Labels for the data series
-  °⊸PlotLabel {"Ice Cream Sales" "Shark Attacks"}
-  # Whether to draw dots or not
-  °⊸DrawDots 0
+  °⊸Size 512_400
+  # Gridline spacing in the y direction
+  °⊸(⊣GridlineInterval) 1
   # Label of the x-axis
   °⊸XLabel "Year"
+  # Label of the y-axis
+  °⊸YLabel "Quantity"
+  # Labels for each bar cluster
+  °⊸BarLabels {"2007" "2008" "2009"}
 )
-
-&ims Plot {
-  [2007_2 2008_1 2009_3]
-  [2007_2 2008_2 2009_4]}
+&ims ⬚∘BarChart
 ```
-This code produces the following output ([try it online](https://uiua.org/pad?src=0_13_0-dev_3__IyBFeHBlcmltZW50YWwhCn4gImdpdDogZ2l0aHViLmNvbS9PbW5pa2FyL3VpdWEtcGxvdCIgfiBQbG90IFBsb3RDb25maWcKUGxvdENvbmZpZyEoCiAgTmV3CiAgIyBNaW5pbXVtIGFuZCBtYXhpbXVtIHggYm91bmRzCiAgwrDiirhYQm91bmRzIDIwMDYuOV8yMDA5LjEKICAjIE1pbmltdW0gYW5kIG1heGltdW0geSBib3VuZHMKICDCsOKKuFlCb3VuZHMgwq8wLjNfNC4zCiAgIyBTcGFjaW5nIGJldHdlZW4gZ3JpZGxpbmVzIGluIHRoZSB4IGFuZCB5IGRpcmVjdGlvbnMKICDCsOKKuEdyaWRsaW5lSW50ZXJ2YWwgMC41XzEKICAjIFNpemUgb2YgdGhlIGltYWdlIHRvIHByb2R1Y2UKICDCsOKKuFNpemUgODAwXzQwMAogICMgQ29sb3IocykgdG8gdXNlIGZvciBwbG90dGluZyB0aGUgZGF0YQogIMKw4oq4UGxvdENvbG9yIFswLjMzXzAuNTFfMC45MyAwLjg1XzAuMzJfMC4yNV0KICAjIExhYmVscyBmb3IgdGhlIGRhdGEgc2VyaWVzCiAgwrDiirhQbG90TGFiZWwgeyJJY2UgQ3JlYW0gU2FsZXMiICJTaGFyayBBdHRhY2tzIn0KICAjIFdoZXRoZXIgdG8gZHJhdyBkb3RzIG9yIG5vdAogIMKw4oq4RHJhd0RvdHMgMAogICMgTGFiZWwgb2YgdGhlIHgtYXhpcwogIMKw4oq4WExhYmVsICJZZWFyIgopCgomaW1zIFBsb3QgewogIFsyMDA3XzIgMjAwOF8xIDIwMDlfM10KICBbMjAwN18yIDIwMDhfMiAyMDA5XzRdfQo=)):
-![Example plot](examples/example-plot-0.png)
+This code produces the following output ([try it online](https://uiua.org/pad?src=0_14_0-dev_1__IyBFeHBlcmltZW50YWwhCn4gImdpdDogaHR0cHM6Ly9naXRodWIuY29tL09tbmlrYXIvdWl1YS1wbG90IiB-IEJhckNoYXJ0IERhdGEgUGxvdENvbmZpZwpbRGF0YSEoCiAgICAjIERhdGEgZm9yIGJhciBjaGFydHMgc2hvdWxkIGJlIGxpc3RzIG9mIHNjYWxhcnMsCiAgICAjIHJhdGhlciB0aGFuIGxpc3RzIG9mIGNvb3JkaW5hdGVzLgogICAgTmV3IDJfMV8zCiAgICDCsOKKuExhYmVsICJJY2UgQ3JlYW0gU2FsZXMiCiAgKQogRGF0YSEoCiAgICBOZXcgMl8yXzQKICAgIMKw4oq4TGFiZWwgIlNoYXJrIEF0dGFja3MiCiAgKV0KUGxvdENvbmZpZyEoCiAgTmV3CiAgIyBTaXplIG9mIHRoZSBpbWFnZSB0byBwcm9kdWNlCiAgwrDiirhTaXplIDUxMl80MDAKICAjIEdyaWRsaW5lIHNwYWNpbmcgaW4gdGhlIHkgZGlyZWN0aW9uCiAgwrDiirgo4oqjR3JpZGxpbmVJbnRlcnZhbCkgMQogICMgTGFiZWwgb2YgdGhlIHgtYXhpcwogIMKw4oq4WExhYmVsICJZZWFyIgogICMgTGFiZWwgb2YgdGhlIHktYXhpcwogIMKw4oq4WUxhYmVsICJRdWFudGl0eSIKICAjIExhYmVscyBmb3IgZWFjaCBiYXIgY2x1c3RlcgogIMKw4oq4QmFyTGFiZWxzIHsiMjAwNyIgIjIwMDgiICIyMDA5In0KKQomaW1zIOKsmuKImEJhckNoYXJ0Cg==)):  
+![Example bar chart](example-images/example-plot-2.png)
 
-If unspecified, plot bounds and gridline spacing are inferred, and some default settings are used.
+## Histograms
+
+The `Histogram` function takes data and categorizes frequencies of intervals as determined by the x component of the configured `GridlineInterval` (inferred if unspecified), then makes a histogram. Note that `Histogram` cannot take multiple data series, and must be passed a single `Data` instance.
 ```uiua
 # Experimental!
-~ "git: github.com/Omnikar/uiua-plot" ~ Plot PlotConfig
-# Create a default `PlotConfig` with zero configuration
-PlotConfig
-&ims Plot {
-  [2007_2 2008_1 2009_3]
-  [2007_2 2008_2 2009_4]}
+~ "git: github.com/Omnikar/uiua-plot" ~ Data Histogram
+# Generate 1000 binomial random variables with p=0.8 and N=20
+/+<0.8 gen 20_1000 0
+&ims Histogram Data
 ```
-![Example plot without configuration](examples/example-plot-1.png)
+This code produces the following output ([try it online](https://uiua.org/pad?src=0_14_0-dev_1__IyBFeHBlcmltZW50YWwhCn4gImdpdDogZ2l0aHViLmNvbS9PbW5pa2FyL3VpdWEtcGxvdCIgfiBEYXRhIEhpc3RvZ3JhbQojIEdlbmVyYXRlIDEwMDAgYmlub21pYWwgcmFuZG9tIHZhcmlhYmxlcyB3aXRoIHA9MC44IGFuZCBOPTIwCi8rPDAuOCBnZW4gMjBfMTAwMCAwCiZpbXMgSGlzdG9ncmFtIERhdGEK)):  
+![Example histogram](example-images/example-plot-3.png)
 
-Fields supporting inference actually have their values default to `[∞ ∞]`, and these are replaced with inferred values when `Plot` is called. If you want, you can take advantage of this to partially infer some fields, for example by setting `Max` to `[10 ∞]` to use an upper bound of `10` in the x direction, but infer the upper bound in the y direction.
+## Functions
 
-In addition to `Plot` for creating scatter/line plots, `BarChart` and `Histogram` are also available. See the in-code documentation for more information on how to use these. You can also use `Plot Func!` to plot a function. <sub>TODO: Document these more.</sub>
+The `Func!` macro can be used to plot functions. It takes a function and an x interval and produces a `Data` instance that can be passed to `Plot`.
+```uiua
+# Experimental!
+~ "git: github.com/Omnikar/uiua-plot" ~ Func! Plot
+# Plot the function x² from -3 to 3
+&ims Plot Func!(×.) ¯3_3
+```
+This code produces the following output ([try it online](https://uiua.org/pad?src=0_14_0-dev_1__IyBFeHBlcmltZW50YWwhCn4gImdpdDogZ2l0aHViLmNvbS9PbW5pa2FyL3VpdWEtcGxvdCIgfiBGdW5jISBQbG90CiMgUGxvdCB0aGUgZnVuY3Rpb24geMKyIGZyb20gLTMgdG8gMwomaW1zIFBsb3QgRnVuYyEow5cuKSDCrzNfMwo=)):  
+![Example function plot](example-images/example-plot-4.png)
 
-All available configuration values for `PlotConfig` are in the following table. Any field marked with "Distributive" will distribute its values across multiple data series, repeating values or defaults if necessary.
+## Configuration fields
+
+All available configuration values can be found in the following tables.
+
+In the `Data` table, "Inherits global" indicates that a field has an analogue in `PlotConfig`, and if unspecified in `Data`, will inherit whatever is configured in the `PlotConfig` being used (the `PlotConfig` default if unspecified). These global fallback values are indicated in the `PlotConfig` table with "Global fallback."
+
+#### `Data`
+| Field | Shape | Description | Default |
+|---|---|---|---|
+| `Color` | `[3]` or `[4]` | Color with which to plot this data | [Desmos graph colors](https://www.desmos.com/api/v1.7/docs/index.html#document-colors) |
+| `Label` | string | Label to put in the legend | `""` |
+| `DrawDots` | `[]` | Whether to draw dots (expects `0` or `1`) | Inherits global |
+| `DotSize` | `[]` | Size with which to draw dots | Inherits global |
+| `DrawLines` | `[]` | Whether to draw lines (expects `0` or `1`) | Inherits global |
+| `LineWidth` | `[]` | Thickness with which to draw lines | Inherits global |
+
+#### `PlotConfig`
 | Field | Shape | Description | Default |
 |---|---|---|---|
 | `XBounds` | `[2]` | The minimum and maximum x bounds of the plot (overrides `Min` and `Max`) | Inferred |
@@ -104,15 +199,13 @@ All available configuration values for `PlotConfig` are in the following table. 
 | `YLabel` | string | y-axis label | `""` |
 | `AxisLabelSize` | `[]` | Font size to use for axis labels | `20` |
 | `AxisLabelColor` | `[3]` or `[4]` | Font color to use for axis labels | `[0.2 0.2 0.2]` |
-| `PlotColor` | `[3]`, `[4]`, `[x 3]`, or `[x 4]` | (Distributive) Colors with which to plot data series | [Desmos graph colors](https://www.desmos.com/api/v1.7/docs/index.html#document-colors) |
-| `PlotLabel` | boxed string list | (Distributive) Labels, for each data series, to put in the legend | `□""` |
 | `PlotLabelSize` | `[]` | Font size to use for data series labels | `15` |
-| `PlotLabelColor` | `[3]`, `[4]`, `[x 3]`, or `[x 4]` | (Distributive) Font colors to use for data series labels | `[0.2 0.2 0.2]` |
-| `DrawDots` | `[]` or `[x]` | (Distributive) Whether to draw dots when plotting a series; expects `0` or `1` | `1` |
-| `DotSize` | `[]` or `[x]` | (Distributive) Size with which to draw dots | `40` |
-| `DrawLines` | `[]` or `[x]` | (Distributive) Whether to draw lines when plotting a series; expects `0` or `1` | `1` |
-| `LineWidth` | `[]` or `[x]` | (Distributive) Thickness with which to draw lines | `8` |
+| `PlotLabelColor` | `[3]` or `[4]` | Font color to use for data series labels | `[0.2 0.2 0.2]` |
 | `BarWidth` | `[]` | Width with which to draw each bar | `40` |
-| `BarLabels` | boxed string list | Labels to use for each bar/bar cluster | `□""` |
+| `BarLabels` | boxed string list | Labels to use for each bar/bar cluster | `{}` |
 | `BarLabelSize` | `[]` | Font size to use for bar/bar cluster labels | `15` |
 | `BarLabelColor` | `[3]` or `[4]` | Font color to use for bar/bar cluster labels | `[0.2 0.2 0.2]` |
+| `DrawDots` | `[]` | (Global fallback) Whether to draw dots when plotting a series (expects `0` or `1`) | `1` |
+| `DotSize` | `[]` | (Global fallback) Size with which to draw dots | `40` |
+| `DrawLines` | `[]` | (Global fallback) Whether to draw lines when plotting a series (expects `0` or `1`) | `1` |
+| `LineWidth` | `[]` | (Global fallback) Thickness with which to draw lines | `8` |

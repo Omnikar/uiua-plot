@@ -28,7 +28,7 @@ Box  ↚ °2type
     Max: °2°¤△⟜Num ← ⊟.∞
     Size: °2°¤△⟜Num ← 512_512
     BgColor: ⍣°3°4°¤△⟜Num ← ↯3 1
-    AxisWidth: °[]△⟜Num ← 3
+    AxisWidth: °[]△⟜Num ← 2
     AxisColor: ⍣°3°4°¤△⟜Num ← ↯3 0
     GridlineWidth: °[]△⟜Num ← 1
     GridlineColor: ⍣°3°4°¤△⟜Num ← ↯3 0.7

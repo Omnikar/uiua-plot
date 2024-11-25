@@ -6,7 +6,7 @@
 # Apply a color to an alpha map
 C ↚ ⍜(⊣°⍉)×∧↯⇌△,⬚1↙₄
 # Round to one significant figure
-AutoRound ↚ ⍜×⁅˜ⁿ10¯⌊⊸ₙ10
+AutoRound ↚ ⍜×⁅𝄈ⁿ10¯⌊⊸ₙ10
 
 Num  ↚ °0type
 Char ↚ °1type
@@ -87,7 +87,7 @@ Axes ← (
   ⊙(°⊟PC~Size,)°⊟⊞-
   ∩(°⊚⁅▽⊸≥0▽)⊓⤚>⊸<
   ∩⬚0↙⊙:°⊟◡⋅⋅PC~Size
-  C PC~AxisColor:⇌˜⊞↥)
+  C PC~AxisColor:⇌𝄈⊞↥)
 
 # Image ? PlotConfig
 Gridlines ← (
@@ -96,7 +96,7 @@ Gridlines ← (
   | ∩+⊙:∩⇡∩°⊟PC~Size,×)
   ∩(⌵⍜⊙+◿⤙÷2)⊙:°⊟
   ∩≤’÷2◡⋅⋅PC~GridlineWidth
-  C PC~GridlineColor:⇌˜⊞↥)
+  C PC~GridlineColor:⇌𝄈⊞↥)
 
 # Image ? PlotConfig
 AxisNums ← ⬚∘(
@@ -105,11 +105,11 @@ AxisNums ← ⬚∘(
   ∩°⊟₆°⊟⍉⊟₆
   ∩⊓(
     ⤙×▽⊸≠0⍜-(⇡+1)
-    ⍜×⁅˜ⁿ10⬚0⊗@.⇌°⋕ # Round values to precision of original factor
-    ⍚(∧⌝↘⊟⊸¯⊟.⁅÷8⟜layout) PC~NumberSize°◌⊃°⋕(×˜-)
+    ⍜×⁅𝄈ⁿ10⬚0⊗@.⇌°⋕ # Round values to precision of original factor
+    ⍚(∧⌝↘⊟⊸¯⊟.⁅÷8⟜layout) PC~NumberSize°◌⊃°⋕(×𝄈-)
   )∘
   ⊓⍚⍉⊙⊙⍚⇌⍚⇌
-  ∩(☇1∧◇(⬚0↥⬚0↙⁅⊟⊙:¯+⌊÷2⤚⧻)⊙⊙⊙[])
+  ∩(♭₂∧◇(⬚0↥⬚0↙⁅⊟⊙:¯+⌊÷2⤚⧻)⊙⊙⊙[])
   ↥∩⇌∩⬚0↙’⇌PC~Size°◌⍉
   C PC~NumberColor°◌)
 
@@ -119,9 +119,9 @@ Legend ← (
   ≡PC!Data!⊃⋅PlotLabelSize⊃Color⊃°◇°Label⋅PlotLabelColor
   ⍚(≡⊂⊓(C:≡⬚0↙⌊×3/2⊸⧻¬↯⟜⊚|C:layout))’
   PC~PlotLabelSize⤙⊙⊓(⊢PC~Size)⊓0[]⤚≡◇(⧻⊢)
-  ⟜⊃(⊕□˜▽°⊏⇌⊂◌∧(⨬⋅⊓-+₁⊓˜-⋅⊓1⊂: ⊙◡< ⊙+)⤙⊓:∘)⋅⋅∘
+  ⟜⊃(⊕□𝄈▽°⊏⇌⊂◌∧(⨬⋅⊓-+₁⊓𝄈-⋅⊓1⊂: ⊙◡< ⊙+)⤙⊓:∘)⋅⋅∘
   ⟜(≡◇∧≡⬚0↙≡⊟¯⌊÷2⊸+≡◇(⧻⊢)’⍚/◇≡(⊂⊂)¤⍉↯4↯⟜⊚)
-  ⟜(/(⊂⊂)⍉↯4˜↯0˜⊟⊡2△,)
+  ⟜(/(⊂⊂)⍉↯4𝄈↯0𝄈⊟⊡2△,)
   ∧⌝↘⊟⊸¯⌊÷2)
 
 # Convolution kernels
@@ -134,7 +134,7 @@ CircleKernel ↚ ⁿ4↧1×2√₁₆Gaussian⤙÷40⍜(÷2+1)⁅
 # Kernel ? Size
 XKernel ↚ (
   0.3:¤↥⊸⇌⊞=.⊸⇡⍜(÷2+1)⁅×0.3
-  /↥≡↻☇1⊞⊟.-÷2-1⟜⇡⍜(÷2+1)⌊×)
+  /↥≡↻♭₂⊞⊟.-÷2-1⟜⇡⍜(÷2+1)⌊×)
 
 # Kernel ? Size
 BoxKernel ↚ ¬↯⟜⊚⍜(÷2+1)⁅×0.3
@@ -146,7 +146,7 @@ PointsToPx ↚ ≡⇌×⊙-∩¤PC!⊃Ppu Min:
 # Image ? Data PlotConfig
 Dots ← (
   ⤚⤙(⁅PointsToPx Data~Values)
-  ⇌⬚0↙:°⊚ ▽⊸∈☇1⤚⇡⇌PC~Size
+  ⇌⬚0↙:°⊚ ▽⊸∈♭₂⤚⇡⇌PC~Size
   CircleKernel Data~DotSize,
   ↘¯⟜↘⌊÷2△⟜FFTConvolve
   ↧1C Data~Color:)
@@ -169,7 +169,7 @@ SingleSeries ← /Stack[
 
 # Bars ? Data PlotConfig
 SingleBars ← (
-  PC~YBounds’˜⊙⊸Data~Values
+  PC~YBounds’𝄈⊙⊸Data~Values
   ⟜⊃(↥⊙↧°⊟)⊢
   ↥⊃(↥0-↥0⊢|⌵↧0-↧0⊣|¯↧0-↧0◌)
   ∩×,⊙(⊣PC~Ppu,)
@@ -190,7 +190,7 @@ Bars ← (
 # Data ? XBounds
 Func! ← (
   ⤚/-⊙PC!(Size New)
-  ≡⊟⟜∵^0˜⊂⊣⤙⍜×/⍜-(⇡⁅)÷5÷⊙⊢
+  ≡⊟⟜∵^0𝄈⊂⊣⤙⍜×/⍜-(⇡⁅)÷5÷⊙⊢
   Data!(°⊸DrawDots0New))
 
 # Colors from Desmos graphing calculator
@@ -229,8 +229,8 @@ PostChart ← (
   PC!⊃AxisLabelColor⊃AxisLabelSize⊃XLabel YLabel:
   ⊙∩(∧⌝↘⊟⊸¯⌊÷4⟜layout)⊙’
   ⊡1△:⊙(⟜⧻,)∩(⤸1⍉⊞×)’⬚1↙₄
-  ⊙˜⊂:⤸1⊙⇌∩(↻⌊÷2-⊃⊙⧻⬚0↙)
-  Stack˜⊂↙×1_¯1⇌:≡⊂⬚0↙⧻,)
+  ⊙𝄈⊂:⤸1⊙⇌∩(↻⌊÷2-⊃⊙⧻⬚0↙)
+  Stack𝄈⊂↙×1_¯1⇌:≡⊂⬚0↙⧻,)
 
 # TODO: Document this more
 # Create a line/scatter plot with a list of `Data`
@@ -239,7 +239,7 @@ PostChart ← (
 # Use `⬚ fill` to provide a custom `PlotConfig`.
 # Image ? Data
 Plot ← (
-  ColorAutoInfer ⊙⍣°◌PC ☇1
+  ColorAutoInfer ⊙⍣°◌PC ♭₂
 
   PC!Infer‼GridlineInterval(AutoRound÷5-⊃/↧/↥/◇⊂⍚Data~Values)
   PC!Infer‼Min(-÷5GridlineInterval,/↧/◇⊂⍚Data~Values)
@@ -261,7 +261,7 @@ Plot ← (
 # Use `⬚ fill` to provide a custom `PlotConfig`.
 # Image ? Data
 BarChart ← (
-  ⊙⍜PC~XBounds⋅1_1 ☇1 ⊙⍣°◌PC
+  ⊙⍜PC~XBounds⋅1_1 ♭₂ ⊙⍣°◌PC
   PC!Infer‼YBounds(⊟⊓↧↥’0∩(+⊸÷20)⊃/↧/↥♭⬚0≡Data~Values)
   PC!Infer‼(⊣GridlineInterval|AutoRound÷5/-⋅⊸YBounds)
   ColorAutoInfer
@@ -293,7 +293,7 @@ Histogram ← (
   ⊙⍣°◌PC
   PC!Infer‼(⊢GridlineInterval|AutoRound÷10-⊃/↧/↥Data~Values)
   PC!Infer‼XBounds(⍜÷⁅⊢GridlineInterval,⊟⊃/↧/↥Data~Values)
-  ⍜☇₁ColorAutoInfer
+  ⍜♭₂ColorAutoInfer
   ⍜Data~Values(
     ⊢PC!⊃GridlineInterval XBounds,
     °⊂⍜÷(⍜-(⇡⁅+1)°⊟)

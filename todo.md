@@ -6,10 +6,9 @@
 - Convenient interface for harnessing the lib's modularity capabilities and making more custom chart configurations.
   - Manually combining `Axes`, `Gridlines`, `SingleSeries`, etc.
 
-- Document bar chart example usage
 - Make histogram and bar chart numbers render outside the chart
-- Document `Func!` example usage
 - Variadic `Func!`?
+- Hide empty legend entries (and hide legend if all are empty)
 
 ## Bugs
 - Histogram bars do not align properly with the gridlines.

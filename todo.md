@@ -14,5 +14,6 @@
 - Error if a data series is empty or entirely out of bounds of the plot
 - Error if only one point of a series is being considered (including cases where a series has only one point) and a line draw is attempted
 - When plot bounds are partially specified, the inference of the remaining bounds still takes into account data points that lie outside of the specified bounds.
+- Inference of gridline intervals does not account for manually configured plot bounds
 - Inference does not work if there is only one data point
 - Error if a single label in the legend is too long to fit on one line

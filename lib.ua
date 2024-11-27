@@ -220,8 +220,8 @@ ColorAutoInfer ← (
 
 PreChart ← (
   ⊙⟜Background
-  ×⊸⊃(=1⧻|≍""Data~Label⊢)
-  ⨬⟜(⤚(⍜⊙(⊣PC~Size)-⧻)⊸Legend)⊙⟜(°△[0⊙4]⊢PC~Size)
+  ⟜(±⊸⧻▽>0⊸≡(⧻Data~Label)
+    ⨬⋅⟜(°△[0⊙4]⊢PC~Size)(⤚(⍜⊙(⊣PC~Size)-⧻)⊸Legend))
   ⊙(>0⊸[∩⧻PC!⊃YLabel XLabel]⟜PC~Size
     ⍜⊙PC~Size-×+⟜+⌊⊸÷4 PC~AxisLabelSize,))
 

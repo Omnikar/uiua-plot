@@ -8,7 +8,6 @@
 
 - Make histogram and bar chart numbers render outside the chart
 - Variadic `Func!`?
-- Hide empty legend entries (and hide legend if all are empty)
 
 ## Bugs
 - Histogram bars do not align properly with the gridlines.

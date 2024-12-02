@@ -72,10 +72,7 @@ PC ↚ PlotConfig
 └─╴
 
 # Stack one RGBA image atop another
-Stack ← ⍜°⍉⊂⊃(
-  ↧⊸↥0÷⊃(+×¬’⊙◌|+⊃×(××¬⊙◌))
-| ⍜∩¬×⊙◌
-)∩⍜°⍉⍜⇌°⊂
+Stack ← ⍜°⍉⊂ ↧⊸↥0÷⊃(+×¬𝄐’|+⊃×(×𝄐×¬)|𝄐⍜∩¬×) ∩⍜°⍉°𝄈⊂
 
 # Image ? PlotConfig
 Background ← ∧↯⊙⬚1↙₄ PC!⊃Size BgColor

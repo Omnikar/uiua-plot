@@ -150,7 +150,7 @@ Dots ← (
 
 # Image ? Data PlotConfig
 Lines ← (
-  ⤚⤙(◫2≡/ℂPointsToPx Data~Values)
+  ⤚⤙(⧈∘2≡/ℂPointsToPx Data~Values)
   ¤/ℂ°⍉⇡⇌PC~Size
   ⇌/↧≡/(⌵-×↥0↧1÷∩(/+×∩⊟∩°ℂ)⤙⤙◠:∩-’)
   ¬↥0↧1-÷10Data~LineWidth,×0.7
@@ -160,9 +160,7 @@ Lines ← (
 # Image ? Data PlotConfig
 SingleSeries ← /Stack[
   ⋅◌⍥◠Dots⊸Data~DrawDots
-  # FIXME: This `⊙∘` should not be necessary.
-  # It exists to suppress an erroneous warning.
-  ⍥◠Lines⊸Data~DrawLines ⊙∘]
+  ⍥◠Lines⊸Data~DrawLines]
 
 # Bars ? Data PlotConfig
 SingleBars ← (

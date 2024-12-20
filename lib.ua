@@ -76,7 +76,7 @@ Scatter ← Data!(°⊸DrawDots 1 °⊸DrawLines 0 New)
 Line ← Data!(°⊸DrawLines 1 °⊸DrawDots 0 New)
 
 # Stack one RGBA image atop another
-Stack ← ⍜°⍉⊂ ↧⊸↥0÷⊃(+×¬𝄐’|+⊃×(×𝄐×¬)|𝄐⍜∩¬×) ∩⍜°⍉°𝄈⊂
+Stack ← ⍜°⍉⊂ ↧⊸↥0÷⊃(+×𝄐⤚¬|+⊃×(×𝄐×¬)|𝄐⍜∩¬×) ∩⍜°⍉°𝄈⊂
 
 # Image ? PlotConfig
 Background ← ∧↯⊙⬚1↙₄ PC!⊃Size BgColor
@@ -96,13 +96,13 @@ Gridlines ← (
   ⊃(×PC~GridlineInterval⋅:
   | ∩+⊙:∩⇡∩°⊟PC~Size,×)
   ∩(⌵⍜⊙+◿⤙÷2)⊙:°⊟
-  ∩≤’÷2◡⋅⋅PC~GridlineWidth
+  ∩⌞≤÷2◡⋅⋅PC~GridlineWidth
   C PC~GridlineColor:⇌𝄈⊞↥)
 
 # Image ? PlotConfig
 AxisNums ← ⬚∘(
   PC!⊃GridlineInterval⊃Min⊃Max⊃Ppu Size°◌
-  ⊓⌈⌊⤚∩÷’⊙⊓’⊙⇌
+  ⊓⌈⌊⤚∩⌞÷⊙⊓⟜:⊙⇌
   ∩°⊟₆°⊟⍉⊟₆
   ∩⊓(
     ⤙×▽⊸≠0⍜-(⇡+1)
@@ -111,17 +111,17 @@ AxisNums ← ⬚∘(
   )∘
   ⊓⍚⍉⊙⊙⍚⇌⍚⇌
   ∩(♭₂∧◇(⬚0↥⬚0↙⁅⊟⊙:¯+⌊÷2⤚⧻)⊙⊙⊙[])
-  ↥∩⇌∩⬚0↙’⇌PC~Size°◌⍉
+  ↥∩⇌∩⌞⬚0↙⇌PC~Size°◌⍉
   C PC~NumberColor°◌)
 
 # Legend ? Data PlotConfig
 Legend ← (
   ⊙⊸¤
   ≡PC!Data!⊃⋅PlotLabelSize⊃Color⊃°◇°Label⋅PlotLabelColor
-  ⍚(≡⊂⊓(C:≡⬚0↙⌊×3/2⊸⧻¬↯⟜⊚|C:layout))’
+  ⍚(≡⊂⊓(C:≡⬚0↙⌊×3/2⊸⧻¬↯⟜⊚|C:layout))⟜:
   PC~PlotLabelSize⤙⊙⊓(⊢PC~Size)⊓0[]⤚≡◇(⧻⊢)
   ⟜⊃(⊕□𝄈▽°⊏⇌⊂◌∧(⨬⋅⊓-+₁⊓𝄈-⋅⊓1⊂: ⊙◡< ⊙+)⤙⊓:∘)⋅⋅∘
-  ⟜(≡◇∧≡⬚0↙≡⊟¯⌊÷2⊸+≡◇(⧻⊢)’⍚/◇≡(⊂⊂)¤⍉↯4↯⟜⊚)
+  ⟜(≡◇∧≡⬚0↙≡⊟¯⌊÷2⊸+⤚≡◇(⧻⊢)⍚/◇≡(⊂⊂)¤⍉↯4↯⟜⊚)
   ⟜(/(⊂⊂)⍉↯4𝄈↯0𝄈⊟⊡2△,)
   ∧⌝↘⊟⊸¯⌊÷2)
 
@@ -147,7 +147,7 @@ PointsToPx ↚ ≡⇌×⊙-∩¤PC!⊃Ppu Min:
 # Image ? Data PlotConfig
 Dots ← (
   ⤚⤙(⁅PointsToPx Data~Values)
-  ⇌⬚0↙:°⊚ ▽⊸∈♭₂⤚⇡⇌PC~Size
+  ⇌⬚0↙:°⊚ ▽⊸∊♭₂⤚⇡⇌PC~Size
   CircleKernel Data~DotSize,
   ↘¯⟜↘⌊÷2△⟜FFTConvolve
   ↧1C Data~Color:)
@@ -156,7 +156,7 @@ Dots ← (
 Lines ← (
   ⤚⤙(⧈∘2≡/ℂPointsToPx Data~Values)
   ¤/ℂ°⍉⇡⇌PC~Size
-  ⇌/↧≡/(⌵-×↥0↧1÷∩(/+×∩⊟∩°ℂ)⤙⤙◠:∩-’)
+  ⇌/↧≡/(⌵-×↥0↧1÷∩(/+×∩⊟∩°ℂ)⤙⤙◠:∩⌞-)
   ¬↥0↧1-÷10Data~LineWidth,×0.7
   C Data~Color:)
 
@@ -168,7 +168,7 @@ SingleSeries ← /Stack[
 
 # Bars ? Data PlotConfig
 SingleBars ← (
-  PC~YBounds’𝄈⊙⊸Data~Values
+  ⤚PC~YBounds𝄈⊙⊸Data~Values
   ⟜⊃(↥⊙↧°⊟)⊢
   ↥⊃(↥0-↥0⊢|⌵↧0-↧0⊣|¯↧0-↧0◌)
   ∩×,⊙(⊣PC~Ppu,)
@@ -206,7 +206,7 @@ DefaultColors ← ≡⊂÷255[
 # Infer values for a config field using
 # a function that operates on input data
 # ? FieldGetter InferenceFunction
-Infer‼ ↚ ⟜(⍜(∩♭^0|⍜∩▽◌’⊸=∞):^1)
+Infer‼ ↚ ⟜(⍜(∩♭^0|⍜∩▽◌⟜:⊸=∞):^1)
 # Inherit defaults from a PlotConfig to
 # the DataConfigs of some data
 # ? DataConfigGetter PlotConfigGetter
@@ -226,8 +226,8 @@ PreChart ← (
 
 PostChart ← (
   PC!⊃AxisLabelColor⊃AxisLabelSize⊃XLabel YLabel:
-  ⊙∩(∧⌝↘⊟⊸¯⌊÷4⟜layout)⊙’
-  ⊡1△:⊙(⟜⧻,)∩(⤸1⍉⊞×)’⬚1↙₄
+  ⊙∩⌞(∧⌝↘⊟⊸¯⌊÷4⟜layout)
+  ⊡1△:⊙(⟜⧻,)∩⌞(⤸1⍉⊞×)⬚1↙₄
   ⊙𝄈⊂:⤸1⊙⇌∩(↻⌊÷2-⊃⊙⧻⬚0↙)
   Stack𝄈⊂↙×1_¯1⇌:≡⊂⬚0↙⧻,)
 
@@ -261,7 +261,7 @@ Plot ← (
 # Image ? Data
 BarChart ← (
   ⊙⍜PC~XBounds⋅1_1 ♭₂ ⊙⍣°◌PC
-  PC!Infer‼YBounds(⊟⊓↧↥’0∩(+⊸÷20)⊃/↧/↥♭⬚0≡Data~Values)
+  PC!Infer‼YBounds(⊟⊓⌞↧↥0∩(+⊸÷20)⊃/↧/↥♭⬚0≡Data~Values)
   PC!Infer‼(⊣GridlineInterval|AutoRound÷5/-⋅⊸YBounds)
   ColorAutoInfer
   ⊙⍜(⊢PC~GridlineInterval)⋅∞

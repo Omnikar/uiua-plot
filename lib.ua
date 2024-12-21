@@ -102,7 +102,7 @@ Gridlines ← (
 # Image ? PlotConfig
 AxisNums ← ⬚∘(
   PC!⊃GridlineInterval⊃Min⊃Max⊃Ppu Size°◌
-  ⊓⌈⌊⤚∩⌞÷⊙⊓⟜:⊙⇌
+  ⊓⌈⌊⤚∩⌞÷⊙⊓⤚∘⊙⇌
   ∩°⊟₆°⊟⍉⊟₆
   ∩⊓(
     ⤙×▽⊸≠0⍜-(⇡+1)
@@ -118,7 +118,7 @@ AxisNums ← ⬚∘(
 Legend ← (
   ⊙⊸¤
   ≡PC!Data!⊃⋅PlotLabelSize⊃Color⊃°◇°Label⋅PlotLabelColor
-  ⍚(≡⊂⊓(C:≡⬚0↙⌊×3/2⊸⧻¬↯⟜⊚|C:layout))⟜:
+  ⍚(≡⊂⊓(C:≡⬚0↙⌊×3/2⊸⧻¬↯⟜⊚|C:layout))⤚∘
   PC~PlotLabelSize⤙⊙⊓(⊢PC~Size)⊓0[]⤚≡◇(⧻⊢)
   ⟜⊃(⊕□𝄈▽°⊏⇌⊂◌∧(⨬⋅⊓-+₁⊓𝄈-⋅⊓1⊂: ⊙◡< ⊙+)⤙⊓:∘)⋅⋅∘
   ⟜(≡◇∧≡⬚0↙≡⊟¯⌊÷2⊸+⤚≡◇(⧻⊢)⍚/◇≡(⊂⊂)¤⍉↯4↯⟜⊚)
@@ -206,7 +206,7 @@ DefaultColors ← ≡⊂÷255[
 # Infer values for a config field using
 # a function that operates on input data
 # ? FieldGetter InferenceFunction
-Infer‼ ↚ ⟜(⍜(∩♭^0|⍜∩▽◌⟜:⊸=∞):^1)
+Infer‼ ↚ ⟜(⍜(∩♭^0|⍜∩▽◌⤚∘⊸=∞):^1)
 # Inherit defaults from a PlotConfig to
 # the DataConfigs of some data
 # ? DataConfigGetter PlotConfigGetter

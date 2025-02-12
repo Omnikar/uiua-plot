@@ -1,3 +1,6 @@
+## QoL
+- Improve performance/memory usage of SDF line rendering
+
 ## Features
 - Bar width inference for bar charts
 - Config option for whether to display axis numbers?

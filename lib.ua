@@ -4,9 +4,9 @@
 ~ "git: github.com/Omnikar/uiua-math" ~ FFTConvolve Gaussian
 
 # Apply a color to an alpha map
-C ↚ ⍜(⊣°⍉)×∧↯⇌△,⬚1↙₄
+C ← ⍜(⊣°⍉)×∧↯⇌◡⋅△⬚1↙₄
 # Round to one significant figure
-AutoRound ↚ ⍜×⁅˜ⁿ10¯⌊⊸ₙ10
+AutoRound ← ⍜×⁅˜ⁿ10¯⌊⊸ₙ10
 
 Num  ↚ °0type
 Char ↚ °1type
@@ -84,8 +84,8 @@ Background ← ∧↯⊙⬚1↙₄ PC!⊃Size BgColor
 # Image ? PlotConfig
 Axes ← (
   -⌊÷2⟜⇡⊸PC~AxisWidth
-  ×PC!⊃Min Ppu,
-  ⊙(°⊟PC~Size,)°⊟⊞-
+  ×PC!⊃Min Ppu⤙∘
+  ⊙(°⊟PC~Size⤙∘)°⊟⊞-
   ∩(°⊚⁅▽⊸≥0▽)⊓⤚>⊸<
   ∩⬚0↙⊙:°⊟◡⋅⋅PC~Size
   C PC~AxisColor:⇌˜⊞↥)
@@ -94,7 +94,7 @@ Axes ← (
 Gridlines ← (
   ⊸PC!⊃Min Ppu
   ⊃(×PC~GridlineInterval⋅:
-  | ∩+⊙:∩⇡∩°⊟PC~Size,×)
+  | ∩+⊙:∩⇡∩°⊟PC~Size⤙∘×)
   ∩(⌵⍜⊙+◿⤙÷2)⊙:°⊟
   ∩⌞≤÷2◡⋅⋅PC~GridlineWidth
   C PC~GridlineColor:⇌˜⊞↥)
@@ -122,7 +122,7 @@ Legend ← (
   PC~PlotLabelSize⤙⊙⊓(⊢PC~Size)⊓0[]⤚≡◇(⧻⊢)
   ⟜⊃(⊕□˜▽°⊏⇌⊂◌∧(⨬⋅⊓-+₁⊓˜-⋅⊓1⊂: ⊙◡< ⊙+)⤙⊓:∘)⋅⋅∘
   ⟜(≡◇∧≡⬚0↙≡⊟¯⌊÷2⊸+⤚≡◇(⧻⊢)⍚/◇≡(⊂⊂)¤⍉↯4↯⟜⊚)
-  ⟜(/(⊂⊂)⍉↯4˜↯0˜⊟⊡2△,)
+  ⟜(/(⊂⊂)⍉↯4˜↯0˜⊟⊡2△ ⤙∘)
   ∧⌝↘⊟⊸¯⌊÷2)
 
 # Convolution kernels
@@ -130,25 +130,25 @@ Legend ← (
 # the post-convolution array the correct shape
 
 # Kernel ? Size
-CircleKernel ↚ ⁿ4↧1×2√₁₆Gaussian⤙÷40⍜(÷2+1)⁅
+CircleKernel ← ⁿ4↧1×2√₁₆Gaussian⤙÷40⍜(÷2+1)⁅
 
 # Kernel ? Size
-XKernel ↚ (
+XKernel ← (
   0.3:¤↥⊸⇌⊞=.⊸⇡⍜(÷2+1)⁅×0.3
   /↥≡↻♭₂⊞⊟.-÷2-1⟜⇡⍜(÷2+1)⌊×)
 
 # Kernel ? Size
-BoxKernel ↚ ¬↯⟜⊚⍜(÷2+1)⁅×0.3
+BoxKernel ← ¬↯⟜⊚⍜(÷2+1)⁅×0.3
 
 # Non-rounded non-bound-checked pixel coordinates of points
 # Coords ? Points PlotConfig
-PointsToPx ↚ ≡⇌×⊙-∩¤PC!⊃Ppu Min:
+PointsToPx ← ≡⇌×⊙-∩¤PC!⊃Ppu Min:
 
 # Image ? Data PlotConfig
 Dots ← (
   ⤚⤙(⁅PointsToPx Data~Values)
   ⇌⬚0↙:°⊚ ▽⊸∊♭₂⤚⇡⇌PC~Size
-  CircleKernel Data~DotSize,
+  CircleKernel Data~DotSize⤙∘
   ↘¯⟜↘⌊÷2△⟜FFTConvolve
   ↧1C Data~Color:)
 
@@ -157,7 +157,7 @@ Lines ← (
   ⤚⤙(⧈∘2≡/ℂPointsToPx Data~Values)
   ¤/ℂ°⍉⇡⇌PC~Size
   ⇌/↧≡/(⌵-×↥0↧1÷∩(/+×∩⊟∩°ℂ)⤙⤙◠:∩⌞-)
-  ¬↥0↧1-÷10Data~LineWidth,×0.7
+  ¬↥0↧1-÷10Data~LineWidth⤙∘×0.7
   C Data~Color:)
 
 # Plot a single series
@@ -171,10 +171,10 @@ SingleBars ← (
   ⤚PC~YBounds˜⊙⊸Data~Values
   ⟜⊃(↥⊙↧°⊟)⊢
   ↥⊃(↥0-↥0⊢|⌵↧0-↧0⊣|¯↧0-↧0◌)
-  ∩×,⊙(⊣PC~Ppu,)
-  ⬚0≡⌝↘⁅:⬚0≡↯⊙1⁅≡⊟⊙PC~BarWidth⊙,
-  PC!⊃BarWidth Size,
-  ⁅+÷2-⊙(⊸⊡1×÷⟜⇡⧻,⊢)
+  ∩× ⤙∘⊙(⊣PC~Ppu⤙∘)
+  ⬚0≡⌝↘⁅:⬚0≡↯⊙1⁅≡⊟⊙PC~BarWidth⊙⤙∘
+  PC!⊃BarWidth Size⤙∘
+  ⁅+÷2-⊙(⊸⊡1×÷⟜⇡⧻ ⤙∘⊢)
   ⇌⬚0↙⇌PC~Size:/↥⬚0≡≡⌝↘
   C Data~Color:)
 
@@ -182,7 +182,7 @@ Bars ← (
   ⍜⬚0≡Data~Values∘
   ≡SingleBars⊙⊸¤
   PC~BarWidth:
-  ⁅×⇌-÷2-1⟜⇡⧻,
+  ⁅×⇌-÷2-1⟜⇡⧻ ⤙∘
   /Stack≡≡↻)
 
 # Generate a `Data` instance that plots a given function
@@ -212,15 +212,15 @@ DefaultColors ← ≡⊂[
 # Infer values for a config field using
 # a function that operates on input data
 # ? FieldGetter InferenceFunction
-Infer‼ ↚ ⟜(⍜(∩♭^0|⍜∩▽◌⤚∘⊸=∞):^1)
+Infer‼ ← ⟜(⍜(∩♭^0|⍜∩▽◌⤚∘⊸=∞):^1)
 # Inherit defaults from a PlotConfig to
 # the DataConfigs of some data
 # ? DataConfigGetter PlotConfigGetter
-Inherit‼ ↚ ⍜:Infer‼≡^0(≡⊙∘^1)
+Inherit‼ ← ⍜:Infer‼≡^0(≡⊙∘^1)
 
 ColorAutoInfer ← (
   ≡⍜Data~Color⬚∞↙₄
-  ⍜:Infer‼≡Data~Color⋅(⊏◿⧻,⇡⧻,DefaultColors)
+  ⍜:Infer‼≡Data~Color⋅(⊏◿⧻ ⤙∘⇡⧻ ⤙∘DefaultColors)
 )
 
 PreChart ← (
@@ -228,18 +228,18 @@ PreChart ← (
   ⟜(±⊸⧻▽>0⊸≡(⧻Data~Label)
     ⨬⋅⟜(°△[0⊙4]⊢PC~Size)(⤚(⍜⊙(⊣PC~Size)-⧻)⊸Legend))
   ⊙(>0⊸[∩⧻PC!⊃YLabel XLabel]⟜PC~Size
-    ⍜⊙PC~Size-×+⟜+⌊⊸÷4 PC~AxisLabelSize,))
+    ⍜⊙PC~Size-×+⟜+⌊⊸÷4 PC~AxisLabelSize⤙∘))
 
 PostChart ← (
   PC!⊃AxisLabelColor⊃AxisLabelSize⊃XLabel YLabel:
   ⊙∩⌞(∧⌝↘⊟⊸¯⌊÷4⟜layout)
-  ⊡1△:⊙(⟜⧻,)∩⌞(⤸1⍉⊞×)⬚1↙₄
+  ⊡1△:⊙(⟜⧻ ⤙∘)∩⌞(⤸1⍉⊞×)⬚1↙₄
   ⊙˜⊂:⤸1⊙⇌∩(↻⌊÷2-⊃⊙⧻⬚0↙)
-  Stack˜⊂↙×1_¯1⇌:≡⊂⬚0↙⧻,)
+  Stack˜⊂↙×1_¯1⇌:≡⊂⬚0↙⧻ ⤙∘)
 
 # TODO: Document this more
 # Create a line/scatter plot with a list of `Data`
-# Each `Data~Values` should be a list of 2D coordinates,
+# Each `Data~Values` should be a list of 2D coordinates withid
 # stored as a single rank 2 array.
 # Use `⬚ fill` to provide a custom `PlotConfig`.
 # Image ? Data
@@ -247,8 +247,8 @@ Plot ← (
   ColorAutoInfer ⊙⍣°◌PC ♭₂
 
   PC!Infer‼GridlineInterval(AutoRound÷5-⊃/↧/↥/◇⊂⍚Data~Values)
-  PC!Infer‼Min(-÷5GridlineInterval,/↧/◇⊂⍚Data~Values)
-  PC!Infer‼Max(+÷5GridlineInterval,/↥/◇⊂⍚Data~Values)
+  PC!Infer‼Min(-÷5GridlineInterval⤙∘/↧/◇⊂⍚Data~Values)
+  PC!Infer‼Max(+÷5GridlineInterval⤙∘/↥/◇⊂⍚Data~Values)
   Inherit‼Data~DrawDots PC~DrawDots
   Inherit‼Data~DotSize PC~DotSize
   Inherit‼Data~DrawLines PC~DrawLines
@@ -275,12 +275,12 @@ BarChart ← (
   PreChart
 
   ◠(⬚""↙⊙⊸PC~BarLabels/↥≡(⧻Data~Values)
-    ⍚⌝↘⁅÷8⟜⍚layoutPC~BarLabelSize,
-    ×÷⟜⇡⧻,⊢PC~Size,
-    ⁅+÷2-⊙⊸⊡₁≡◇(⧻⊢),
-    ≡⬚0↙⊢PC~Size,/↥⬚0≡◇≡⌝↘
+    ⍚⌝↘⁅÷8⟜⍚layoutPC~BarLabelSize⤙∘
+    ×÷⟜⇡⧻ ⤙∘⊢PC~Size⤙∘
+    ⁅+÷2-⊙⊸⊡₁≡◇(⧻⊢) ⤙∘
+    ≡⬚0↙⊢PC~Size⤙∘/↥⬚0≡◇≡⌝↘
     C PC~BarLabelColor:)
-  ⊙(⍜⊙(⊣PC~Size)-⧻,)
+  ⊙(⍜⊙(⊣PC~Size)-⧻ ⤙∘)
 
   ⊂⊙:/Stack ⊸[⊙::Bars⊙⟜(AxisNums|Axes|Gridlines)]
 
@@ -297,16 +297,16 @@ BarChart ← (
 Histogram ← (
   ⊙⍣°◌PC
   PC!Infer‼(⊢GridlineInterval|AutoRound÷10-⊃/↧/↥Data~Values)
-  PC!Infer‼XBounds(⍜÷⁅⊢GridlineInterval,⊟⊃/↧/↥Data~Values)
+  PC!Infer‼XBounds(⍜÷⁅⊢GridlineInterval⤙∘⊟⊃/↧/↥Data~Values)
   ⍜♭₂ColorAutoInfer
   ⍜Data~Values(
-    ⊢PC!⊃GridlineInterval XBounds,
+    ⊢PC!⊃GridlineInterval XBounds⤙∘
     °⊂⍜÷(⍜-(⇡⁅+1)°⊟)
     ⬚0↙⧻:°⊚⊗1⊸⊞≥▽⊸≥⊙:)
 
   ⍜¤PreChart
 
-  ⊙°⊸PC~BarWidth:⌈⊢×PC!⊃Ppu GridlineInterval,
+  ⊙°⊸PC~BarWidth:⌈⊢×PC!⊃Ppu GridlineInterval⤙∘
   PC!Infer‼YBounds(⊟0⁅×1.04/↥Data~Values)
   PC!Infer‼(⊣GridlineInterval|AutoRound÷5/-⋅⊸YBounds)
   /Stack⊸[⊙::SingleBars⊙⟜(AxisNums|Axes|Gridlines)]

@@ -2,6 +2,7 @@
 - Improve performance/memory usage of SDF line rendering
 
 ## Features
+- Separate backend from abstract frontend? Like produce a structured arrangement of `Layer` instances that is then rendered by the image rendering stuff. This would allow for implementing custom render frontends, like with raylib.
 - Bar width inference for bar charts
 - Config option for whether to display axis numbers?
 - Support for minor gridlines by passing higher rank arrays to `GridlineInterval`, `GridlineWidth`, and `GridlineColor`?

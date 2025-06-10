@@ -331,3 +331,8 @@ Histogram ← (
 
   PostChart
 )
+
+OptArg‼ ←^ $"_! ← ⬚_!(^0 New)_"⟜:°□₂⊙◌
+OptArg‼Plot PlotConfig
+OptArg‼BarChart PlotConfig
+OptArg‼Histogram PlotConfig

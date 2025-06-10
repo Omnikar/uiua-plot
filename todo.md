@@ -1,3 +1,5 @@
+- Modify readme to reflect optional arg shorthand for plot-generating functions.
+
 ## QoL
 - Improve performance/memory usage of SDF line rendering
 

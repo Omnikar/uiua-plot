@@ -1,15 +1,15 @@
 # Experimental!
 
 # Import functions from plotting library
-~ "../lib" ~ Data Plot PlotConfig
+~ "../lib" ~ Data Plot!
 
 # Binomial probability mass function
 # ? n p k
-Binom ← ××ⁿ-⊃⊃⤙⊙⊓¬◌⋅𝄈ⁿ𝄐𝄈⧅<
+Binom ← ××ⁿ-⊃⊃⤙⊙⊓¬◌⋅˜ⁿ𝄐˜⧅<
 
 # Generate binomial PMF data
 20 0.25_0.5_0.75 ⇡21
-⍉𝄈⊟∩°¤⊞⊸Binom
+⍉˜⊟∩°¤⊞⊸Binom
 
 [Blue Red Green]
 
@@ -19,8 +19,7 @@ Binom ← ××ⁿ-⊃⊃⤙⊙⊓¬◌⋅𝄈ⁿ𝄐𝄈⧅<
 
 ≡◇Data!(°⊸Label⊙(°⊸Color|New))
 
-PlotConfig!(
-  New
+Plot!(
   °⊸(⊢XBounds) ¯2
   °⊸GridlineInterval 5_0.05
   °⊸Size 600_450
@@ -30,4 +29,4 @@ PlotConfig!(
   °⊸YLabel "P(X=k)"
 )
 
-&ims⬚∘Plot
+&ims

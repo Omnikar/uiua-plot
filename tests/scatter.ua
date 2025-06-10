@@ -1,5 +1,5 @@
 # Experimental!
-~ "../lib" ~ Data Plot PlotConfig Scatter
+~ "../lib" ~ Plot Scatter
 
 √₄gen 100_2 0
 

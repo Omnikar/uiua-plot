@@ -332,7 +332,7 @@ Histogram ← (
   PostChart
 )
 
-OptArg‼ ←^ $"_! ← ⬚∘_ _!(^0 New)".°□₂⊙◌
+OptArg‼ ↚^ $"_! ← ⬚∘_ _!(^0 ⊓($\"(\_)\"˜↯@⊙-1⊢⋅⊢)^!^0 New)".°□₂⊙◌
 OptArg‼Plot PlotConfig
 OptArg‼BarChart PlotConfig
 OptArg‼Histogram PlotConfig

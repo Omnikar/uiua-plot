@@ -53,7 +53,7 @@ Box  ↚ °2type
   }
   # Pixels per unit
   Ppu     ← ÷-⊃Min⊃Max Size
-  Bounds  ← ⌅([⊃Min Max]|⟜[⊃Min Max]|⍜Max◌⍜Min◌⊙°⊟)
+  Bounds  ← ⊃[Min|Max]
   XBounds ← ⊢⍉Bounds
   YBounds ← ⊣⍉Bounds
 └─╴
@@ -223,7 +223,7 @@ DefaultColors ← ≡⊂[
 # Infer values for a config field using
 # a function that operates on input data
 # ? FieldGetter InferenceFunction
-Infer‼ ← ⟜(⍜(∩♭^0|⍜∩▽◌⟜:⊸=∞):^1)
+Infer‼ ← ⟜(⍜(∩♭^0|◌⍥:⊸≠∞):^1)
 # Inherit defaults from a PlotConfig to
 # the DataConfigs of some data
 # ? DataConfigGetter PlotConfigGetter

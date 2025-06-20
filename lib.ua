@@ -6,7 +6,7 @@
 # Apply a color to an alpha map
 C ← ⍜(⊣°⍉)×∧↯⇌◡⋅△⬚1↙₄
 # Round to one significant figure
-AutoRound ← ⍜×⁅˜ⁿ10¯⌊⊸ₙ10
+AutoRound ← ⍜×⁅ₑ₁₀¯⌊⊸°ₑ₁₀
 
 Num  ↚ °0type
 Char ↚ °1type

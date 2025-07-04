@@ -268,9 +268,9 @@ Plot ← (
   Inherit‼Data~LineWidth PC~LineWidth
 
   PreChart
-  /Stack⊸[
-    /Stack⇌≡SingleSeries⊙¤
-    ⊙⟜(AxisNums|Axes|Gridlines)
+  /Stack⊸↓[
+    ⊙⟜⊃(AxisNums|Axes|Gridlines)
+    /Stack⇌≡⌟SingleSeries
   ]
   PostChart
 )
@@ -298,7 +298,7 @@ BarChart ← (
     C PC~BarLabelColor :)
   ⊙(⍜⊙(⊣PC~Size)-◡⋅⧻)
 
-  ⊂⊙:/Stack ⊸[⊙::Bars⊙⟜(AxisNums|Axes|Gridlines)]
+  ⊂⊙:/Stack ⊸[⊙::Bars⊙⟜⊃(AxisNums|Axes|Gridlines)]
 
   PostChart
 )
@@ -327,7 +327,7 @@ Histogram ← (
   ⊙°⊸PC~BarWidth :⌈⊢×◡⋅PC!⊃Ppu GridlineInterval
   PC!Infer‼YBounds(⊟0⁅×1.04/↥Data~Values)
   PC!Infer‼(⊣GridlineInterval|AutoRound÷5/-⋅⊸YBounds)
-  /Stack⊸[⊙::SingleBars⊙⟜(AxisNums|Axes|Gridlines)]
+  /Stack⊸[⊙::SingleBars⊙⟜⊃(AxisNums|Axes|Gridlines)]
 
   PostChart
 )

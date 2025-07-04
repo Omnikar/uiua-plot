@@ -17,7 +17,7 @@ Binom ← ××ⁿ-⊃⊃⤙⊙⊓¬◌⋅˜ⁿ𝄐˜⧅<
  "n=20,p=0.5"
  "n=20,p=0.75"}
 
-≡◇Data!(°⊸Label⊙(°⊸Color|New))
+≡◇Data!(°⊸⊃Label Color ⊙⊙New)
 
 Plot!(
   °⊸(⊢XBounds) ¯2

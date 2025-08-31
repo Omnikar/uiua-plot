@@ -108,7 +108,7 @@ AxisNums ← ⬚∘(
   ∩°⊟₆°⊟⍉⊟₆
   ∩⊓(
     ⤙×▽⊸≠0⍜-(⇡+1)
-    ⍜×⁅˜ⁿ10⬚0⊗@.⇌°⋕ # Round values to precision of original factor
+    ⍜×⁅˜ⁿ10⬚0˜⨂@.⇌°⋕ # Round values to precision of original factor
     ⍚(∧⌝↘⊟⊸¯⊟.⁅÷8⟜layout) PC~NumberSize°◌⊃°⋕(×˜-)
   )∘
   ⊓⍚⍉⊙⊙⍚⇌⍚⇌
@@ -319,7 +319,7 @@ Histogram ← (
   ⍜Data~Values(
     ⊢◡⋅PC!⊃GridlineInterval XBounds
     °⊂⍜÷(⍜-(⇡⁅+1)°⊟)
-    ⬚0↙⧻:°⊚⊗1⊸⊞≥▽⊸≥⊙:
+    ⬚0↙⧻:°⊚˜⨂1⊸⊞≥▽⊸≥⊙:
   )
 
   ⍜¤PreChart

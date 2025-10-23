@@ -2,6 +2,8 @@
 
 ## QoL
 - Improve performance/memory usage of SDF line rendering
+- Automatically resample data points if they're too dense to show up
+  - Probably only when only drawing lines and not points
 
 ## Features
 - Separate backend from abstract frontend? Like produce a structured arrangement of `Layer` instances that is then rendered by the image rendering stuff. This would allow for implementing custom render frontends, like with raylib.

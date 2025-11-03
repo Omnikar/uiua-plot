@@ -73,7 +73,10 @@ PC ↚ PlotConfig
 # Create a `Data` instance that draws only dots
 Scatter ← Data!(°⊸DrawDots 1 °⊸DrawLines 0 New)
 # Create a `Data` instance that draws only lines
-Line ← Data!(°⊸DrawLines 1 °⊸DrawDots 0 New)
+Line ← (
+  ⨬◌(▽˜÷120)×>120⟜⊸±⊸⧻
+  Data!(°⊸DrawLines 1 °⊸DrawDots 0 New)
+)
 
 # Stack one RGBA image atop another
 Stack ← ⍜°⍉⊂ ↧⊸↥0 ⤚÷⊃(-∪⊃×+|+⊙×˜∩×⟜¬) ∩⍜(⇌°⍉)°⊂

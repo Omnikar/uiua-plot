@@ -1,7 +1,7 @@
 # Experimental!
 # Uiua data plotting library
 
-~ "git: github.com/Omnikar/uiua-math" ~ FFTConvolve Gaussian
+~ "gh: Omnikar/uiua-math" ~ FFTConvolve Gaussian
 
 # Apply a color to an alpha map
 C ← ⍜(⊣°⍉)×∧↯⇌◡⋅△⬚1↙₄
@@ -24,15 +24,15 @@ Box  ↚ °2type
 # - `LineWidth`
 ┌─╴PlotConfig
   ~ {
-    Min: °2°¤△⟜Num ← ⊟.∞
-    Max: °2°¤△⟜Num ← ⊟.∞
+    Min: °2°¤△⟜Num ← ˙⊟∞
+    Max: °2°¤△⟜Num ← ˙⊟∞
     Size: °2°¤△⟜Num ← 512_512
     BgColor: ⍣°3°4°¤△⟜Num ← ↯3 1
     AxisWidth: °[]△⟜Num ← 2
     AxisColor: ⍣°3°4°¤△⟜Num ← ↯3 0
     GridlineWidth: °[]△⟜Num ← 1
     GridlineColor: ⍣°3°4°¤△⟜Num ← ↯3 0.7
-    GridlineInterval: °2°¤△⟜Num ← ⊟.∞
+    GridlineInterval: °2°¤△⟜Num ← ˙⊟∞
     NumberSize: °[]△⟜Num ← 15
     NumberColor: ⍣°3°4°¤△⟜Num ← ↯3 0.3
     XLabel: °[W]△⟜Char ← ""
@@ -76,7 +76,7 @@ Scatter ← Data!(°⊸DrawDots 1 °⊸DrawLines 0 New)
 Line ← Data!(°⊸DrawLines 1 °⊸DrawDots 0 New)
 
 # Stack one RGBA image atop another
-Stack ← ⍜°⍉⊂ ↧⊸↥0 ⤚÷⊃(-𝄐⊃×+|+⊙×˜∩×⟜¬) ∩⍜(⇌°⍉)°⊂
+Stack ← ⍜°⍉⊂ ↧⊸↥0 ⤚÷⊃(-∪⊃×+|+⊙×˜∩×⟜¬) ∩⍜(⇌°⍉)°⊂
 
 # Image ? PlotConfig
 Background ← ∧↯⊙⬚1↙₄ PC!⊃Size BgColor
@@ -87,32 +87,32 @@ Axes ← (
   ×◡⋅PC!⊃Min Ppu
   ⊙(°⊟◡⋅PC~Size)°⊟⊞-
   ∩(°⊚⁅▽⊸≥0▽)⊓⤚>⊸<
-  ∩⬚0↙⊙:°⊟◡⋅⋅PC~Size
-  C PC~AxisColor :⇌˜⊞↥
+  ˜∩⬚0↙°⊟◡⋅⋅PC~Size
+  C ˜PC~AxisColor ⇌˜⊞↥
 )
 
 # Image ? PlotConfig
 Gridlines ← (
   ⊸PC!⊃Min Ppu
-  ⊃(×PC~GridlineInterval⋅:
-  | ∩+⊙:∩⇡∩°⊟◡⋅PC~Size×)
-  ∩(⌵⍜⊙+◿⤙÷2)⊙:°⊟
+  ⊃(×⋅˜PC~GridlineInterval
+  | ˜∩+∩⇡∩°⊟◡⋅PC~Size×)
+  ˜∩(⌵⍜⊙+◿⤙÷2)°⊟
   ∩⌞≤÷2◡⋅⋅PC~GridlineWidth
-  C PC~GridlineColor :⇌˜⊞↥
+  C ˜PC~GridlineColor ⇌˜⊞↥
 )
 
 # Image ? PlotConfig
 AxisNums ← ⬚∘(
   PC!⊃GridlineInterval⊃Min⊃Max⊃Ppu Size°◌
-  ⊓⌈⌊⤚∩⌞÷⊙⊓⟜:⊙⇌
+  ⊓⌈⌊⤚∩⌞÷⊙⊓⟜˜∘⊙⇌
   ∩°⊟₆°⊟⍉⊟₆
   ∩⊓(
     ⤙×▽⊸≠0⍜-(⇡+1)
     ⍜×⁅˜ⁿ10⬚0˜⨂@.⇌°⋕ # Round values to precision of original factor
-    ⍚(∧⌝↘⊟⊸¯⊟.⁅÷8⟜layout) PC~NumberSize°◌⊃°⋕(×˜-)
+    ⍚(∧⌝↘⊟⊸¯˙⊟⁅÷8⟜layout) PC~NumberSize°◌⊃°⋕(×˜-)
   )∘
   ⊓⍚⍉⊙⊙⍚⇌⍚⇌
-  ∩(♭₂∧◇(⬚0↥⬚0↙⁅⊟⊙:¯+⌊÷2⧻⟜:)⊙⊙⊙[])
+  ∩(♭₂∧◇(⬚0↥⬚0↙⁅∪⌟⊟∘¯+⌊÷2⧻⟜˜∘)⊙⊙⊙[])
   ↥∩⇌∩⌞⬚0↙⇌PC~Size°◌⍉
   C PC~NumberColor°◌
 )
@@ -121,10 +121,13 @@ AxisNums ← ⬚∘(
 Legend ← (
   ⊙⊸¤
   ≡PC!Data!⊃⋅PlotLabelSize⊃Color⊃°◇°Label⋅PlotLabelColor
-  ⍚(≡⊂⊓(˜C≡⬚0↙⌊×3/2⊸⧻¬↯⟜⊚|˜C layout))⟜:
-  PC~PlotLabelSize⤙⊙⊓(⊢PC~Size)⊓0[]≡◇(⧻⊢)⟜:
-  ⟜⊃(⊕□˜▽°⊏⇌⊂◌∧(⨬⋅⊓-+₁⊓˜-⋅⊓1⊂: ⊙◡< ⊙+)⤙⊓:∘)⋅⋅∘
-  ⟜(≡◇∧≡⬚0↙≡⊟¯⌊÷2⊸+≡◇(⧻⊢)⟜:⍚/◇≡(⊂⊂)¤⍉↯4↯⟜⊚)
+  ⍚(≡⊂⊓(˜C≡⬚0↙⌊×3/2⊸⧻¬↯⟜⊚|˜C layout))⤚⊙∘
+  PC~PlotLabelSize⤙⊙⊓(⊢PC~Size)⊓0[]≡◇(⧻⊢)⤚⊙∘
+  ⟜⊃(⊕□˜▽°⊏⇌⊂◌∧(
+      ⨬⋅⊓-+₁⊓˜-⋅⊓1⊂˜∘ ⊙◡< ⊙+
+    )⤙⊓˜∘∘
+  )⋅⋅∘
+  ⟜(≡◇∧≡⬚0↙≡⊟¯⌊÷2⊸+≡◇(⧻⊢)⤚⊙∘⍚/◇≡(⊂⊂)¤⍉↯4↯⟜⊚)
   ⟜(/(⊂⊂)⍉↯4˜↯0˜⊟⊡2◡⋅△)
   ∧⌝↘⊟⊸¯⌊÷2
 )
@@ -138,8 +141,8 @@ CircleKernel ← ⁿ4↧1×2√₁₆Gaussian⤙÷40⍜(÷2+1)⁅
 
 # Kernel ? Size
 XKernel ← (
-  0.3:¤↥⊸⇌⊞=.⊸⇡⍜(÷2+1)⁅×0.3
-  /↥≡↻♭₂⊞⊟.-÷2-1⟜⇡⍜(÷2+1)⌊×
+  0.3˜∘¤↥⊸⇌˙⊞=⊸⇡⍜(÷2+1)⁅×0.3
+  /↥≡↻♭₂˙⊞⊟-÷2-1⟜⇡⍜(÷2+1)⌊×
 )
 
 # Kernel ? Size
@@ -147,24 +150,24 @@ BoxKernel ← ¬↯⟜⊚⍜(÷2+1)⁅×0.3
 
 # Non-rounded non-bound-checked pixel coordinates of points
 # Coords ? Points PlotConfig
-PointsToPx ← ≡⇌×⊙-∩¤PC!⊃Ppu Min :
+PointsToPx ← ≡⇌×⊙-∩¤˜PC!⊃Ppu Min
 
 # Image ? Data PlotConfig
 Dots ← (
   ⤚⤙(⁅PointsToPx Data~Values)
-  ⇌⬚0↙:°⊚ ▽⊸∊♭₂⇡⟜:⇌PC~Size
+  ⇌˜⬚0↙°⊚ ▽⊸∊♭₂⇡⟜˜∘⇌PC~Size
   CircleKernel◡⋅Data~DotSize
   ↘¯⟜↘⌊÷2△⟜FFTConvolve
-  ↧1C Data~Color :
+  ↧1C ˜Data~Color
 )
 
 # Image ? Data PlotConfig
 Lines ← (
   ⤚⤙(⧈∘2≡/ℂPointsToPx Data~Values)
   ¤/ℂ°⍉⇡⇌PC~Size
-  ⇌/↧≡/(⌵-×↥0↧1÷∩(/+×∩⊟∩°ℂ)⤙⤙◠:∩⌞-)
+  ⇌/↧≡/(⌵-×↥0↧1÷∩(/+×∩⊟∩°ℂ)⤙⤙◠˜∘∩⌞-)
   ¬↥0↧1-÷10◡⋅Data~LineWidth×0.7
-  C Data~Color :
+  C ˜Data~Color
 )
 
 # Plot a single series
@@ -176,21 +179,21 @@ SingleSeries ← /Stack/◇⊂Data!↓{
 
 # Bars ? Data PlotConfig
 SingleBars ← (
-  PC~YBounds⟜:˜⊙⊸Data~Values
+  PC~YBounds⟜˜∘˜⊙⊸Data~Values
   ⟜⊃(↥⊙↧°⊟)⊢
   ↥⊃(↥0-↥0⊢|⌵↧0-↧0⊣|¯↧0-↧0◌)
-  ∩× ⊸:⊙(⊣◡⋅PC~Ppu)
-  ⬚0≡⌝↘⁅:⬚0≡↯⊙1⁅≡⊟⊙PC~BarWidth⊙⊸:
+  ∩× ⤙⊙∘⊙(⊣◡⋅PC~Ppu)
+  ⬚0≡⌝↘˜⁅⬚0≡↯⊙1⁅≡⊟⊙PC~BarWidth⊙⤙⊙∘
   ◡⋅PC!⊃BarWidth Size
   ⁅+÷2-⊙(⊸⊡1×÷⟜⇡◡⋅⧻⊢)
-  ⇌⬚0↙⇌PC~Size :/↥⬚0≡≡⌝↘
-  C Data~Color :
+  ⇌⬚0↙⇌˜PC~Size /↥⬚0≡≡⌝↘
+  C ˜Data~Color
 )
 
 Bars ← (
   ⍜⬚0≡Data~Values∘
   ≡SingleBars⊙⊸¤
-  PC~BarWidth :
+  ˜PC~BarWidth
   ⁅×⇌-÷2-1⟜⇡◡⋅⧻
   /Stack≡≡↻
 )
@@ -198,7 +201,7 @@ Bars ← (
 # Generate a `Data` instance that plots a given function
 # Data ? XBounds
 Func! ← (
-  /-⟜:⊙PC!(Size New)
+  /-⤚⊙∘⊙PC!(Size New)
   ≡⊟⟜≡₀^0˜⊂⊣⤙⍜×/⍜-(⇡⁅)÷5÷⊙⊢
   Data!(°⊸DrawDots0New)
 )
@@ -223,15 +226,15 @@ DefaultColors ← ≡⊂[
 # Infer values for a config field using
 # a function that operates on input data
 # ? FieldGetter InferenceFunction
-Infer‼ ← ⟜(⍜(∩♭^0|◌⍥:⊸≠∞):^1)
+Infer‼ ← ⟜(⍜(∩♭^0|◌⍥˜∘⊸≠∞)˜∘^1)
 # Inherit defaults from a PlotConfig to
 # the DataConfigs of some data
 # ? DataConfigGetter PlotConfigGetter
-Inherit‼ ← ⍜:Infer‼≡^0(≡⊙∘^1)
+Inherit‼ ← ⍜˜∘Infer‼≡^0(≡⊙∘^1)
 
 ColorAutoInfer ← (
   ≡⍜Data~Color⬚∞↙₄
-  ⍜:Infer‼≡Data~Color⋅(⊏◿◡⋅⧻ ⇡◡⋅⧻ DefaultColors)
+  ⍜˜∘Infer‼≡Data~Color⋅(⊏◿◡⋅⧻ ⇡◡⋅⧻ DefaultColors)
 )
 
 PreChart ← (
@@ -243,11 +246,11 @@ PreChart ← (
 )
 
 PostChart ← (
-  PC!⊃AxisLabelColor⊃AxisLabelSize⊃XLabel YLabel :
+  ˜PC!⊃AxisLabelColor⊃AxisLabelSize⊃XLabel YLabel
   ⊙∩⌞(∧⌝↘⊟⊸¯⌊÷4⟜layout)
-  ⊡1△:⊙◡⋅⟜⧻∩⌞(⤸1⍉⊞×)⬚1↙₄
-  ⊙˜⊂:⤸1⊙⇌∩(↻⌊÷2-⊃⊙⧻⬚0↙)
-  Stack˜⊂↙×1_¯1⇌:≡⊂⬚0↙◡⋅⧻
+  ⊡1˜△⊙◡⋅⟜⧻∩⌞(⤸1⍉⊞×)⬚1↙₄
+  ∪⌞∘˜⊂⤸1⊙⇌∩(↻⌊÷2-⊃⊙⧻⬚0↙)
+  Stack˜⊂↙×1_¯1˜⇌≡⊂⬚0↙◡⋅⧻
 )
 
 # TODO: Document this more
@@ -295,10 +298,10 @@ BarChart ← (
     # ⁅+÷2-⊙⊸⊡₁◡⋅≡◇(⧻⊢)
     ⁅+÷2-⊙⊸⊡₁◡⋅≡◇⧻₁
     ≡⬚0↙⊢◡⋅PC~Size/↥⬚0≡◇≡⌝↘
-    C PC~BarLabelColor :)
+    C ˜PC~BarLabelColor)
   ⊙(⍜⊙(⊣PC~Size)-◡⋅⧻)
 
-  ⊂⊙:/Stack ⊸[⊙::Bars⊙⟜⊃(AxisNums|Axes|Gridlines)]
+  ∪⌟⊂∘/Stack ⊸[⤚⋅⊙∘Bars⊙⟜⊃(AxisNums|Axes|Gridlines)]
 
   PostChart
 )
@@ -319,20 +322,20 @@ Histogram ← (
   ⍜Data~Values(
     ⊢◡⋅PC!⊃GridlineInterval XBounds
     °⊂⍜÷(⍜-(⇡⁅+1)°⊟)
-    ⬚0↙⧻:°⊚˜⨂1⊸⊞≥▽⊸≥⊙:
+    ⬚0↙˜⧻°⊚˜⨂1⊸⊞≥▽∪⌟⊸≥∘
   )
 
   ⍜¤PreChart
 
-  ⊙°⊸PC~BarWidth :⌈⊢×◡⋅PC!⊃Ppu GridlineInterval
+  ⊙°⊸PC~BarWidth ˜∘⌈⊢×◡⋅PC!⊃Ppu GridlineInterval
   PC!Infer‼YBounds(⊟0⁅×1.04/↥Data~Values)
   PC!Infer‼(⊣GridlineInterval|AutoRound÷5/-⋅⊸YBounds)
-  /Stack⊸[⊙::SingleBars⊙⟜⊃(AxisNums|Axes|Gridlines)]
+  /Stack⊸[⤚⋅⊙∘SingleBars⊙⟜⊃(AxisNums|Axes|Gridlines)]
 
   PostChart
 )
 
-OptArg‼ ↚^ $"_! ← ⬚∘_ _!(^0 ⊓($\"(\_)\"˜↯@⊙-1⊢⋅⊢)^!^0 New)".°□₂⊙◌
+OptArg‼ ↚^ $"_! ← ⬚∘_ _!(^0 ⊓($\"(\_)\"˜↯@⊙-1⊢⋅⊢)^!^0 New)"⟜∘°□₂⊙◌
 OptArg‼Plot PlotConfig
 OptArg‼BarChart PlotConfig
 OptArg‼Histogram PlotConfig

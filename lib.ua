@@ -74,7 +74,7 @@ PC ↚ PlotConfig
 Scatter ← Data!(°⊸DrawDots 1 °⊸DrawLines 0 New)
 # Create a `Data` instance that draws only lines
 Line ← (
-  ⨬◌(▽˜÷120)×>120⟜⊸±⊸⧻
+  ⨬◌(▽˜÷500)×>500⟜⊸±⊸⧻
   Data!(°⊸DrawLines 1 °⊸DrawDots 0 New)
 )
 

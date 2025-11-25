@@ -168,7 +168,7 @@ Dots ← (
 Lines ← (
   ⤚⤙(⧈∘2≡/ℂPointsToPx Data~Values)
   ¤/ℂ°⍉⇡⇌PC~Size
-  ⇌/↧≡/(⌵-×↥0↧1÷∩(/+×∩⊟∩°ℂ)⤙⤙◠˜∘∩⌞-)
+  ⇌/↧≡/(⌵-×↥0↧1÷∩(/+×∩⊟∩°ℂ)˜⟜⟜◡˜∘∩⌞-)
   ¬↥0↧1-÷10◡⋅Data~LineWidth×0.7
   C ˜Data~Color
 )
@@ -295,13 +295,15 @@ BarChart ← (
 
   PreChart
 
-  ◠(⬚""↙⊙⊸PC~BarLabels/↥≡(⧻Data~Values)
+  ⊃⊙∘(
+    ⬚""↙⊙⊸PC~BarLabels/↥≡(⧻Data~Values)
     ⍚⌝↘⁅÷8⟜⍚layout◡⋅PC~BarLabelSize
     ×÷⟜⇡◡⋅⧻ ⊢◡⋅PC~Size
     # ⁅+÷2-⊙⊸⊡₁◡⋅≡◇(⧻⊢)
     ⁅+÷2-⊙⊸⊡₁◡⋅≡◇⧻₁
     ≡⬚0↙⊢◡⋅PC~Size/↥⬚0≡◇≡⌝↘
-    C ˜PC~BarLabelColor)
+    C ˜PC~BarLabelColor
+  )
   ⊙(⍜⊙(⊣PC~Size)-◡⋅⧻)
 
   ∪⌟⊂∘/Stack ⊸[⤚⋅⊙∘Bars⊙⟜⊃(AxisNums|Axes|Gridlines)]

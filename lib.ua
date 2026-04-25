@@ -215,12 +215,21 @@ Bars ← (
 )
 
 # Generate a `Data` instance that plots a given function
+#
+# The first function provides additional `Data` field configuration.
+# The second function is the function to plot.
 # Data ? XBounds
-Func! ← (
-  /-⤚⊙∘⊙PC!(Size New)
-  ≡⊟⟜≡₀^0˜⊂⊣⤙⍜×/⍜-(⇡⁅)÷5÷⊙⊢
-  Data!(°⊸DrawDots0New)
+Func‼ ← (
+  SmartDip‼Data!^0(
+    /-⤚⊙∘⊙PC!(Size New)
+    ≡⊟⟜≡₀^1˜⊂⊣⤙⍜×/⍜-(⇡⁅)÷5÷⊙⊢
+    Data!(°⊸DrawDots0New)
+  )
+  Data!^0
 )
+# Generate a `Data` instance that plots a given function
+# Data ? XBounds
+Func! ← Func‼∘^
 
 Red    ← ÷255 199_68_64
 Blue   ← ÷255 45_112_179

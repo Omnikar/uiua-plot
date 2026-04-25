@@ -18,21 +18,22 @@ Or use `≡ rows` if you have multiple series.
 ~ "git: github.com/Omnikar/uiua-plot" ~ Data
 ≡Data [
   [2007_2 2008_1 2009_3]
-  [2007_2 2008_2 2009_4]]
+  [2007_2 2008_2 2009_4]
+]
 ```
 
 On the other hand, if you want to configure how series are drawn, you can use a builder pattern as follows, using `°⊸` to set fields.
 ```uiua
 # Experimental!
 ~ "git: github.com/Omnikar/uiua-plot" ~ Data
-[Data!(
+[ Data!(
     New [2007_2 2008_1 2009_3]
     # Color to draw the plot
     °⊸Color 0.33_0.51_0.93
     # Label to use in the plot legend
     °⊸Label "Ice Cream Sales"
   )
- Data!(
+  Data!(
     New [2007_2 2008_2 2009_4]
     °⊸Color 0.85_0.32_0.25
     °⊸Label "Shark Attacks"
@@ -47,14 +48,14 @@ To plot without additional configuration, simply invoke `Plot` with the data. Th
 ```uiua
 # Experimental!
 ~ "git: github.com/Omnikar/uiua-plot" ~ Data Plot
-[Data!(
+[ Data!(
     New [2007_2 2008_1 2009_3]
     # Color to draw the plot
     °⊸Color 0.33_0.51_0.93
     # Label to use in the plot legend
     °⊸Label "Ice Cream Sales"
   )
- Data!(
+  Data!(
     New [2007_2 2008_2 2009_4]
     °⊸Color 0.85_0.32_0.25
     °⊸Label "Shark Attacks"
@@ -64,24 +65,23 @@ To plot without additional configuration, simply invoke `Plot` with the data. Th
 This code produces the following output:  
 ![Example plot without global configuration](example-images/example-plot-0.png)
 
-However, you will often want to configure specific parts of the actual plot. This can be done by creating a `PlotConfig`, again using a builder pattern to set fields. In order to pass a `PlotConfig` to the `Plot` function, use `⬚ fill`.
+However, you will often want to configure specific parts of the actual plot. This can be done by using the `Plot!` macro, which provides an identical interface to Uiua's [optional arguments system](https://www.uiua.org/tutorial/Data%20Definitions#data-functions). Note that you will have to import `Plot!` specifically (rather than just `Plot`) to use it. To see the full list of fields you can set in this way, see [the corresponding section of the README](https://github.com/Omnikar/uiua-plot#configuration-fields).
 ```uiua
 # Experimental!
-~ "git: github.com/Omnikar/uiua-plot" ~ Data Plot PlotConfig
-[Data!(
+~ "git: github.com/Omnikar/uiua-plot" ~ Data Plot!
+[ Data!(
     New [2007_2 2008_1 2009_3]
     # Color to draw the plot
     °⊸Color 0.33_0.51_0.93
     # Label to use in the plot legend
     °⊸Label "Ice Cream Sales"
   )
- Data!(
+  Data!(
     New [2007_2 2008_2 2009_4]
     °⊸Color 0.85_0.32_0.25
     °⊸Label "Shark Attacks"
   )]
-PlotConfig!(
-  New
+Plot!(
   # Minimum and maximum x bounds
   °⊸XBounds 2006.9_2009.1
   # Minimum and maximum y bounds
@@ -97,31 +97,30 @@ PlotConfig!(
   # Label of the x-axis
   °⊸XLabel "Year"
 )
-&ims ⬚∘Plot
+&ims
 ```
-This code produces the following output ([try it online](https://uiua.org/pad?src=0_14_0-dev_1__IyBFeHBlcmltZW50YWwhCn4gImdpdDogZ2l0aHViLmNvbS9PbW5pa2FyL3VpdWEtcGxvdCIgfiBEYXRhIFBsb3QgUGxvdENvbmZpZwpbRGF0YSEoCiAgICBOZXcgWzIwMDdfMiAyMDA4XzEgMjAwOV8zXQogICAgIyBDb2xvciB0byBkcmF3IHRoZSBwbG90CiAgICDCsOKKuENvbG9yIDAuMzNfMC41MV8wLjkzCiAgICAjIExhYmVsIHRvIHVzZSBpbiB0aGUgcGxvdCBsZWdlbmQKICAgIMKw4oq4TGFiZWwgIkljZSBDcmVhbSBTYWxlcyIKICApCiBEYXRhISgKICAgIE5ldyBbMjAwN18yIDIwMDhfMiAyMDA5XzRdCiAgICDCsOKKuENvbG9yIDAuODVfMC4zMl8wLjI1CiAgICDCsOKKuExhYmVsICJTaGFyayBBdHRhY2tzIgogICldClBsb3RDb25maWchKAogIE5ldwogICMgTWluaW11bSBhbmQgbWF4aW11bSB4IGJvdW5kcwogIMKw4oq4WEJvdW5kcyAyMDA2LjlfMjAwOS4xCiAgIyBNaW5pbXVtIGFuZCBtYXhpbXVtIHkgYm91bmRzCiAgwrDiirhZQm91bmRzIMKvMC4zXzQuMwogICMgU3BhY2luZyBiZXR3ZWVuIGdyaWRsaW5lcyBpbiB0aGUgeCBhbmQgeSBkaXJlY3Rpb25zCiAgwrDiirhHcmlkbGluZUludGVydmFsIDAuNV8xCiAgIyBTaXplIG9mIHRoZSBpbWFnZSB0byBwcm9kdWNlCiAgwrDiirhTaXplIDgwMF80MDAKICAjIFdoZXRoZXIgdG8gZHJhdyBkb3RzCiAgIyBTZXR0aW5nIHRoaXMgaW4gYFBsb3RDb25maWdgIHByb3ZpZGVzIGEgZGVmYXVsdCBmb3IgYWxsIHNlcmllcy4KICAjIFVzZSB0aGUgaWRlbnRpY2FsbHktbmFtZWQgYERhdGFgIGZpZWxkIGZvciBpbmRpdmlkdWFsIHNlcmllcy4KICDCsOKKuERyYXdEb3RzIDAKICAjIExhYmVsIG9mIHRoZSB4LWF4aXMKICDCsOKKuFhMYWJlbCAiWWVhciIKKQomaW1zIOKsmuKImFBsb3QK)):  
+This code produces the following output ([try it online](https://uiua.org/pad?src=0_19_0-dev_2__eJx9kc-O0zAQxu95imkrIfbQrPsPWm7QIrQS_6QKwWpVpdN4mozq2JXjtCmHfQBeBo6c91F4EmQnu0Ws4GRbM983P8_Xg9f1niwXpB2qTnQL3YzdC8jY5dUmTk1x-aHQvEN7WXGF_b0yrgu3sECH8FEZ14luwqPzNAIAeE9HuBkK8TwZwlCIaTLwxywZrUK5B3OjjAVnQFo8gssJvGUo3v349e1nUxfxaJSIeDJIRDwbtdK3uCHlpVVJwPpBDIoy0vLs0TR2r1KCuSUsYImKym4EcBHBf2nDMUvGq8dA00ki4tEwEfFw8mjUMke7g5fOYbprBq2isB0_pwfvWHNRFYBaQoF1uNewMZWWZdQ6fXkVnh7gWTxLPEc8-Kf69Jf6ulXffRfxKBnHfmc9WO4xZZ3BhtyRSENmWSrWVN6vrw6mJ5BsKXVs9IPhm7b1SjuyB1Qg4knS8Cz5K4HZBgMuMCOfyd4aWaV0Lw89UyGSsRBB9Dknl9M5eWmcn9WDJTnnGV3OAWvt9zY3esvZ2rseWFIJCJK2WCkHW2MBlYKSLFMZB49PJTU0krTjFJU69TUWJGHLpGSw9bGvg5q15APLCv80CdQLi8eFcSU0zE247U_rPtZ8TqsN_prQdqOL6AkXZfQbGyQUsg==)):  
 ![Example plot with global configuration](example-images/example-plot-1.png)
 
 ## Bar charts
 
-In addition to `Plot` for creating scatter/line plots, `BarChart` can be used to create bar graphs.
+In addition to `Plot` for creating scatter/line plots, `BarChart`/`BarChart!` can be used to create bar graphs.
 
 For instance:
 ```uiua
 # Experimental!
-~ "git: https://github.com/Omnikar/uiua-plot" ~ BarChart Data PlotConfig
-[Data!(
+~ "git: https://github.com/Omnikar/uiua-plot" ~ BarChart! Data
+[ Data!(
     # Data for bar charts should be lists of scalars,
     # rather than lists of coordinates.
     New 2_1_3
     °⊸Label "Ice Cream Sales"
   )
- Data!(
+  Data!(
     New 2_2_4
     °⊸Label "Shark Attacks"
   )]
-PlotConfig!(
-  New
+BarChart!(
   # Size of the image to produce
   °⊸Size 512_400
   # Gridline spacing in the y direction
@@ -133,9 +132,9 @@ PlotConfig!(
   # Labels for each bar cluster
   °⊸BarLabels {"2007" "2008" "2009"}
 )
-&ims ⬚∘BarChart
+&ims
 ```
-This code produces the following output ([try it online](https://uiua.org/pad?src=0_14_0-dev_1__IyBFeHBlcmltZW50YWwhCn4gImdpdDogaHR0cHM6Ly9naXRodWIuY29tL09tbmlrYXIvdWl1YS1wbG90IiB-IEJhckNoYXJ0IERhdGEgUGxvdENvbmZpZwpbRGF0YSEoCiAgICAjIERhdGEgZm9yIGJhciBjaGFydHMgc2hvdWxkIGJlIGxpc3RzIG9mIHNjYWxhcnMsCiAgICAjIHJhdGhlciB0aGFuIGxpc3RzIG9mIGNvb3JkaW5hdGVzLgogICAgTmV3IDJfMV8zCiAgICDCsOKKuExhYmVsICJJY2UgQ3JlYW0gU2FsZXMiCiAgKQogRGF0YSEoCiAgICBOZXcgMl8yXzQKICAgIMKw4oq4TGFiZWwgIlNoYXJrIEF0dGFja3MiCiAgKV0KUGxvdENvbmZpZyEoCiAgTmV3CiAgIyBTaXplIG9mIHRoZSBpbWFnZSB0byBwcm9kdWNlCiAgwrDiirhTaXplIDUxMl80MDAKICAjIEdyaWRsaW5lIHNwYWNpbmcgaW4gdGhlIHkgZGlyZWN0aW9uCiAgwrDiirgo4oqjR3JpZGxpbmVJbnRlcnZhbCkgMQogICMgTGFiZWwgb2YgdGhlIHgtYXhpcwogIMKw4oq4WExhYmVsICJZZWFyIgogICMgTGFiZWwgb2YgdGhlIHktYXhpcwogIMKw4oq4WUxhYmVsICJRdWFudGl0eSIKICAjIExhYmVscyBmb3IgZWFjaCBiYXIgY2x1c3RlcgogIMKw4oq4QmFyTGFiZWxzIHsiMjAwNyIgIjIwMDgiICIyMDA5In0KKQomaW1zIOKsmuKImEJhckNoYXJ0Cg==)):  
+This code produces the following output ([try it online](https://uiua.org/pad?src=0_19_0-dev_2__eJxlkdtqFEEQhu_7Kf6dBcmCyR4SUXNnokhAlLA3BglLbU9lp9me7qG6RncN5gHyGnmBXHrto-RJZA4bo14VBd9X9Rc1xLtNxeJKDkp-YG6QrZweo1Ct0vF4vHJa1MsDG8vxpzK4Ncm4djXtVz5qhhuckJwWJDrAW1IyX9oy2DMAMGwbXEXBkgS24RJSEWufY8nwLmlCvEKy5EnS894S0oIFWlD4w9gYJXeBlNNBy33kb5gtpovDtvt1_3D78wMt2SM7s4xTYSoxJ88pM8DI4Gmyzp0tjv5z5wXJGm9Uya4789I83tjIQ8zdd24SacFwJa0YGlFJzGvLpp82b5gX09niaDJppfficu8CI1VkXVjBhXbAFrkTtupi2Ll7D7d3O_wsKMtX8iNM2zFdyn75Zp82Lu20z_0FF0zSBP8H3v4FX_TweU1BnW6fCKl9GJMtuq_5OinLTjwh6anrbDaZvMzQlFddeZ39MCPzzJXJ_AZIDcTP)):  
 ![Example bar chart](example-images/example-plot-2.png)
 
 ## Histograms
@@ -158,9 +157,9 @@ The `Func!` macro can be used to plot functions. It takes a function and an x in
 # Experimental!
 ~ "git: github.com/Omnikar/uiua-plot" ~ Func! Plot
 # Plot the function x² from -3 to 3
-&ims Plot Func!(×.) ¯3_3
+&ims Plot Func!˙× ¯3_3
 ```
-This code produces the following output ([try it online](https://uiua.org/pad?src=0_14_0-dev_1__IyBFeHBlcmltZW50YWwhCn4gImdpdDogZ2l0aHViLmNvbS9PbW5pa2FyL3VpdWEtcGxvdCIgfiBGdW5jISBQbG90CiMgUGxvdCB0aGUgZnVuY3Rpb24geMKyIGZyb20gLTMgdG8gMwomaW1zIFBsb3QgRnVuYyEow5cuKSDCrzNfMwo=)):  
+This code produces the following output ([try it online](https://uiua.org/pad?src=0_19_0-dev_2__eJxTVnCtKEgtysxNzStJzFHkqlNQSs8ssVJIzyzJKE3SS87P1ffPzcvMTizSL80sTdQtyMkvUVKoU3ArzUtWVAjIyS_hUgZTCiUZqQpppXnJJZn5eQoVhzYppBXl5yroGiuU5CsYc6ll5hZD1IF1np55eLrCofXG8cZcAG1XLXI=)):  
 ![Example function plot](example-images/example-plot-4.png)
 
 ## Configuration fields

@@ -70,13 +70,26 @@ PC ↚ PlotConfig
     LineWidth: °[]△⟜Num ← ∞
   }
 └─╴
+
+SmartDip‼ ↚ ⊓($"∩_∘"+@₀-@0°⋕↥₀-₁⊢⋅⊢)^!^0^1
 # Create a `Data` instance that draws only dots
-Scatter ← Data!(°⊸DrawDots 1 °⊸DrawLines 0 New)
+#
+# Takes a function to provide additional `Data` field configuration
+Scatter! ← Data!(^ SmartDip‼^(°⊸DrawDots 1 °⊸DrawLines 0 New))
+# Create a `Data` instance that draws only dots
+Scatter ← Scatter!∘
 # Create a `Data` instance that draws only lines
-Line ← (
-  ⨬◌(▽˜÷500)×>500⟜⊸±⊸⧻
-  Data!(°⊸DrawLines 1 °⊸DrawDots 0 New)
+#
+# Takes a function to provide additional `Data` field configuration
+Line! ← Data!(
+  SmartDip‼^(
+    ⨬◌(▽˜÷500)×>500⟜⊸±⊸⧻
+    °⊸DrawLines 1 °⊸DrawDots 0 New
+  )
+  ^
 )
+# Create a `Data` instance that draws only lines
+Line ← Line!∘
 
 # Stack one RGBA image atop another
 Stack ← ⍜°⍉⊂ ↧⊸↥0 ⤚÷⊃(-∪⊃×+|+⊙×˜∩×⟜¬) ∩⍜(⇌°⍉)°⊂
